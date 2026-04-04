@@ -53,12 +53,12 @@ body {
 
 /* ==================== HEADER ==================== */
 .header {
-  background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 40%, var(--navy-light) 100%);
+  background: linear-gradient(135deg, #1A2744 0%, #243B5E 40%, #2C4A73 100%);
   color: var(--white);
   position: sticky;
   top: 0;
   z-index: 100;
-  box-shadow: 0 4px 30px rgba(0,0,0,0.3);
+  box-shadow: 0 4px 24px rgba(26,39,68,0.25);
 }
 .header::after {
   content: '';
@@ -70,7 +70,7 @@ body {
 .header-inner {
   max-width: 1280px;
   margin: 0 auto;
-  padding: 14px 24px;
+  padding: 16px 24px;
   display: flex;
   align-items: center;
   gap: 16px;
@@ -78,31 +78,36 @@ body {
 .logo {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 14px;
   text-decoration: none;
   color: var(--white);
 }
 .logo-icon {
-  width: 48px; height: 48px;
+  width: 52px; height: 52px;
   background: linear-gradient(135deg, var(--gold), var(--gold-light));
-  border-radius: 12px;
+  border-radius: 14px;
   display: flex; align-items: center; justify-content: center;
-  font-size: 1.6rem;
+  font-size: 1.8rem;
   box-shadow: var(--shadow-gold);
   flex-shrink: 0;
 }
 .logo-text h1 {
   font-family: 'Playfair Display', serif;
-  font-size: 1.25rem;
-  font-weight: 800;
-  line-height: 1.2;
+  font-size: 1.55rem;
+  font-weight: 900;
+  line-height: 1.15;
   letter-spacing: -0.3px;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+.logo-text h1 .title-accent {
+  color: var(--gold-light);
 }
 .logo-text p {
-  font-size: 0.7rem;
-  opacity: 0.7;
-  font-weight: 300;
-  margin-top: 2px;
+  font-size: 0.72rem;
+  opacity: 0.75;
+  font-weight: 400;
+  margin-top: 3px;
+  letter-spacing: 0.5px;
 }
 .header-right {
   margin-left: auto;
@@ -131,8 +136,8 @@ body {
 
 /* ==================== NAV TABS ==================== */
 .nav-tabs {
-  background: var(--navy-mid);
-  border-bottom: 1px solid rgba(255,255,255,0.08);
+  background: #1E3350;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
   overflow-x: auto;
 }
 .nav-tabs-inner {
@@ -622,13 +627,277 @@ body {
 @media (max-width: 768px) {
   .main { padding: 14px; }
   .header-inner { padding: 10px 16px; }
-  .logo-text h1 { font-size: 1.05rem; }
+  .logo-text h1 { font-size: 1.15rem; }
   .form-grid { grid-template-columns: 1fr; }
   .stats-row { grid-template-columns: repeat(2, 1fr); }
   .room-code-display .code { font-size: 2.2rem; }
   .q-body, .q-answers-preview { padding-left: 0; }
   .header-badge { display: none; }
 }
+
+/* ==================== GUIDE STYLES ==================== */
+.guide-step {
+  display: flex;
+  gap: 18px;
+  padding: 20px;
+  background: var(--white);
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  margin-bottom: 14px;
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+}
+.guide-step:hover { box-shadow: var(--shadow); border-color: var(--blue-light); }
+.guide-step::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 4px;
+  background: var(--gold);
+}
+.guide-step .step-icon {
+  width: 56px; height: 56px;
+  background: linear-gradient(135deg, var(--navy), #2C4A73);
+  border-radius: 14px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.5rem;
+  flex-shrink: 0;
+  color: var(--gold-light);
+  box-shadow: 0 4px 12px rgba(12,27,51,0.15);
+}
+.guide-step .step-content { flex: 1; }
+.guide-step .step-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.guide-step .step-title .step-badge {
+  background: var(--gold);
+  color: var(--navy);
+  padding: 1px 8px;
+  border-radius: 10px;
+  font-size: 0.65rem;
+  font-weight: 800;
+}
+.guide-step .step-desc {
+  font-size: 0.84rem;
+  line-height: 1.7;
+  color: var(--text);
+}
+.guide-step .step-tips {
+  margin-top: 10px;
+  padding: 10px 14px;
+  background: #F8FAFC;
+  border-radius: var(--radius-sm);
+  font-size: 0.8rem;
+  color: var(--text-light);
+  line-height: 1.6;
+}
+.guide-step .step-tips strong { color: var(--navy); }
+.guide-methods {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 12px;
+  margin-top: 12px;
+}
+.guide-method {
+  background: #F8FAFC;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 14px;
+  text-align: center;
+  transition: var(--transition);
+}
+.guide-method:hover { border-color: var(--gold); background: var(--cream); }
+.guide-method .gm-icon { font-size: 1.8rem; margin-bottom: 6px; }
+.guide-method .gm-title { font-size: 0.82rem; font-weight: 700; color: var(--navy); margin-bottom: 4px; }
+.guide-method .gm-desc { font-size: 0.75rem; color: var(--text-light); line-height: 1.5; }
+.guide-section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--navy);
+  margin: 28px 0 16px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid var(--gold);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.guide-note {
+  background: var(--cream);
+  border: 1.5px solid rgba(212,160,18,0.3);
+  border-radius: var(--radius);
+  padding: 16px 20px;
+  font-size: 0.84rem;
+  line-height: 1.7;
+  margin: 16px 0;
+}
+.guide-note strong { color: var(--gold-dark); }
+
+/* Upload area */
+.upload-zone {
+  border: 2px dashed var(--border);
+  border-radius: var(--radius);
+  padding: 32px;
+  text-align: center;
+  cursor: pointer;
+  transition: var(--transition);
+  background: #FAFBFC;
+}
+.upload-zone:hover { border-color: var(--blue); background: #F0F7FF; }
+.upload-zone.dragging { border-color: var(--gold); background: var(--cream); }
+.upload-zone .uz-icon { font-size: 2.5rem; margin-bottom: 8px; opacity: 0.6; }
+.upload-zone .uz-text { font-size: 0.88rem; color: var(--text-light); }
+.upload-zone .uz-sub { font-size: 0.75rem; color: var(--text-light); margin-top: 4px; opacity: 0.7; }
+
+/* ==================== CUSTOM DIALOG ==================== */
+.dialog-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(12,27,51,0.55);
+  backdrop-filter: blur(6px);
+  z-index: 250;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+.dialog-overlay.show { display: flex; }
+.dialog-card {
+  background: var(--white);
+  border-radius: 18px;
+  max-width: 440px;
+  width: 100%;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+  animation: dialogPop 0.35s cubic-bezier(0.34,1.56,0.64,1);
+  overflow: hidden;
+}
+@keyframes dialogPop {
+  from { opacity:0; transform: scale(0.85) translateY(20px); }
+  to { opacity:1; transform: scale(1) translateY(0); }
+}
+.dialog-icon {
+  text-align: center;
+  padding: 28px 24px 8px;
+}
+.dialog-icon .icon-circle {
+  width: 64px; height: 64px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+}
+.dialog-icon .icon-circle.gold { background: linear-gradient(135deg, var(--cream), #FFF0C0); }
+.dialog-icon .icon-circle.green { background: linear-gradient(135deg, #E8F8F0, #C6F0D8); }
+.dialog-icon .icon-circle.red { background: linear-gradient(135deg, #FDEDEC, #F5C6CB); }
+.dialog-icon .icon-circle.blue { background: linear-gradient(135deg, #EBF5FB, #BEE0F7); }
+.dialog-body {
+  padding: 8px 28px 20px;
+  text-align: center;
+}
+.dialog-body h3 {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--navy);
+  margin-bottom: 8px;
+}
+.dialog-body p {
+  font-size: 0.88rem;
+  color: var(--text-light);
+  line-height: 1.6;
+}
+.dialog-body .highlight {
+  display: inline-block;
+  background: var(--cream);
+  color: var(--gold-dark);
+  font-weight: 700;
+  padding: 2px 10px;
+  border-radius: 6px;
+  margin: 4px 2px;
+}
+.dialog-foot {
+  padding: 0 28px 24px;
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+.dialog-btn {
+  padding: 11px 28px;
+  border: none;
+  border-radius: 10px;
+  font-family: inherit;
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+  min-width: 100px;
+}
+.dialog-btn:active { transform: scale(0.96); }
+.dialog-btn.primary { background: var(--gold); color: var(--navy); }
+.dialog-btn.primary:hover { filter: brightness(1.1); }
+.dialog-btn.success { background: var(--success); color: white; }
+.dialog-btn.success:hover { filter: brightness(1.1); }
+.dialog-btn.danger { background: var(--danger); color: white; }
+.dialog-btn.cancel { background: var(--off-white); color: var(--text-light); border: 1px solid var(--border); }
+.dialog-btn.cancel:hover { background: #E8E8E8; }
+
+/* ==================== STUDENT LINK BOX ==================== */
+.link-box {
+  background: linear-gradient(135deg, #F0F7FF, #EBF5FB);
+  border: 2px solid var(--blue);
+  border-radius: var(--radius);
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.link-box .link-url {
+  flex: 1;
+  font-family: monospace;
+  font-size: 0.82rem;
+  color: var(--navy);
+  word-break: break-all;
+  min-width: 200px;
+}
+.link-box .link-actions { display: flex; gap: 6px; }
+
+/* ==================== SCHOOL REGISTRATION ==================== */
+.school-reg-overlay {
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(135deg, #1A2744, #2C4A73);
+  z-index: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+.school-reg-card {
+  background: white;
+  border-radius: 20px;
+  padding: 40px;
+  max-width: 480px;
+  width: 100%;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+  text-align: center;
+}
+.school-reg-card .sr-icon { font-size: 3rem; margin-bottom: 12px; }
+.school-reg-card h2 {
+  font-family: 'Playfair Display', serif;
+  color: var(--navy);
+  font-size: 1.35rem;
+  margin-bottom: 4px;
+}
+.school-reg-card .sr-sub { font-size: 0.82rem; color: var(--text-light); margin-bottom: 24px; }
+.school-reg-card .form-group { text-align: left; margin-bottom: 14px; }
 
 /* Print */
 @media print {
@@ -645,13 +914,13 @@ body {
     <a class="logo" href="#">
       <div class="logo-icon">🏆</div>
       <div class="logo-text">
-        <h1>Olympic Tiếng Việt – Toán</h1>
+        <h1>Olympic <span class="title-accent">Tiếng Việt – Toán</span> Tuổi Thơ</h1>
         <p>Hệ thống thi trực tuyến • Giáo viên</p>
       </div>
     </a>
     <div class="header-right">
       <span class="header-badge">Năm học 2025-2026</span>
-      <a class="header-link" href="#" onclick="window.open('hocsinh.html','_blank')">🎓 Trang học sinh ↗</a>
+      <span id="headerSchoolName" style="font-size:0.78rem;opacity:0.8;max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;"></span>
     </div>
   </div>
   <nav class="nav-tabs">
@@ -665,6 +934,33 @@ body {
     </div>
   </nav>
 </header>
+
+<!-- SCHOOL REGISTRATION -->
+<div class="school-reg-overlay" id="schoolRegOverlay" style="display:none;">
+  <div class="school-reg-card">
+    <div class="sr-icon">🏫</div>
+    <h2>Đăng ký trường thi</h2>
+    <div class="sr-sub">Nhập thông tin trường để bắt đầu sử dụng hệ thống</div>
+    <div class="form-group">
+      <label class="form-label">Tên trường<span class="req">*</span></label>
+      <input class="form-input" id="regSchoolName" placeholder="VD: Trường Tiểu học Diễn Liên">
+    </div>
+    <div class="form-group">
+      <label class="form-label">Xã / Phường<span class="req">*</span></label>
+      <input class="form-input" id="regWard" placeholder="VD: Xã Quảng Châu">
+    </div>
+    <div class="form-group">
+      <label class="form-label">Người phụ trách</label>
+      <input class="form-input" id="regContact" placeholder="VD: Nguyễn Văn A">
+    </div>
+    <button class="btn btn-gold" style="width:100%;margin-top:8px;padding:14px;" onclick="registerSchool()">🚀 Bắt đầu sử dụng</button>
+  </div>
+</div>
+
+<!-- CUSTOM DIALOG -->
+<div class="dialog-overlay" id="dialogOverlay">
+  <div class="dialog-card" id="dialogCard"></div>
+</div>
 
 <!-- TOAST -->
 <div class="toast" id="toast"></div>
@@ -720,6 +1016,19 @@ body {
       </div>
     </div>
 
+    <!-- Student link -->
+    <div class="card">
+      <div class="card-title"><span class="emoji">🔗</span> Link thi cho học sinh</div>
+      <div class="link-box">
+        <div class="link-url" id="studentLinkUrl">https://hososoeduvn.github.io/dethiolympic/</div>
+        <div class="link-actions">
+          <button class="btn btn-blue btn-sm" onclick="copyStudentLink()">📋 Copy link</button>
+          <button class="btn btn-outline btn-sm" onclick="window.open('https://hososoeduvn.github.io/dethiolympic/','_blank')">↗ Mở</button>
+        </div>
+      </div>
+      <p style="font-size:0.78rem;color:var(--text-light);margin-top:8px;">Gửi link này cho học sinh. Các em nhập <strong>Mã phòng + SBD</strong> để vào làm bài.</p>
+    </div>
+
     <!-- Rooms overview -->
     <div class="card">
       <div class="card-header">
@@ -731,14 +1040,43 @@ body {
 
   <!-- ====== TAB: CREATE ====== -->
   <div class="section" id="sec-create">
-    <div class="card">
+
+    <!-- EXAM STATUS BAR -->
+    <div class="card" id="examStatusBar" style="padding:14px 24px;display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+      <div style="display:flex;align-items:center;gap:8px;">
+        <span id="statusIcon" style="font-size:1.3rem;">📝</span>
+        <span id="statusText" style="font-weight:700;font-size:0.95rem;color:var(--navy);">Trạng thái: Nháp</span>
+        <span id="statusBadge" class="q-tag q-tag-diff" style="font-size:0.72rem;">DRAFT</span>
+      </div>
+      <div style="margin-left:auto;" class="btn-group">
+        <button class="btn btn-outline btn-sm" onclick="saveAsDraft()">💾 Lưu nháp</button>
+        <button class="btn btn-blue btn-sm" onclick="previewExam()">👁️ Xem trước đề</button>
+        <button class="btn btn-gold" onclick="publishExam()" id="btnPublish">🚀 Xuất bản đề thi</button>
+        <button class="btn btn-danger btn-sm" onclick="unpublishExam()" id="btnUnpublish" style="display:none;">🔒 Hủy xuất bản</button>
+      </div>
+    </div>
+
+    <!-- MA TRẬN ĐỀ THI -->
+    <div class="card" id="matrixCard">
+      <div class="card-header">
+        <div class="card-title"><span class="emoji">📊</span> Ma trận đề thi tham khảo (15 câu – 100 điểm)</div>
+        <button class="btn btn-gold btn-sm" onclick="autoGenerateExam()">🤖 Tự động tạo đề</button>
+      </div>
+      <div class="info-box" style="margin-bottom:12px;">
+        <strong>Ma trận tham khảo:</strong> Mức 1 (Nhận biết): 4 câu – 25 điểm │ Mức 2 (Thông hiểu): 5 câu – 35 điểm │ Mức 3 (Vận dụng + VD cao): 6 câu – 40 điểm
+      </div>
+      <div id="matrixStats" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;"></div>
+    </div>
+
+    <!-- FORM SOẠN CÂU HỎI -->
+    <div class="card" id="questionFormCard">
       <div class="card-header">
         <div class="card-title"><span class="emoji">✏️</span> Soạn câu hỏi</div>
         <div class="btn-group">
           <button class="btn btn-outline btn-sm" onclick="showImportModal()">📥 Nhập từ JSON</button>
+          <button class="btn btn-outline btn-sm" onclick="document.getElementById('imgUpload').click();goTab('guide');">📸 Upload ảnh đề</button>
           <button class="btn btn-outline btn-sm" onclick="loadSampleExam('toan')">⚡ Đề mẫu Toán</button>
           <button class="btn btn-outline btn-sm" onclick="loadSampleExam('tv')">⚡ Đề mẫu T.Việt</button>
-          <button class="btn btn-outline btn-sm" onclick="loadSampleExam('ttt_dien_chau')">📜 TTT Diễn Châu</button>
         </div>
       </div>
 
@@ -975,40 +1313,210 @@ body {
 
   <!-- ====== TAB: GUIDE ====== -->
   <div class="section" id="sec-guide">
+    <!-- HERO -->
+    <div class="card" style="background:linear-gradient(135deg,#1A2744,#2C4A73);color:white;border:none;">
+      <div style="text-align:center;padding:12px 0;">
+        <div style="font-size:2.5rem;margin-bottom:8px;">🏆</div>
+        <h2 style="font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:900;">Hướng dẫn tổ chức thi Olympic</h2>
+        <p style="opacity:0.7;font-size:0.85rem;margin-top:6px;">Sân chơi trí tuệ dành cho học sinh Tiểu học</p>
+      </div>
+    </div>
+
+    <!-- BƯỚC 1: SOẠN ĐỀ (CHI TIẾT) -->
     <div class="card">
-      <div class="card-title"><span class="emoji">📖</span> Hướng dẫn sử dụng – Quy trình tổ chức thi Olympic</div>
-      
-      <div class="info-box gold" style="margin-top:16px;">
-        <strong>Hệ thống này</strong> được thiết kế riêng cho kỳ thi Olympic Tiếng Việt – Toán Tuổi Thơ Tiểu học cấp tỉnh năm 2026. Dựa trên nền tảng Ong Vàng với kiến trúc GAS + Google Sheets.
+      <div class="guide-section-title">📝 Bước 1 – Soạn đề thi</div>
+      <p style="font-size:0.88rem;color:var(--text-light);margin-bottom:16px;">
+        Có <strong>3 cách</strong> để đưa câu hỏi vào hệ thống. Chọn cách phù hợp nhất với bạn:
+      </p>
+
+      <div class="guide-methods">
+        <div class="guide-method">
+          <div class="gm-icon">✏️</div>
+          <div class="gm-title">Soạn thủ công</div>
+          <div class="gm-desc">Nhập từng câu hỏi trực tiếp trên giao diện. Phù hợp khi soạn mới hoặc chỉnh sửa.</div>
+        </div>
+        <div class="guide-method">
+          <div class="gm-icon">⚡</div>
+          <div class="gm-title">Lấy đề mẫu</div>
+          <div class="gm-desc">Chọn bộ đề có sẵn: Toán 15 câu, Tiếng Việt 15 câu, TTT Diễn Châu... Chỉnh sửa tuỳ ý.</div>
+        </div>
+        <div class="guide-method">
+          <div class="gm-icon">📸</div>
+          <div class="gm-title">Upload ảnh đề thi</div>
+          <div class="gm-desc">Chụp ảnh/scan đề thi giấy. AI đọc và chuyển thành câu hỏi số. GV tinh chỉnh rồi xuất đề.</div>
+        </div>
       </div>
 
-      <h4 style="margin:20px 0 10px;color:var(--navy);font-size:0.95rem;">🔄 Quy trình 6 bước</h4>
-      
-      <div style="font-size:0.88rem;line-height:1.8;">
-        <p><strong>Bước 1 – Soạn đề thi (Tab "Soạn đề")</strong><br>
-        Nhập từng câu hỏi hoặc dùng đề mẫu. Hỗ trợ: trắc nghiệm, đúng/sai, điền khuyết, nhiều lựa chọn, câu hỏi chùm. Toán: 15 câu (13 TV + 2 TA). Tiếng Việt: 15 câu.</p>
-
-        <p style="margin-top:12px;"><strong>Bước 2 – Tạo phòng thi (Tab "Phòng thi")</strong><br>
-        Mỗi phòng thi có mã riêng (VD: OLY-A1B2). Cấu hình: thời gian, xáo trộn câu hỏi/đáp án, hiển thị kết quả.</p>
-
-        <p style="margin-top:12px;"><strong>Bước 3 – Nhập thí sinh (Tab "Thí sinh")</strong><br>
-        Nhập danh sách thí sinh cho từng phòng. Mỗi em có SBD. In phiếu tài khoản (Mã phòng + SBD) phát cho thí sinh.</p>
-
-        <p style="margin-top:12px;"><strong>Bước 4 – Mở phòng thi</strong><br>
-        Bấm "Mở phòng" khi đã sẵn sàng. Thí sinh truy cập trang <code>hocsinh.html</code>, nhập mã phòng + SBD để vào.</p>
-
-        <p style="margin-top:12px;"><strong>Bước 5 – Thí sinh làm bài</strong><br>
-        Đếm ngược thời gian. Hết giờ tự động nộp bài. Giáo viên theo dõi tiến trình trực tiếp.</p>
-
-        <p style="margin-top:12px;"><strong>Bước 6 – Chấm bài & Kết quả (Tab "Kết quả")</strong><br>
-        Hệ thống chấm tự động ngay khi nộp. Xem bảng điểm, xuất Excel, tính điểm toàn đoàn.</p>
+      <!-- Cách 1: Soạn thủ công -->
+      <div class="guide-step" style="margin-top:20px;">
+        <div class="step-icon">✏️</div>
+        <div class="step-content">
+          <div class="step-title"><span class="step-badge">CÁCH 1</span> Soạn thủ công</div>
+          <div class="step-desc">
+            Vào tab <strong>"Soạn đề"</strong> → Chọn Môn, Loại câu hỏi, Độ khó, Mức độ nhận thức → Nhập nội dung → Nhập đáp án → Bấm <strong>"Thêm câu hỏi"</strong>.
+          </div>
+          <div class="step-tips">
+            <strong>Các loại câu hỏi hỗ trợ:</strong><br>
+            • <strong>Một lựa chọn:</strong> Nhập A. B. C. D. mỗi dòng. Đáp án: ký tự đúng (VD: B)<br>
+            • <strong>Đúng/Sai:</strong> Tự động tạo A. Đúng, B. Sai. Đáp án: A hoặc B<br>
+            • <strong>Điền khuyết:</strong> Dùng {a}, {b}... trong nội dung. Đáp án: A.nội dung đúng<br>
+            • <strong>Nhiều lựa chọn:</strong> Giống một lựa chọn, đáp án: A,C (phẩy phân cách)<br>
+            • <strong>Câu hỏi chùm:</strong> Nhập câu dẫn trước, các câu con đánh dấu "Có" ở cột câu hỏi con
+          </div>
+        </div>
       </div>
 
-      <h4 style="margin:24px 0 10px;color:var(--navy);font-size:0.95rem;">📋 Cấu trúc đề thi Olympic (theo KH xã Quảng Châu)</h4>
-      <div style="font-size:0.88rem;line-height:1.8;">
-        <p><strong>Môn Toán:</strong> 15 câu (13 câu tiếng Việt + 2 câu tiếng Anh). Trắc nghiệm + điền đáp số + điền khuyết. Tổng 100 điểm. Thời gian: 40 phút.</p>
-        <p><strong>Môn Tiếng Việt:</strong> 15 câu. Trắc nghiệm + đúng/sai + sắp xếp + điền khuyết. Tổng 100 điểm. Thời gian: 40 phút.</p>
+      <!-- Cách 2: Lấy đề mẫu -->
+      <div class="guide-step">
+        <div class="step-icon">⚡</div>
+        <div class="step-content">
+          <div class="step-title"><span class="step-badge">CÁCH 2</span> Lấy đề mẫu có sẵn</div>
+          <div class="step-desc">
+            Vào tab <strong>"Soạn đề"</strong> → Bấm nút đề mẫu phía trên (⚡ Đề mẫu Toán / T.Việt / 📜 TTT Diễn Châu) → Hệ thống tự động tải câu hỏi vào danh sách → Chỉnh sửa nếu cần.
+          </div>
+          <div class="step-tips">
+            <strong>Đề mẫu có sẵn:</strong><br>
+            • <strong>Toán – 15 câu:</strong> 13 câu tiếng Việt + 2 câu tiếng Anh<br>
+            • <strong>Tiếng Việt – 15 câu:</strong> Trắc nghiệm + đúng/sai + điền khuyết<br>
+            • <strong>TTT Diễn Châu 2013-2014:</strong> 15 bài điền đáp số (đề thi thật)
+          </div>
+        </div>
       </div>
+
+      <!-- Cách 3: Upload ảnh -->
+      <div class="guide-step">
+        <div class="step-icon">📸</div>
+        <div class="step-content">
+          <div class="step-title"><span class="step-badge">CÁCH 3</span> Upload ảnh đề thi (AI đọc đề)</div>
+          <div class="step-desc">
+            Vào tab <strong>"Soạn đề"</strong> → Bấm <strong>"📸 Upload ảnh đề"</strong> → Chọn file ảnh (JPG/PNG) hoặc kéo thả → Hệ thống AI đọc và chuyển thành câu hỏi → Giáo viên kiểm tra, chỉnh sửa → Bấm <strong>"Thêm vào ngân hàng"</strong>.
+          </div>
+          <div class="step-tips">
+            <strong>Lưu ý khi chụp ảnh đề:</strong><br>
+            • Chụp rõ nét, đủ sáng, không bị mờ/nghiêng<br>
+            • Mỗi ảnh nên chứa 1–2 trang đề<br>
+            • Hỗ trợ: JPG, PNG (tối đa 10MB/ảnh)<br>
+            • AI có thể nhầm → <strong>luôn kiểm tra lại</strong> trước khi sử dụng
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- BƯỚC 2–6 -->
+    <div class="card">
+      <div class="guide-section-title">🚀 Bước 2–6: Tổ chức thi</div>
+
+      <div class="guide-step">
+        <div class="step-icon">🚪</div>
+        <div class="step-content">
+          <div class="step-title"><span class="step-badge">BƯỚC 2</span> Tạo phòng thi</div>
+          <div class="step-desc">
+            Vào tab <strong>"Phòng thi"</strong> → Nhập tên phòng, chọn môn → Cấu hình thời gian (40 phút), xáo trộn câu hỏi/đáp án → Bấm <strong>"Tạo phòng thi"</strong> → Hệ thống cấp mã phòng (VD: <strong>OLY-A1B2</strong>).
+          </div>
+          <div class="step-tips">
+            <strong>Mẹo:</strong> Tạo riêng phòng Toán và phòng Tiếng Việt. Bật "Xáo trộn" để mỗi thí sinh nhận đề khác thứ tự.
+          </div>
+        </div>
+      </div>
+
+      <div class="guide-step">
+        <div class="step-icon">🎓</div>
+        <div class="step-content">
+          <div class="step-title"><span class="step-badge">BƯỚC 3</span> Nhập thí sinh</div>
+          <div class="step-desc">
+            Vào tab <strong>"Thí sinh"</strong> → Chọn phòng thi → Nhập từng em (họ tên, trường, SBD) hoặc bấm <strong>"Nhập hàng loạt"</strong> để dán danh sách. Bấm <strong>"🖨 In phiếu tài khoản"</strong> để in thẻ phát cho thí sinh.
+          </div>
+          <div class="step-tips">
+            <strong>Trên phiếu có:</strong> Mã phòng + SBD + Họ tên + Trường + Thời gian thi. Thí sinh dùng Mã phòng + SBD để đăng nhập.
+          </div>
+        </div>
+      </div>
+
+      <div class="guide-step">
+        <div class="step-icon">▶️</div>
+        <div class="step-content">
+          <div class="step-title"><span class="step-badge">BƯỚC 4</span> Mở phòng thi</div>
+          <div class="step-desc">
+            Vào tab <strong>"Phòng thi"</strong> → Bấm <strong>"▶ Mở phòng"</strong> khi đã sẵn sàng. Từ lúc này, thí sinh có thể truy cập trang <code>hocsinh.html</code>, nhập Mã phòng + SBD để bắt đầu làm bài.
+          </div>
+          <div class="step-tips">
+            <strong>Quan trọng:</strong> Chỉ mở phòng khi tất cả thí sinh đã ngồi tại vị trí máy tính. Sau khi đóng phòng, không ai có thể vào thêm.
+          </div>
+        </div>
+      </div>
+
+      <div class="guide-step">
+        <div class="step-icon">⏱️</div>
+        <div class="step-content">
+          <div class="step-title"><span class="step-badge">BƯỚC 5</span> Thí sinh làm bài</div>
+          <div class="step-desc">
+            Thí sinh đăng nhập → Xác nhận thông tin → Bấm <strong>"Bắt đầu làm bài"</strong>. Đồng hồ đếm ngược 40 phút. Hết giờ hệ thống <strong>tự động nộp bài</strong>. Thí sinh có thể nộp sớm.
+          </div>
+          <div class="step-tips">
+            <strong>Giáo viên:</strong> Có thể theo dõi bao nhiêu em đã nộp ở tab "Kết quả" (bấm 🔄 Làm mới để cập nhật).
+          </div>
+        </div>
+      </div>
+
+      <div class="guide-step">
+        <div class="step-icon">📊</div>
+        <div class="step-content">
+          <div class="step-title"><span class="step-badge">BƯỚC 6</span> Chấm bài & Kết quả</div>
+          <div class="step-desc">
+            Hệ thống <strong>chấm tự động ngay khi nộp</strong>. Vào tab <strong>"Kết quả"</strong> → Chọn phòng thi → Xem bảng xếp hạng, điểm TB, điểm cao nhất. Bấm <strong>"📤 Xuất Excel"</strong> để tải bảng điểm.
+          </div>
+          <div class="step-tips">
+            <strong>Tính điểm toàn đoàn:</strong> Điểm trung bình cộng của tất cả thí sinh trong đội.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CẤU TRÚC ĐỀ -->
+    <div class="card">
+      <div class="guide-section-title">📋 Cấu trúc đề thi Olympic</div>
+      <div class="guide-note">
+        <strong>Cấu trúc tham khảo:</strong> Đề thi gồm 15 câu, tổng 100 điểm, thời gian 40 phút. Phân bổ theo ma trận: Mức 1 (25%) – Mức 2 (35%) – Mức 3 (40%).
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;">
+        <div style="background:#EBF5FB;border-radius:var(--radius);padding:20px;border-left:4px solid var(--blue);">
+          <h4 style="color:var(--blue);margin-bottom:8px;font-size:0.95rem;">🔢 Môn Toán</h4>
+          <div style="font-size:0.84rem;line-height:1.8;">
+            • <strong>15 câu</strong> (13 tiếng Việt + 2 tiếng Anh)<br>
+            • Dạng: trắc nghiệm + điền đáp số + điền khuyết<br>
+            • Tổng: <strong>100 điểm</strong><br>
+            • Thời gian: <strong>40 phút</strong>
+          </div>
+        </div>
+        <div style="background:#F4ECF7;border-radius:var(--radius);padding:20px;border-left:4px solid #8E44AD;">
+          <h4 style="color:#8E44AD;margin-bottom:8px;font-size:0.95rem;">📖 Môn Tiếng Việt</h4>
+          <div style="font-size:0.84rem;line-height:1.8;">
+            • <strong>15 câu</strong><br>
+            • Dạng: trắc nghiệm + đúng/sai + sắp xếp + điền khuyết<br>
+            • Tổng: <strong>100 điểm</strong><br>
+            • Thời gian: <strong>40 phút</strong>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- UPLOAD ẢNH ĐỀ THI -->
+    <div class="card">
+      <div class="guide-section-title">📸 Upload ảnh đề thi (AI đọc đề)</div>
+      <p style="font-size:0.85rem;color:var(--text-light);margin-bottom:16px;">
+        Chụp ảnh hoặc scan đề thi giấy. Hệ thống AI sẽ đọc nội dung và chuyển thành câu hỏi số hoá. Giáo viên kiểm tra, chỉnh sửa rồi thêm vào ngân hàng đề.
+      </p>
+      <div class="upload-zone" id="uploadZone" onclick="document.getElementById('imgUpload').click()" 
+        ondragover="event.preventDefault();this.classList.add('dragging')" 
+        ondragleave="this.classList.remove('dragging')"
+        ondrop="event.preventDefault();this.classList.remove('dragging');handleImageDrop(event)">
+        <div class="uz-icon">📸</div>
+        <div class="uz-text">Bấm để chọn ảnh hoặc kéo thả vào đây</div>
+        <div class="uz-sub">Hỗ trợ: JPG, PNG (tối đa 10MB)</div>
+      </div>
+      <input type="file" id="imgUpload" accept="image/*" multiple style="display:none" onchange="handleImageUpload(event)">
+      <div id="uploadPreview" style="margin-top:16px;"></div>
+      <div id="aiResult" style="margin-top:16px;"></div>
     </div>
   </div>
 
@@ -1024,9 +1532,10 @@ body {
 let DB = {
   questions: [],
   rooms: [],
-  students: [],  // { roomId, name, school, sbd, score, submitted, answers }
+  students: [],
 };
 let editIdx = -1;
+let examStatus = 'draft'; // 'draft' | 'published'
 
 // ================================================================
 //  TAB NAVIGATION
@@ -1068,9 +1577,240 @@ function clearForm() {
 }
 
 // ================================================================
+//  EXAM STATUS & PUBLISH WORKFLOW
+// ================================================================
+function updateExamStatusUI() {
+  const icon = document.getElementById('statusIcon');
+  const text = document.getElementById('statusText');
+  const badge = document.getElementById('statusBadge');
+  const btnPub = document.getElementById('btnPublish');
+  const btnUnpub = document.getElementById('btnUnpublish');
+  const formCard = document.getElementById('questionFormCard');
+
+  if (examStatus === 'published') {
+    icon.textContent = '✅';
+    text.textContent = 'Trạng thái: Đã xuất bản';
+    text.style.color = 'var(--success)';
+    badge.textContent = 'PUBLISHED';
+    badge.style.background = 'var(--success-bg)';
+    badge.style.color = 'var(--success)';
+    btnPub.style.display = 'none';
+    btnUnpub.style.display = 'inline-flex';
+    formCard.style.opacity = '0.5';
+    formCard.style.pointerEvents = 'none';
+  } else {
+    icon.textContent = '📝';
+    text.textContent = 'Trạng thái: Nháp';
+    text.style.color = 'var(--navy)';
+    badge.textContent = 'DRAFT';
+    badge.style.background = 'var(--cream)';
+    badge.style.color = 'var(--gold-dark)';
+    btnPub.style.display = 'inline-flex';
+    btnUnpub.style.display = 'none';
+    formCard.style.opacity = '1';
+    formCard.style.pointerEvents = 'auto';
+  }
+  updateMatrixStats();
+}
+
+function saveAsDraft() {
+  examStatus = 'draft';
+  save();
+  updateExamStatusUI();
+  toast('💾 Đã lưu nháp!');
+}
+
+function publishExam() {
+  if (!DB.questions.length) {
+    showDialog('warning','⚠️','Chưa có câu hỏi','Hãy soạn đề thi trước khi xuất bản.',
+      [{text:'Đã hiểu',cls:'primary',action:'closeDialog()'}]);
+    return;
+  }
+  const noAnswer = DB.questions.filter(q => 
+    !['Câu hỏi chùm (câu dẫn)','Câu tự luận'].includes(q.type) && !q.correct
+  );
+  if (noAnswer.length) {
+    showDialog('red','❌','Lỗi đáp án','Có <span class="highlight">'+noAnswer.length+' câu</span> chưa có đáp án đúng. Kiểm tra và bổ sung trước khi xuất bản.',
+      [{text:'Kiểm tra lại',cls:'danger',action:'closeDialog()'}]);
+    return;
+  }
+  showDialog('gold','🚀','Xuất bản đề thi?',
+    'Đề thi sẽ được khoá chỉnh sửa và sẵn sàng cho thí sinh làm bài.<br>Số câu: <span class="highlight">'+DB.questions.length+'</span><br><br>Bạn vẫn có thể hủy xuất bản để chỉnh sửa sau.',
+    [{text:'Huỷ',cls:'cancel',action:'closeDialog()'},{text:'Xuất bản',cls:'success',action:'doPublish()'}]);
+}
+
+function doPublish() {
+  closeDialog();
+  examStatus = 'published';
+  save();
+  updateExamStatusUI();
+  showDialog('green','✅','Xuất bản thành công!',
+    'Đề thi đã sẵn sàng. Tiếp theo:<br>1. Tạo <strong>phòng thi</strong><br>2. Nhập <strong>thí sinh</strong><br>3. <strong>Mở phòng</strong> để các em làm bài',
+    [{text:'Tạo phòng thi →',cls:'primary',action:'closeDialog();goTab("rooms")'}]);
+}
+
+function unpublishExam() {
+  showDialog('red','🔒','Hủy xuất bản?',
+    'Đề thi sẽ chuyển về trạng thái <strong>nháp</strong>, cho phép chỉnh sửa lại.',
+    [{text:'Giữ nguyên',cls:'cancel',action:'closeDialog()'},{text:'Hủy xuất bản',cls:'danger',action:'doUnpublish()'}]);
+}
+
+function doUnpublish() {
+  closeDialog();
+  examStatus = 'draft';
+  save();
+  updateExamStatusUI();
+  toast('🔒 Đã hủy xuất bản. Bạn có thể chỉnh sửa đề.');
+}
+
+function previewExam() {
+  if (!DB.questions.length) return toast('⚠️ Chưa có câu hỏi!','var(--danger)');
+  
+  let html = `<div class="modal-head"><h3>👁️ Xem trước đề thi (${DB.questions.length} câu)</h3><button class="modal-close" onclick="closeModal()">✕</button></div>`;
+  html += `<div class="modal-body" style="max-height:70vh;overflow-y:auto;">`;
+  
+  DB.questions.forEach((q, i) => {
+    const pointLabel = q.point ? ` (${q.point} điểm)` : '';
+    html += `<div style="margin-bottom:16px;padding:14px;background:#F8FAFC;border-radius:var(--radius-sm);border-left:3px solid var(--navy);">`;
+    html += `<div style="font-size:0.78rem;color:var(--text-light);margin-bottom:4px;"><strong>Câu ${i+1}</strong> – ${q.type} – ${q.level}${pointLabel}</div>`;
+    html += `<div style="font-size:0.9rem;line-height:1.7;">${esc(q.content)}</div>`;
+    if (q.answers) {
+      html += `<div style="margin-top:8px;font-size:0.85rem;color:var(--text-light);white-space:pre-line;">${esc(q.answers)}</div>`;
+    }
+    html += `</div>`;
+  });
+  
+  html += `</div><div class="modal-foot"><button class="btn btn-outline" onclick="closeModal()">Đóng</button></div>`;
+  openModal(html);
+}
+
+// ================================================================
+//  MA TRẬN ĐỀ THI
+// ================================================================
+const MATRIX = {
+  'Nhận biết': { target: 4, percent: 25, color: 'var(--blue)' },
+  'Thông hiểu': { target: 5, percent: 35, color: '#8E44AD' },
+  'Vận dụng': { target: 4, percent: 25, color: 'var(--gold-dark)' },
+  'Vận dụng cao': { target: 2, percent: 15, color: 'var(--danger)' }
+};
+
+function updateMatrixStats() {
+  const el = document.getElementById('matrixStats');
+  if (!el) return;
+  
+  const levels = ['Nhận biết','Thông hiểu','Vận dụng','Vận dụng cao'];
+  const counts = {};
+  const points = {};
+  levels.forEach(l => { counts[l] = 0; points[l] = 0; });
+  
+  DB.questions.forEach(q => {
+    if (counts[q.level] !== undefined) {
+      counts[q.level]++;
+      points[q.level] += (q.point || 1);
+    }
+  });
+  
+  const totalPts = Object.values(points).reduce((s,v)=>s+v, 0);
+  
+  el.innerHTML = levels.map(l => {
+    const m = MATRIX[l];
+    const count = counts[l];
+    const pt = points[l];
+    const pctActual = totalPts ? Math.round(pt/totalPts*100) : 0;
+    const ok = count >= m.target;
+    return `<div style="background:white;border:1.5px solid ${ok?'var(--success)':'var(--border)'};border-radius:var(--radius-sm);padding:14px;text-align:center;">
+      <div style="font-size:0.72rem;color:var(--text-light);text-transform:uppercase;font-weight:600;letter-spacing:0.3px;">${l}</div>
+      <div style="font-size:1.5rem;font-weight:800;color:${m.color};margin:4px 0;">${count}<span style="font-size:0.8rem;font-weight:400;color:var(--text-light);">/${m.target}</span></div>
+      <div style="font-size:0.72rem;color:var(--text-light);">${pt} đ (${pctActual}%) <span style="opacity:0.5;">mục tiêu ${m.percent}%</span></div>
+      <div style="margin-top:6px;height:4px;background:var(--border);border-radius:2px;overflow:hidden;">
+        <div style="height:100%;width:${Math.min(count/m.target*100,100)}%;background:${ok?'var(--success)':m.color};border-radius:2px;transition:0.3s;"></div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+// ================================================================
+//  AUTO-GENERATE EXAM FROM MATRIX
+// ================================================================
+function autoGenerateExam() {
+  const subj = prompt('Chọn môn thi:\n1. Toán\n2. Tiếng Việt\n\nNhập 1 hoặc 2:');
+  if (!subj || !['1','2'].includes(subj.trim())) return;
+  
+  const subject = subj.trim() === '1' ? 'Toán' : 'Tiếng Việt';
+  
+  if (DB.questions.length && !confirm('⚠️ Tạo đề mới sẽ THAY THẾ toàn bộ câu hỏi hiện tại.\nTiếp tục?')) return;
+
+  DB.questions = [];
+  const qs = subject === 'Toán' ? generateToanByMatrix() : generateTVByMatrix();
+  DB.questions = qs;
+  examStatus = 'draft';
+  save();
+  renderQuestions();
+  updateExamStatusUI();
+  toast('✅ Đã tạo '+qs.length+' câu '+subject+' theo ma trận!');
+}
+
+function generateToanByMatrix() {
+  const qs = [];
+  // Mức 1: Nhận biết – 4 câu × ~6 điểm = 25 điểm
+  qs.push(mq('Toán','Một lựa chọn','Dễ','Nhận biết','Kết quả của phép tính 4 527 + 3 684 là:','A. 8 211\nB. 8 111\nC. 8 201\nD. 7 211','A','',6));
+  qs.push(mq('Toán','Một lựa chọn','Dễ','Nhận biết','Số nào sau đây chia hết cho 9?','A. 1 234\nB. 5 679\nC. 2 345\nD. 4 567','B','Tổng chữ số = 27, chia hết cho 9',6));
+  qs.push(mq('Toán','Đúng/Sai','Dễ','Nhận biết','1 tấn = 1 000 kg','A. Đúng\nB. Sai','A','',6));
+  qs.push(mq('Toán','Điền khuyết','Dễ','Nhận biết','3/4 giờ = {a} phút.','','A.45','3/4 × 60 = 45',7));
+
+  // Mức 2: Thông hiểu – 5 câu × ~7 điểm = 35 điểm
+  qs.push(mq('Toán','Một lựa chọn','Trung bình','Thông hiểu','Một hình chữ nhật có chiều dài 15 cm, chiều rộng 9 cm. Chu vi hình chữ nhật đó là:','A. 48 cm\nB. 135 cm\nC. 24 cm\nD. 42 cm','A','(15+9)×2=48',7));
+  qs.push(mq('Toán','Một lựa chọn','Trung bình','Thông hiểu','Phân số nào sau đây bằng 3/5?','A. 6/15\nB. 9/15\nC. 6/10\nD. 12/15','C','3/5 = 6/10',7));
+  qs.push(mq('Toán','Một lựa chọn','Trung bình','Thông hiểu','40% của 350 là bao nhiêu?','A. 140\nB. 120\nC. 160\nD. 180','A','350 × 40/100 = 140',7));
+  qs.push(mq('Toán','Đúng/Sai','Trung bình','Thông hiểu','Số 3 150 chia hết cho cả 2, 3 và 5.','A. Đúng\nB. Sai','A','Chẵn, tổng cs=9, tận cùng 0',7));
+  qs.push(mq('Toán','Điền khuyết','Trung bình','Thông hiểu','Một ô tô đi với vận tốc 60 km/h trong 2 giờ 30 phút. Quãng đường ô tô đi được là {a} km.','','A.150','60 × 2,5 = 150',7));
+
+  // Mức 3: Vận dụng – 4 câu × ~7 điểm = 25 điểm
+  qs.push(mq('Toán','Điền khuyết','Khó','Vận dụng','Một thửa ruộng hình thang có đáy lớn 80 m, đáy bé 60 m, chiều cao 40 m. Diện tích thửa ruộng là {a} m².','','A.2800','(80+60)×40÷2=2800',7));
+  qs.push(mq('Toán','Một lựa chọn','Khó','Vận dụng','Tìm x: x × 4 - 15 = 85','A. x = 20\nB. x = 25\nC. x = 30\nD. x = 17,5','B','x = (85+15)÷4 = 25',7));
+  qs.push(mq('Toán','Điền khuyết','Khó','Vận dụng','Một bể nước hình hộp chữ nhật có chiều dài 1,5 m, chiều rộng 0,8 m, chiều cao 1 m. Thể tích bể nước là {a} m³.','','A.1,2','1,5×0,8×1=1,2',6));
+  qs.push(mq('Toán','Một lựa chọn','Trung bình','Vận dụng','What is 2/5 of 200?','A. 60\nB. 80\nC. 100\nD. 40','B','Câu tiếng Anh: 200×2/5=80',5));
+
+  // Mức 3+: Vận dụng cao – 2 câu × ~7,5 điểm = 15 điểm
+  qs.push(mq('Toán','Điền khuyết','Rất khó','Vận dụng cao','Hai vòi nước cùng chảy vào một bể, vòi thứ nhất chảy đầy bể trong 4 giờ, vòi thứ hai chảy đầy bể trong 6 giờ. Hỏi cả hai vòi cùng chảy thì sau bao lâu đầy bể? Đáp số: {a} giờ.','','A.2,4','1/4+1/6=5/12 bể/giờ → 12/5=2,4 giờ',8));
+  qs.push(mq('Toán','Điền khuyết','Rất khó','Vận dụng cao','A rectangle has length 20 cm and width 12 cm. A square has the same perimeter. What is the area of the square? Answer: {a} cm².','','A.256','Chu vi HCN = 64 → cạnh vuông = 16 → S = 256. Câu tiếng Anh.',7));
+
+  return qs;
+}
+
+function generateTVByMatrix() {
+  const qs = [];
+  // Mức 1: Nhận biết – 4 câu × ~6 điểm = 25 điểm
+  qs.push(mq('Tiếng Việt','Một lựa chọn','Dễ','Nhận biết','Từ nào dưới đây là danh từ?','A. Chạy\nB. Đẹp\nC. Bàn ghế\nD. Nhanh','C','',6));
+  qs.push(mq('Tiếng Việt','Một lựa chọn','Dễ','Nhận biết','Từ nào sau đây là từ láy?','A. Nhà cửa\nB. Long lanh\nC. Quần áo\nD. Bạn bè','B','',6));
+  qs.push(mq('Tiếng Việt','Đúng/Sai','Dễ','Nhận biết','Trong câu "Em bé cười tươi", chủ ngữ là "Em bé".','A. Đúng\nB. Sai','A','',6));
+  qs.push(mq('Tiếng Việt','Điền khuyết','Dễ','Nhận biết','Điền dấu câu thích hợp: "Bạn tên là gì {a}"','','A.?','Câu hỏi dùng dấu chấm hỏi',7));
+
+  // Mức 2: Thông hiểu – 5 câu × ~7 điểm = 35 điểm
+  qs.push(mq('Tiếng Việt','Một lựa chọn','Trung bình','Thông hiểu','Câu nào sau đây là câu ghép?','A. Hoa nở rất đẹp.\nB. Mưa tạnh, nắng lên.\nC. Em đang học bài.\nD. Chim hót líu lo.','B','',7));
+  qs.push(mq('Tiếng Việt','Một lựa chọn','Trung bình','Thông hiểu','Biện pháp tu từ trong câu "Mặt trời như quả cầu lửa" là:','A. Nhân hoá\nB. So sánh\nC. Ẩn dụ\nD. Điệp ngữ','B','',7));
+  qs.push(mq('Tiếng Việt','Một lựa chọn','Trung bình','Thông hiểu','Từ "ăn" trong "ăn cơm" và "ăn ảnh" có quan hệ gì?','A. Đồng nghĩa\nB. Đồng âm\nC. Trái nghĩa\nD. Nhiều nghĩa','D','',7));
+  qs.push(mq('Tiếng Việt','Đúng/Sai','Trung bình','Thông hiểu','Thành ngữ "Nước đổ đầu vịt" nghĩa là lời nói không có tác dụng.','A. Đúng\nB. Sai','A','',7));
+  qs.push(mq('Tiếng Việt','Điền khuyết','Trung bình','Thông hiểu','Điền từ: "Công cha như núi {a}, nghĩa mẹ như nước trong nguồn chảy ra."','','A.Thái Sơn','Ca dao',7));
+
+  // Mức 3: Vận dụng – 4 câu × ~7 điểm = 25 điểm
+  qs.push(mq('Tiếng Việt','Một lựa chọn','Khó','Vận dụng','Bộ phận trạng ngữ trong câu "Mỗi buổi sáng, bà em ra vườn tưới cây" là:','A. Bà em\nB. Mỗi buổi sáng\nC. Ra vườn\nD. Tưới cây','B','',7));
+  qs.push(mq('Tiếng Việt','Nhiều lựa chọn','Khó','Vận dụng','Những câu nào sử dụng biện pháp nhân hoá?','A. Ông mặt trời toả nắng.\nB. Trời trong xanh.\nC. Chị gió hát vui.\nD. Cây cao bóng mát.','A,C','',7));
+  qs.push(mq('Tiếng Việt','Một lựa chọn','Khó','Vận dụng','Dấu phẩy trong câu "Sáng nay, các bạn đi thi" có tác dụng gì?','A. Ngăn cách các vế câu\nB. Ngăn cách trạng ngữ với chủ ngữ và vị ngữ\nC. Ngăn cách các từ cùng làm chủ ngữ\nD. Liệt kê','B','',6));
+  qs.push(mq('Tiếng Việt','Điền khuyết','Khó','Vận dụng','Tìm từ trái nghĩa với "cần cù": {a}','','A.lười biếng','',5));
+
+  // Mức 3+: Vận dụng cao – 2 câu × ~7,5 điểm = 15 điểm
+  qs.push(mq('Tiếng Việt','Một lựa chọn','Rất khó','Vận dụng cao','Câu "Những cánh đồng lúa chín trải dài đến tận chân trời" thuộc kiểu câu gì theo mục đích nói?','A. Câu hỏi\nB. Câu kể\nC. Câu cảm\nD. Câu cầu khiến','B','',8));
+  qs.push(mq('Tiếng Việt','Một lựa chọn','Rất khó','Vận dụng cao','Trong đoạn văn tả cảnh, câu mở đoạn thường có nhiệm vụ gì?','A. Kết luận nội dung\nB. Giới thiệu cảnh sẽ tả\nC. Nêu cảm xúc\nD. Kể sự việc','B','',7));
+
+  return qs;
+}
+
+// ================================================================
 //  QUESTIONS CRUD
 // ================================================================
 function addQuestion() {
+  if (examStatus === 'published') return toast('🔒 Đề thi đã xuất bản! Hủy xuất bản để chỉnh sửa.','var(--danger)');
   const q = {
     subject: v('fSubj'),
     type: v('fType'),
@@ -1098,6 +1838,7 @@ function addQuestion() {
   clearForm();
   renderQuestions();
   save();
+  updateMatrixStats();
 }
 
 function editQ(i) {
@@ -1188,6 +1929,14 @@ function createRoom() {
   const name = v('rName').trim();
   const subj = v('rSubject');
   if (!name) return toast('⚠️ Nhập tên phòng thi!','var(--danger)');
+  
+  // Check exam is published
+  if (examStatus !== 'published') {
+    showDialog('warning','⚠️','Đề chưa xuất bản',
+      'Bạn cần <strong>xuất bản đề thi</strong> trước khi tạo phòng thi.<br>Vào tab "Soạn đề" → bấm "🚀 Xuất bản đề thi".',
+      [{text:'Đi soạn đề →',cls:'primary',action:'closeDialog();goTab("create")'}]);
+    return;
+  }
   
   // Get questions for this subject
   const qs = DB.questions.filter(q => q.subject === subj);
@@ -1723,6 +2472,103 @@ function sampleTTT_DienChau() {
 }
 
 // ================================================================
+//  IMAGE UPLOAD & AI PARSING (Placeholder - cần API key)
+// ================================================================
+function handleImageUpload(event) {
+  const files = event.target.files;
+  processImageFiles(files);
+}
+
+function handleImageDrop(event) {
+  const files = event.dataTransfer.files;
+  processImageFiles(files);
+}
+
+function processImageFiles(files) {
+  if (!files || !files.length) return;
+  const preview = document.getElementById('uploadPreview');
+  const resultDiv = document.getElementById('aiResult');
+  
+  preview.innerHTML = '';
+  let images = [];
+  
+  Array.from(files).forEach((file, i) => {
+    if (!file.type.startsWith('image/')) return;
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      const imgData = e.target.result;
+      images.push(imgData);
+      preview.innerHTML += `<div style="display:inline-block;margin:8px;vertical-align:top;">
+        <img src="${imgData}" style="max-width:280px;max-height:200px;border-radius:var(--radius-sm);border:2px solid var(--border);box-shadow:var(--shadow-sm);">
+        <div style="font-size:0.75rem;color:var(--text-light);text-align:center;margin-top:4px;">Ảnh ${i+1}</div>
+      </div>`;
+      
+      if (images.length === files.length) {
+        // Show processing UI
+        resultDiv.innerHTML = `
+          <div class="info-box" style="margin-top:16px;">
+            <strong>📸 Đã tải ${images.length} ảnh.</strong><br>
+            Bấm nút bên dưới để AI đọc và chuyển thành câu hỏi. Sau đó giáo viên kiểm tra, chỉnh sửa rồi thêm vào ngân hàng.
+          </div>
+          <div class="btn-group" style="margin-top:12px;">
+            <button class="btn btn-gold" onclick="aiParseImages()">🤖 AI đọc đề thi</button>
+            <button class="btn btn-outline" onclick="clearUpload()">🗑 Xoá ảnh</button>
+          </div>
+          <div id="aiParseResult" style="margin-top:16px;"></div>
+        `;
+      }
+    };
+    reader.readAsDataURL(file);
+  });
+}
+
+function clearUpload() {
+  document.getElementById('uploadPreview').innerHTML = '';
+  document.getElementById('aiResult').innerHTML = '';
+  document.getElementById('imgUpload').value = '';
+}
+
+function aiParseImages() {
+  const parseDiv = document.getElementById('aiParseResult');
+  parseDiv.innerHTML = `
+    <div class="info-box gold">
+      <strong>⚠️ Tính năng AI đọc đề đang phát triển</strong><br><br>
+      Hiện tại bạn có thể sử dụng 2 cách thay thế:<br><br>
+      <strong>Cách 1:</strong> Copy ảnh đề thi → Dán vào Claude.ai → Yêu cầu Claude chuyển thành JSON câu hỏi → Copy kết quả → Dán vào phần "📥 Nhập từ JSON" ở tab Soạn đề.<br><br>
+      <strong>Cách 2:</strong> Gửi ảnh đề cho Chung Trần (Zalo: 0913 031 073) để được hỗ trợ số hoá và cập nhật vào ngân hàng đề.<br><br>
+      <em>Tính năng AI tích hợp trực tiếp sẽ sớm được ra mắt!</em>
+    </div>
+    <div class="btn-group" style="margin-top:12px;">
+      <button class="btn btn-outline" onclick="showManualParseGuide()">📖 Xem hướng dẫn chi tiết</button>
+    </div>
+  `;
+}
+
+function showManualParseGuide() {
+  openModal(`
+    <div class="modal-head">
+      <h3>📖 Hướng dẫn số hoá đề thi bằng Claude AI</h3>
+      <button class="modal-close" onclick="closeModal()">✕</button>
+    </div>
+    <div class="modal-body" style="font-size:0.88rem;line-height:1.8;">
+      <p><strong>Bước 1:</strong> Truy cập <a href="https://claude.ai" target="_blank" style="color:var(--blue);">claude.ai</a></p>
+      <p><strong>Bước 2:</strong> Upload ảnh đề thi (kéo thả hoặc bấm 📎)</p>
+      <p><strong>Bước 3:</strong> Gửi prompt sau:</p>
+      <div style="background:#F0F0F0;padding:12px;border-radius:8px;font-family:monospace;font-size:0.8rem;margin:8px 0;">
+        Hãy đọc đề thi trong ảnh và chuyển thành JSON với cấu trúc sau cho mỗi câu hỏi:<br>
+        {"subject":"Toán","type":"Điền khuyết","diff":"Khó","level":"Vận dụng","child":"","point":7,"content":"Nội dung câu hỏi... {a}","answers":"","correct":"A.đáp án","explain":"giải thích"}<br><br>
+        Trả về mảng JSON tất cả câu hỏi: {"questions": [...]}
+      </div>
+      <p><strong>Bước 4:</strong> Copy kết quả JSON</p>
+      <p><strong>Bước 5:</strong> Về tab "Soạn đề" → Bấm "📥 Nhập từ JSON" → Dán và tải lên</p>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-gold" onclick="closeModal()">Đã hiểu!</button>
+    </div>
+  `);
+}
+
+// ================================================================
 //  UTILITIES
 // ================================================================
 function v(id) { return document.getElementById(id).value; }
@@ -1750,6 +2596,81 @@ function copyText(t) {
   navigator.clipboard.writeText(t).then(() => toast('📋 Đã copy: '+t));
 }
 
+function copyStudentLink() {
+  const link = 'https://hososoeduvn.github.io/dethiolympic/';
+  navigator.clipboard.writeText(link).then(() => {
+    showDialog('blue','📋','Đã copy link!',
+      'Link thi đã được copy vào clipboard:<br><br><code style="background:#EBF5FB;padding:6px 12px;border-radius:6px;font-size:0.82rem;word-break:break-all;">'+link+'</code><br><br>Gửi link này qua <strong>Zalo, Messenger, Email</strong> cho học sinh.',
+      [{text:'Đóng',cls:'primary',action:'closeDialog()'}]);
+  });
+}
+
+// ================================================================
+//  CUSTOM DIALOG SYSTEM
+// ================================================================
+function showDialog(colorTheme, icon, title, message, buttons) {
+  const el = document.getElementById('dialogCard');
+  const circleClass = colorTheme === 'warning' ? 'gold' : colorTheme;
+  el.innerHTML = `
+    <div class="dialog-icon"><div class="icon-circle ${circleClass}">${icon}</div></div>
+    <div class="dialog-body">
+      <h3>${title}</h3>
+      <p>${message}</p>
+    </div>
+    <div class="dialog-foot">
+      ${buttons.map(b => `<button class="dialog-btn ${b.cls}" onclick="${b.action}">${b.text}</button>`).join('')}
+    </div>
+  `;
+  document.getElementById('dialogOverlay').classList.add('show');
+}
+
+function closeDialog() {
+  document.getElementById('dialogOverlay').classList.remove('show');
+}
+
+// ================================================================
+//  SCHOOL REGISTRATION
+// ================================================================
+let schoolInfo = null;
+
+function checkSchoolRegistration() {
+  try {
+    const saved = localStorage.getItem('oly_school');
+    if (saved) {
+      schoolInfo = JSON.parse(saved);
+      document.getElementById('headerSchoolName').textContent = '🏫 ' + schoolInfo.name;
+      return true;
+    }
+  } catch(e) {}
+  document.getElementById('schoolRegOverlay').style.display = 'flex';
+  return false;
+}
+
+function registerSchool() {
+  const name = document.getElementById('regSchoolName').value.trim();
+  const ward = document.getElementById('regWard').value.trim();
+  const contact = document.getElementById('regContact').value.trim();
+  
+  if (!name) return toast('⚠️ Nhập tên trường!','var(--danger)');
+  if (!ward) return toast('⚠️ Nhập xã/phường!','var(--danger)');
+  
+  schoolInfo = {
+    name: name,
+    ward: ward,
+    contact: contact,
+    id: name.replace(/\s+/g,'_').substring(0,20) + '_' + Date.now().toString(36),
+    registered: new Date().toISOString()
+  };
+  
+  localStorage.setItem('oly_school', JSON.stringify(schoolInfo));
+  document.getElementById('schoolRegOverlay').style.display = 'none';
+  document.getElementById('headerSchoolName').textContent = '🏫 ' + schoolInfo.name;
+  
+  showDialog('green','🎉','Đăng ký thành công!',
+    '<strong>'+esc(name)+'</strong><br>'+esc(ward)+'<br><br>Dữ liệu của trường sẽ được lưu riêng biệt. Bắt đầu soạn đề thi ngay!',
+    [{text:'Bắt đầu →',cls:'success',action:'closeDialog()'}]);
+}
+
 function openModal(html) {
   document.getElementById('modalBox').innerHTML = html;
   document.getElementById('modalBg').classList.add('show');
@@ -1769,11 +2690,15 @@ async function gasCall(action, data, params) {
   if (!useGAS()) return null;
   try {
     let url = GAS_URL + '?action=' + action;
+    // Add schoolId for data isolation
+    if (schoolInfo && schoolInfo.id) {
+      url += '&schoolId=' + encodeURIComponent(schoolInfo.id);
+    }
     if (params) {
       Object.keys(params).forEach(k => url += '&' + k + '=' + encodeURIComponent(params[k]));
     }
     const opts = data
-      ? { method: 'POST', body: JSON.stringify(data), headers: {'Content-Type':'text/plain'} }
+      ? { method: 'POST', body: JSON.stringify({...(data||{}), schoolId: schoolInfo?.id}), headers: {'Content-Type':'text/plain'} }
       : { method: 'GET' };
     const res = await fetch(url, opts);
     return await res.json();
@@ -1787,14 +2712,33 @@ async function gasCall(action, data, params) {
 // ================================================================
 //  PERSISTENCE (GAS + localStorage fallback)
 // ================================================================
+function getStorageKey() {
+  if (schoolInfo && schoolInfo.id) return 'oly_db_' + schoolInfo.id;
+  return 'oly_db';
+}
+
 function saveLocal() {
-  try { localStorage.setItem('oly_db', JSON.stringify(DB)); } catch(e){}
+  try { localStorage.setItem(getStorageKey(), JSON.stringify({...DB, examStatus})); } catch(e){}
 }
 
 function loadLocal() {
   try {
-    const d = localStorage.getItem('oly_db');
-    if (d) DB = JSON.parse(d);
+    const key = getStorageKey();
+    const d = localStorage.getItem(key);
+    if (d) {
+      const parsed = JSON.parse(d);
+      DB = { questions: parsed.questions||[], rooms: parsed.rooms||[], students: parsed.students||[] };
+      examStatus = parsed.examStatus || 'draft';
+    }
+    // Also try legacy key for migration
+    if (!d) {
+      const legacy = localStorage.getItem('oly_db');
+      if (legacy) {
+        const parsed = JSON.parse(legacy);
+        DB = { questions: parsed.questions||[], rooms: parsed.rooms||[], students: parsed.students||[] };
+        examStatus = parsed.examStatus || 'draft';
+      }
+    }
   } catch(e){}
 }
 
@@ -1837,6 +2781,13 @@ createRoom = async function() {
   const name = v('rName').trim();
   const subj = v('rSubject');
   if (!name) return toast('⚠️ Nhập tên phòng thi!','var(--danger)');
+  
+  if (examStatus !== 'published') {
+    showDialog('warning','⚠️','Đề chưa xuất bản',
+      'Bạn cần <strong>xuất bản đề thi</strong> trước khi tạo phòng thi.',
+      [{text:'Đi soạn đề →',cls:'primary',action:'closeDialog();goTab("create")'}]);
+    return;
+  }
   
   const qs = DB.questions.filter(q => q.subject === subj);
   if (!qs.length) return toast('⚠️ Chưa có câu hỏi '+subj+'! Hãy soạn đề trước.','var(--danger)');
@@ -2046,9 +2997,11 @@ async function syncQuestionsToGAS() {
 // ================================================================
 //  INIT
 // ================================================================
+checkSchoolRegistration();
 loadLocal();
 renderQuestions();
 refreshDashboard();
+updateExamStatusUI();
 
 // Auto-load from GAS if configured
 if (useGAS()) {
@@ -2067,7 +3020,7 @@ setTimeout(() => {
 
 <!-- FOOTER -->
 <div style="text-align:center;padding:20px;font-size:0.72rem;color:var(--text-light);">
-  Thiết kế: Chung Trần • Olympic Tiếng Việt – Toán Tuổi Thơ 2026 • Xã Quảng Châu, Nghệ An
+  Thiết kế: Chung Trần • Olympic Tiếng Việt – Toán Tuổi Thơ 2026
 </div>
 
 </body>
