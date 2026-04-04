@@ -1,0 +1,2074 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Olympic Tiếng Việt – Toán Tuổi Thơ | Giáo viên</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏆</text></svg>">
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@700;800;900&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   OLYMPIC THI TRỰC TUYẾN – GIÁO VIÊN
+   Theme: Championship Gold + Deep Navy  
+   ============================================================ */
+:root {
+  --gold: #D4A012;
+  --gold-light: #F4D35E;
+  --gold-dark: #B8860B;
+  --navy: #0C1B33;
+  --navy-mid: #152642;
+  --navy-light: #1E3A5F;
+  --blue: #2980B9;
+  --blue-light: #5DADE2;
+  --white: #FFFFFF;
+  --off-white: #F7F8FA;
+  --cream: #FFF9E6;
+  --success: #27AE60;
+  --success-bg: #E8F8F0;
+  --danger: #E74C3C;
+  --danger-bg: #FDEDEC;
+  --warning: #F39C12;
+  --text: #1A1A2E;
+  --text-light: #6B7280;
+  --border: #E5E7EB;
+  --shadow-sm: 0 1px 3px rgba(12,27,51,0.08);
+  --shadow: 0 4px 16px rgba(12,27,51,0.1);
+  --shadow-lg: 0 12px 40px rgba(12,27,51,0.15);
+  --shadow-gold: 0 4px 20px rgba(212,160,18,0.25);
+  --radius: 14px;
+  --radius-sm: 8px;
+  --radius-xs: 6px;
+  --transition: 0.3s cubic-bezier(0.4,0,0.2,1);
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+  font-family: 'Be Vietnam Pro', sans-serif;
+  background: var(--off-white);
+  color: var(--text);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ==================== HEADER ==================== */
+.header {
+  background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 40%, var(--navy-light) 100%);
+  color: var(--white);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 4px 30px rgba(0,0,0,0.3);
+}
+.header::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--gold), var(--gold-light), var(--gold));
+}
+.header-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 14px 24px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: var(--white);
+}
+.logo-icon {
+  width: 48px; height: 48px;
+  background: linear-gradient(135deg, var(--gold), var(--gold-light));
+  border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.6rem;
+  box-shadow: var(--shadow-gold);
+  flex-shrink: 0;
+}
+.logo-text h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.25rem;
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: -0.3px;
+}
+.logo-text p {
+  font-size: 0.7rem;
+  opacity: 0.7;
+  font-weight: 300;
+  margin-top: 2px;
+}
+.header-right {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.header-badge {
+  background: rgba(212,160,18,0.2);
+  border: 1px solid rgba(212,160,18,0.4);
+  color: var(--gold-light);
+  padding: 5px 14px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+.header-link {
+  color: rgba(255,255,255,0.7);
+  text-decoration: none;
+  font-size: 0.8rem;
+  padding: 6px 12px;
+  border-radius: var(--radius-xs);
+  transition: var(--transition);
+}
+.header-link:hover { color: white; background: rgba(255,255,255,0.1); }
+
+/* ==================== NAV TABS ==================== */
+.nav-tabs {
+  background: var(--navy-mid);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  overflow-x: auto;
+}
+.nav-tabs-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: flex;
+  padding: 0 24px;
+}
+.nav-tab {
+  background: none;
+  border: none;
+  color: rgba(255,255,255,0.55);
+  font-family: inherit;
+  font-size: 0.83rem;
+  font-weight: 500;
+  padding: 13px 20px;
+  cursor: pointer;
+  transition: var(--transition);
+  white-space: nowrap;
+  position: relative;
+}
+.nav-tab:hover { color: rgba(255,255,255,0.9); }
+.nav-tab.active {
+  color: var(--gold-light);
+  font-weight: 600;
+}
+.nav-tab.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 8px; right: 8px;
+  height: 2.5px;
+  background: var(--gold);
+  border-radius: 2px 2px 0 0;
+}
+
+/* ==================== MAIN ==================== */
+.main {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+/* ==================== SECTION ==================== */
+.section { display: none; }
+.section.active { display: block; animation: fadeUp 0.35s ease; }
+@keyframes fadeUp {
+  from { opacity:0; transform: translateY(12px); }
+  to { opacity:1; transform: translateY(0); }
+}
+
+/* ==================== CARDS ==================== */
+.card {
+  background: var(--white);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border);
+  padding: 24px;
+  margin-bottom: 20px;
+  transition: var(--transition);
+}
+.card:hover { box-shadow: var(--shadow); }
+.card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 18px;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.card-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--navy);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.card-title .emoji { font-size: 1.2rem; }
+
+/* ==================== BUTTONS ==================== */
+.btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: var(--radius-sm);
+  font-family: inherit;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  text-decoration: none;
+}
+.btn:active { transform: scale(0.97); }
+.btn-gold {
+  background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+  color: var(--navy);
+  box-shadow: var(--shadow-gold);
+}
+.btn-gold:hover { filter: brightness(1.1); }
+.btn-navy {
+  background: var(--navy);
+  color: var(--white);
+}
+.btn-navy:hover { background: var(--navy-light); }
+.btn-blue {
+  background: var(--blue);
+  color: var(--white);
+}
+.btn-blue:hover { background: var(--blue-light); }
+.btn-success {
+  background: var(--success);
+  color: var(--white);
+}
+.btn-success:hover { filter: brightness(1.1); }
+.btn-danger {
+  background: var(--danger);
+  color: var(--white);
+}
+.btn-danger:hover { filter: brightness(1.1); }
+.btn-outline {
+  background: var(--white);
+  color: var(--navy);
+  border: 1.5px solid var(--border);
+}
+.btn-outline:hover { border-color: var(--navy); background: var(--off-white); }
+.btn-sm { padding: 7px 14px; font-size: 0.8rem; }
+.btn-group { display: flex; gap: 8px; flex-wrap: wrap; }
+
+/* ==================== FORMS ==================== */
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+}
+.form-group { display: flex; flex-direction: column; gap: 5px; }
+.form-label {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--text-light);
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
+.form-label .req { color: var(--danger); margin-left: 2px; }
+.form-input, .form-select, .form-textarea {
+  padding: 10px 14px;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-family: inherit;
+  font-size: 0.88rem;
+  transition: var(--transition);
+  background: var(--white);
+  width: 100%;
+}
+.form-input:focus, .form-select:focus, .form-textarea:focus {
+  outline: none;
+  border-color: var(--blue);
+  box-shadow: 0 0 0 3px rgba(41,128,185,0.1);
+}
+.form-textarea { min-height: 90px; resize: vertical; }
+
+/* ==================== ROOM CODE DISPLAY ==================== */
+.room-code-display {
+  background: linear-gradient(135deg, var(--navy), var(--navy-mid));
+  border-radius: var(--radius);
+  padding: 32px;
+  text-align: center;
+  color: var(--white);
+  position: relative;
+  overflow: hidden;
+}
+.room-code-display::before {
+  content: '';
+  position: absolute;
+  top: -50%; left: -50%;
+  width: 200%; height: 200%;
+  background: radial-gradient(circle, rgba(212,160,18,0.08) 0%, transparent 60%);
+}
+.room-code-display .label {
+  font-size: 0.85rem;
+  opacity: 0.7;
+  margin-bottom: 8px;
+  position: relative;
+}
+.room-code-display .code {
+  font-family: 'Playfair Display', serif;
+  font-size: 3rem;
+  font-weight: 900;
+  color: var(--gold-light);
+  letter-spacing: 6px;
+  text-shadow: 0 2px 10px rgba(212,160,18,0.3);
+  position: relative;
+}
+.room-code-display .sub {
+  font-size: 0.8rem;
+  opacity: 0.5;
+  margin-top: 8px;
+  position: relative;
+}
+
+/* ==================== QUESTION ITEM ==================== */
+.q-item {
+  background: var(--white);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px 20px;
+  margin-bottom: 10px;
+  transition: var(--transition);
+  position: relative;
+  animation: slideIn 0.3s ease;
+}
+@keyframes slideIn {
+  from { opacity:0; transform: translateY(8px); }
+  to { opacity:1; transform: translateY(0); }
+}
+.q-item:hover { border-color: var(--blue-light); box-shadow: var(--shadow-sm); }
+.q-item .q-top {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+  flex-wrap: wrap;
+}
+.q-num {
+  min-width: 30px; height: 30px;
+  background: var(--navy);
+  color: var(--gold-light);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.78rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+.q-tags { display: flex; gap: 5px; flex-wrap: wrap; }
+.q-tag {
+  padding: 2px 10px;
+  border-radius: 12px;
+  font-size: 0.68rem;
+  font-weight: 600;
+  line-height: 1.6;
+}
+.q-tag-type { background: #EBF5FB; color: var(--blue); }
+.q-tag-diff { background: var(--cream); color: var(--gold-dark); }
+.q-tag-level { background: #F4ECF7; color: #7D3C98; }
+.q-tag-subj { background: #E8F8F0; color: var(--success); }
+.q-tag-child { background: var(--danger-bg); color: var(--danger); }
+.q-body {
+  font-size: 0.88rem;
+  line-height: 1.65;
+  padding-left: 40px;
+  color: var(--text);
+}
+.q-answers-preview {
+  padding-left: 40px;
+  margin-top: 6px;
+  font-size: 0.82rem;
+  color: var(--text-light);
+}
+.q-answers-preview .correct-ans {
+  color: var(--success);
+  font-weight: 600;
+}
+.q-actions {
+  position: absolute;
+  top: 12px; right: 12px;
+  display: flex; gap: 3px;
+}
+.q-act-btn {
+  width: 28px; height: 28px;
+  border: none;
+  border-radius: var(--radius-xs);
+  cursor: pointer;
+  font-size: 0.75rem;
+  background: var(--off-white);
+  color: var(--text-light);
+  transition: var(--transition);
+}
+.q-act-btn:hover { background: var(--navy); color: var(--white); }
+.q-act-btn.del:hover { background: var(--danger); color: var(--white); }
+
+/* ==================== STATS ==================== */
+.stats-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 12px;
+  margin-bottom: 24px;
+}
+.stat-box {
+  background: var(--white);
+  border-radius: var(--radius);
+  padding: 18px 16px;
+  text-align: center;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border);
+  border-top: 3px solid var(--navy);
+  transition: var(--transition);
+}
+.stat-box:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+.stat-box.gold { border-top-color: var(--gold); }
+.stat-box.blue { border-top-color: var(--blue); }
+.stat-box.green { border-top-color: var(--success); }
+.stat-box.purple { border-top-color: #8E44AD; }
+.stat-val {
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--navy);
+  line-height: 1;
+}
+.stat-box.gold .stat-val { color: var(--gold-dark); }
+.stat-box.blue .stat-val { color: var(--blue); }
+.stat-box.green .stat-val { color: var(--success); }
+.stat-box.purple .stat-val { color: #8E44AD; }
+.stat-lbl {
+  font-size: 0.72rem;
+  color: var(--text-light);
+  font-weight: 500;
+  margin-top: 4px;
+}
+
+/* ==================== STEPS INDICATOR ==================== */
+.steps {
+  display: flex;
+  gap: 0;
+  margin-bottom: 24px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+}
+.step {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--text-light);
+  white-space: nowrap;
+  position: relative;
+}
+.step::after {
+  content: '→';
+  margin-left: 8px;
+  opacity: 0.3;
+}
+.step:last-child::after { display: none; }
+.step .step-num {
+  width: 24px; height: 24px;
+  border-radius: 50%;
+  background: var(--border);
+  color: var(--text-light);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.7rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+.step.done .step-num { background: var(--success); color: white; }
+.step.done { color: var(--success); font-weight: 600; }
+.step.current .step-num { background: var(--gold); color: var(--navy); }
+.step.current { color: var(--navy); font-weight: 700; }
+
+/* ==================== TABLE ==================== */
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.82rem;
+}
+.data-table th {
+  background: var(--navy);
+  color: var(--white);
+  padding: 10px 12px;
+  text-align: left;
+  font-weight: 600;
+  font-size: 0.78rem;
+  white-space: nowrap;
+}
+.data-table td {
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+}
+.data-table tr:hover td { background: #F0F7FF; }
+
+/* ==================== MODAL ==================== */
+.modal-bg {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(12,27,51,0.6);
+  backdrop-filter: blur(4px);
+  z-index: 200;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+.modal-bg.show { display: flex; }
+.modal-box {
+  background: var(--white);
+  border-radius: var(--radius);
+  max-width: 640px;
+  width: 100%;
+  max-height: 85vh;
+  overflow-y: auto;
+  box-shadow: var(--shadow-lg);
+  animation: modalPop 0.3s ease;
+}
+@keyframes modalPop {
+  from { opacity:0; transform: scale(0.95); }
+  to { opacity:1; transform: scale(1); }
+}
+.modal-head {
+  padding: 20px 24px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.modal-head h3 { font-size: 1.05rem; color: var(--navy); }
+.modal-close {
+  width: 32px; height: 32px;
+  border: none;
+  border-radius: 50%;
+  background: var(--off-white);
+  cursor: pointer;
+  font-size: 1.1rem;
+  color: var(--text-light);
+  transition: var(--transition);
+}
+.modal-close:hover { background: var(--danger); color: white; }
+.modal-body { padding: 24px; }
+.modal-foot {
+  padding: 16px 24px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+/* ==================== TOAST ==================== */
+.toast {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  padding: 14px 22px;
+  border-radius: var(--radius-sm);
+  font-size: 0.85rem;
+  font-weight: 500;
+  box-shadow: var(--shadow-lg);
+  z-index: 300;
+  display: none;
+  color: var(--white);
+  animation: toastSlide 0.3s ease;
+}
+@keyframes toastSlide {
+  from { transform: translateY(20px); opacity:0; }
+  to { transform: translateY(0); opacity:1; }
+}
+
+/* ==================== EMPTY STATE ==================== */
+.empty {
+  text-align: center;
+  padding: 48px 20px;
+}
+.empty-icon { font-size: 3rem; margin-bottom: 10px; opacity: 0.4; }
+.empty-text { color: var(--text-light); font-size: 0.88rem; }
+
+/* ==================== INFO BOX ==================== */
+.info-box {
+  background: #EBF5FB;
+  border-left: 4px solid var(--blue);
+  border-radius: var(--radius-sm);
+  padding: 14px 18px;
+  font-size: 0.83rem;
+  line-height: 1.6;
+  color: var(--navy);
+  margin-bottom: 16px;
+}
+.info-box.gold {
+  background: var(--cream);
+  border-left-color: var(--gold);
+}
+.info-box.green {
+  background: var(--success-bg);
+  border-left-color: var(--success);
+}
+
+/* ==================== RESPONSIVE ==================== */
+@media (max-width: 768px) {
+  .main { padding: 14px; }
+  .header-inner { padding: 10px 16px; }
+  .logo-text h1 { font-size: 1.05rem; }
+  .form-grid { grid-template-columns: 1fr; }
+  .stats-row { grid-template-columns: repeat(2, 1fr); }
+  .room-code-display .code { font-size: 2.2rem; }
+  .q-body, .q-answers-preview { padding-left: 0; }
+  .header-badge { display: none; }
+}
+
+/* Print */
+@media print {
+  .header, .nav-tabs, .btn, .q-actions { display: none !important; }
+  .card { box-shadow: none; border: 1px solid #ccc; page-break-inside: avoid; }
+}
+</style>
+</head>
+<body>
+
+<!-- ==================== HEADER ==================== -->
+<header class="header">
+  <div class="header-inner">
+    <a class="logo" href="#">
+      <div class="logo-icon">🏆</div>
+      <div class="logo-text">
+        <h1>Olympic Tiếng Việt – Toán</h1>
+        <p>Hệ thống thi trực tuyến • Giáo viên</p>
+      </div>
+    </a>
+    <div class="header-right">
+      <span class="header-badge">Năm học 2025-2026</span>
+      <a class="header-link" href="#" onclick="window.open('hocsinh.html','_blank')">🎓 Trang học sinh ↗</a>
+    </div>
+  </div>
+  <nav class="nav-tabs">
+    <div class="nav-tabs-inner">
+      <button class="nav-tab active" onclick="goTab('dashboard')">📊 Tổng quan</button>
+      <button class="nav-tab" onclick="goTab('create')">✏️ Soạn đề</button>
+      <button class="nav-tab" onclick="goTab('rooms')">🚪 Phòng thi</button>
+      <button class="nav-tab" onclick="goTab('students')">🎓 Thí sinh</button>
+      <button class="nav-tab" onclick="goTab('results')">📈 Kết quả</button>
+      <button class="nav-tab" onclick="goTab('guide')">📖 Hướng dẫn</button>
+    </div>
+  </nav>
+</header>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<!-- MODAL -->
+<div class="modal-bg" id="modalBg" onclick="if(event.target===this)closeModal()">
+  <div class="modal-box" id="modalBox"></div>
+</div>
+
+<!-- ==================== MAIN ==================== -->
+<div class="main">
+
+  <!-- ====== DASHBOARD ====== -->
+  <div class="section active" id="sec-dashboard">
+    <!-- Steps -->
+    <div class="steps" id="stepsBar">
+      <div class="step current"><span class="step-num">1</span> Soạn đề thi</div>
+      <div class="step"><span class="step-num">2</span> Tạo phòng thi</div>
+      <div class="step"><span class="step-num">3</span> Nhập thí sinh</div>
+      <div class="step"><span class="step-num">4</span> Mở phòng thi</div>
+      <div class="step"><span class="step-num">5</span> HS làm bài</div>
+      <div class="step"><span class="step-num">6</span> Chấm & Kết quả</div>
+    </div>
+
+    <!-- Stats -->
+    <div class="stats-row">
+      <div class="stat-box gold">
+        <div class="stat-val" id="dTotal">0</div>
+        <div class="stat-lbl">Tổng câu hỏi</div>
+      </div>
+      <div class="stat-box blue">
+        <div class="stat-val" id="dRooms">0</div>
+        <div class="stat-lbl">Phòng thi</div>
+      </div>
+      <div class="stat-box green">
+        <div class="stat-val" id="dStudents">0</div>
+        <div class="stat-lbl">Thí sinh</div>
+      </div>
+      <div class="stat-box purple">
+        <div class="stat-val" id="dSubmitted">0</div>
+        <div class="stat-lbl">Đã nộp bài</div>
+      </div>
+    </div>
+
+    <!-- Quick actions -->
+    <div class="card">
+      <div class="card-title"><span class="emoji">⚡</span> Thao tác nhanh</div>
+      <div class="btn-group">
+        <button class="btn btn-gold" onclick="goTab('create')">✏️ Soạn đề thi</button>
+        <button class="btn btn-navy" onclick="goTab('rooms')">🚪 Tạo phòng thi</button>
+        <button class="btn btn-blue" onclick="goTab('students')">🎓 Nhập thí sinh</button>
+        <button class="btn btn-success" onclick="goTab('results')">📈 Xem kết quả</button>
+      </div>
+    </div>
+
+    <!-- Rooms overview -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title"><span class="emoji">🚪</span> Phòng thi hiện tại</div>
+      </div>
+      <div id="dashRoomsList"></div>
+    </div>
+  </div>
+
+  <!-- ====== TAB: CREATE ====== -->
+  <div class="section" id="sec-create">
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title"><span class="emoji">✏️</span> Soạn câu hỏi</div>
+        <div class="btn-group">
+          <button class="btn btn-outline btn-sm" onclick="showImportModal()">📥 Nhập từ JSON</button>
+          <button class="btn btn-outline btn-sm" onclick="loadSampleExam('toan')">⚡ Đề mẫu Toán</button>
+          <button class="btn btn-outline btn-sm" onclick="loadSampleExam('tv')">⚡ Đề mẫu T.Việt</button>
+          <button class="btn btn-outline btn-sm" onclick="loadSampleExam('ttt_dien_chau')">📜 TTT Diễn Châu</button>
+        </div>
+      </div>
+
+      <div class="form-grid">
+        <div class="form-group">
+          <label class="form-label">Môn thi<span class="req">*</span></label>
+          <select class="form-select" id="fSubj">
+            <option value="Toán">Toán</option>
+            <option value="Tiếng Việt">Tiếng Việt</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Loại câu hỏi<span class="req">*</span></label>
+          <select class="form-select" id="fType" onchange="onTypeChange()">
+            <option value="Một lựa chọn">Một lựa chọn</option>
+            <option value="Đúng/Sai">Đúng/Sai</option>
+            <option value="Điền khuyết">Điền khuyết</option>
+            <option value="Nhiều lựa chọn">Nhiều lựa chọn</option>
+            <option value="Câu hỏi chùm (câu dẫn)">Câu hỏi chùm (câu dẫn)</option>
+            <option value="Câu tự luận">Câu tự luận</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Độ khó<span class="req">*</span></label>
+          <select class="form-select" id="fDiff">
+            <option value="Dễ">Dễ</option>
+            <option value="Trung bình">Trung bình</option>
+            <option value="Khó">Khó</option>
+            <option value="Rất khó">Rất khó</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Mức độ nhận thức<span class="req">*</span></label>
+          <select class="form-select" id="fLevel">
+            <option value="Nhận biết">Nhận biết</option>
+            <option value="Thông hiểu">Thông hiểu</option>
+            <option value="Vận dụng">Vận dụng</option>
+            <option value="Vận dụng cao">Vận dụng cao</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-grid" id="fChildRow" style="display:none;margin-top:12px;">
+        <div class="form-group">
+          <label class="form-label">Là câu hỏi con của câu hỏi chùm?</label>
+          <select class="form-select" id="fChild">
+            <option value="">Không</option>
+            <option value="Có">Có</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Điểm câu hỏi</label>
+          <input class="form-input" type="number" id="fPoint" value="1" min="0" step="0.5">
+        </div>
+      </div>
+
+      <div class="form-group" style="margin-top:16px;">
+        <label class="form-label">Nội dung câu hỏi<span class="req">*</span></label>
+        <textarea class="form-textarea" id="fContent" placeholder="Nhập nội dung câu hỏi...&#10;Với điền khuyết: dùng {a}, {b}... đánh dấu chỗ trống"></textarea>
+      </div>
+
+      <div id="fAnswersSec" style="margin-top:16px;">
+        <div class="form-group">
+          <label class="form-label">Câu trả lời <span style="font-weight:400;opacity:0.6;">(mỗi dòng 1 đáp án: A. ... B. ... C. ... D. ...)</span></label>
+          <textarea class="form-textarea" id="fAnswers" placeholder="A. Đáp án 1&#10;B. Đáp án 2&#10;C. Đáp án 3&#10;D. Đáp án 4"></textarea>
+        </div>
+        <div class="form-grid" style="margin-top:12px;">
+          <div class="form-group">
+            <label class="form-label">Đáp án đúng<span class="req">*</span></label>
+            <input class="form-input" id="fCorrect" placeholder="VD: B hoặc A,C (nhiều lựa chọn)">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Giải thích</label>
+            <input class="form-input" id="fExplain" placeholder="(Tuỳ chọn)">
+          </div>
+        </div>
+      </div>
+
+      <div class="btn-group" style="margin-top:20px;">
+        <button class="btn btn-gold" onclick="addQuestion()">➕ Thêm câu hỏi</button>
+        <button class="btn btn-outline" onclick="clearForm()">🔄 Làm mới form</button>
+      </div>
+    </div>
+
+    <!-- Question list -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title"><span class="emoji">📋</span> Danh sách câu hỏi (<span id="qCount">0</span>)</div>
+        <div class="btn-group">
+          <select class="form-select" id="fFilter" onchange="renderQuestions()" style="width:auto;padding:6px 12px;font-size:0.8rem;">
+            <option value="">Tất cả</option>
+            <option value="Toán">Toán</option>
+            <option value="Tiếng Việt">Tiếng Việt</option>
+          </select>
+          <button class="btn btn-outline btn-sm" onclick="exportJSON()">💾 Lưu JSON</button>
+          <button class="btn btn-danger btn-sm" onclick="clearAllQ()">🗑 Xoá tất cả</button>
+        </div>
+      </div>
+      <div id="qList"></div>
+    </div>
+  </div>
+
+  <!-- ====== TAB: ROOMS ====== -->
+  <div class="section" id="sec-rooms">
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title"><span class="emoji">🚪</span> Tạo phòng thi mới</div>
+      </div>
+      <div class="info-box gold">
+        Mỗi phòng thi có mã riêng (VD: <strong>OLY-A1B2</strong>). Học sinh nhập mã này để vào phòng thi và làm bài. Mỗi phòng thi gắn với 1 môn (Toán hoặc Tiếng Việt).
+      </div>
+      <div class="form-grid">
+        <div class="form-group">
+          <label class="form-label">Tên phòng thi<span class="req">*</span></label>
+          <input class="form-input" id="rName" placeholder="VD: Phòng Toán - Đợt 1">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Môn thi<span class="req">*</span></label>
+          <select class="form-select" id="rSubject">
+            <option value="Toán">Toán</option>
+            <option value="Tiếng Việt">Tiếng Việt</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Thời gian (phút)<span class="req">*</span></label>
+          <input class="form-input" type="number" id="rTime" value="40" min="5" max="120">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Tổng điểm</label>
+          <input class="form-input" type="number" id="rMaxScore" value="100">
+        </div>
+      </div>
+      <div class="form-grid" style="margin-top:12px;">
+        <div class="form-group">
+          <label class="form-label">Xáo trộn câu hỏi</label>
+          <select class="form-select" id="rShuffle">
+            <option value="1">Có</option>
+            <option value="0">Không</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Xáo trộn đáp án</label>
+          <select class="form-select" id="rShuffleAns">
+            <option value="1">Có</option>
+            <option value="0">Không</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Hiển thị kết quả sau nộp</label>
+          <select class="form-select" id="rShowResult">
+            <option value="1">Có</option>
+            <option value="0">Không (chỉ GV xem)</option>
+          </select>
+        </div>
+      </div>
+      <div style="margin-top:20px;">
+        <button class="btn btn-gold" onclick="createRoom()">🚪 Tạo phòng thi</button>
+      </div>
+    </div>
+
+    <!-- Room list -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title"><span class="emoji">📋</span> Danh sách phòng thi (<span id="roomCount">0</span>)</div>
+      </div>
+      <div id="roomList"></div>
+    </div>
+  </div>
+
+  <!-- ====== TAB: STUDENTS ====== -->
+  <div class="section" id="sec-students">
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title"><span class="emoji">🎓</span> Quản lý thí sinh</div>
+      </div>
+      <div class="info-box">
+        Nhập danh sách thí sinh cho từng phòng thi. Mỗi thí sinh được cấp mã số (SBD) để đăng nhập vào trang thi. Thí sinh dùng <strong>Mã phòng + SBD</strong> để vào làm bài.
+      </div>
+      <div class="form-grid">
+        <div class="form-group">
+          <label class="form-label">Chọn phòng thi<span class="req">*</span></label>
+          <select class="form-select" id="sRoom" onchange="renderStudents()">
+            <option value="">-- Chọn phòng --</option>
+          </select>
+        </div>
+      </div>
+      <div style="margin-top:16px;">
+        <div class="form-grid">
+          <div class="form-group">
+            <label class="form-label">Họ và tên<span class="req">*</span></label>
+            <input class="form-input" id="sName" placeholder="Nguyễn Văn A">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Trường</label>
+            <input class="form-input" id="sSchool" placeholder="TH Diễn Liên">
+          </div>
+          <div class="form-group">
+            <label class="form-label">SBD (tự tạo nếu bỏ trống)</label>
+            <input class="form-input" id="sSBD" placeholder="Tự động">
+          </div>
+        </div>
+        <div class="btn-group" style="margin-top:12px;">
+          <button class="btn btn-blue" onclick="addStudent()">➕ Thêm thí sinh</button>
+          <button class="btn btn-outline btn-sm" onclick="showBatchStudentModal()">📋 Nhập hàng loạt</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Student list -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title"><span class="emoji">📋</span> Danh sách thí sinh</div>
+        <button class="btn btn-outline btn-sm" onclick="printStudentCards()">🖨 In phiếu tài khoản</button>
+      </div>
+      <div id="studentList"></div>
+    </div>
+  </div>
+
+  <!-- ====== TAB: RESULTS ====== -->
+  <div class="section" id="sec-results">
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title"><span class="emoji">📈</span> Kết quả thi</div>
+        <div class="btn-group">
+          <select class="form-select" id="resRoom" onchange="renderResults()" style="width:auto;padding:6px 12px;font-size:0.8rem;">
+            <option value="">-- Chọn phòng --</option>
+          </select>
+          <button class="btn btn-outline btn-sm" onclick="exportResults()">📤 Xuất Excel</button>
+        </div>
+      </div>
+      <div id="resultsList"></div>
+    </div>
+  </div>
+
+  <!-- ====== TAB: GUIDE ====== -->
+  <div class="section" id="sec-guide">
+    <div class="card">
+      <div class="card-title"><span class="emoji">📖</span> Hướng dẫn sử dụng – Quy trình tổ chức thi Olympic</div>
+      
+      <div class="info-box gold" style="margin-top:16px;">
+        <strong>Hệ thống này</strong> được thiết kế riêng cho kỳ thi Olympic Tiếng Việt – Toán Tuổi Thơ Tiểu học cấp tỉnh năm 2026. Dựa trên nền tảng Ong Vàng với kiến trúc GAS + Google Sheets.
+      </div>
+
+      <h4 style="margin:20px 0 10px;color:var(--navy);font-size:0.95rem;">🔄 Quy trình 6 bước</h4>
+      
+      <div style="font-size:0.88rem;line-height:1.8;">
+        <p><strong>Bước 1 – Soạn đề thi (Tab "Soạn đề")</strong><br>
+        Nhập từng câu hỏi hoặc dùng đề mẫu. Hỗ trợ: trắc nghiệm, đúng/sai, điền khuyết, nhiều lựa chọn, câu hỏi chùm. Toán: 15 câu (13 TV + 2 TA). Tiếng Việt: 15 câu.</p>
+
+        <p style="margin-top:12px;"><strong>Bước 2 – Tạo phòng thi (Tab "Phòng thi")</strong><br>
+        Mỗi phòng thi có mã riêng (VD: OLY-A1B2). Cấu hình: thời gian, xáo trộn câu hỏi/đáp án, hiển thị kết quả.</p>
+
+        <p style="margin-top:12px;"><strong>Bước 3 – Nhập thí sinh (Tab "Thí sinh")</strong><br>
+        Nhập danh sách thí sinh cho từng phòng. Mỗi em có SBD. In phiếu tài khoản (Mã phòng + SBD) phát cho thí sinh.</p>
+
+        <p style="margin-top:12px;"><strong>Bước 4 – Mở phòng thi</strong><br>
+        Bấm "Mở phòng" khi đã sẵn sàng. Thí sinh truy cập trang <code>hocsinh.html</code>, nhập mã phòng + SBD để vào.</p>
+
+        <p style="margin-top:12px;"><strong>Bước 5 – Thí sinh làm bài</strong><br>
+        Đếm ngược thời gian. Hết giờ tự động nộp bài. Giáo viên theo dõi tiến trình trực tiếp.</p>
+
+        <p style="margin-top:12px;"><strong>Bước 6 – Chấm bài & Kết quả (Tab "Kết quả")</strong><br>
+        Hệ thống chấm tự động ngay khi nộp. Xem bảng điểm, xuất Excel, tính điểm toàn đoàn.</p>
+      </div>
+
+      <h4 style="margin:24px 0 10px;color:var(--navy);font-size:0.95rem;">📋 Cấu trúc đề thi Olympic (theo KH xã Quảng Châu)</h4>
+      <div style="font-size:0.88rem;line-height:1.8;">
+        <p><strong>Môn Toán:</strong> 15 câu (13 câu tiếng Việt + 2 câu tiếng Anh). Trắc nghiệm + điền đáp số + điền khuyết. Tổng 100 điểm. Thời gian: 40 phút.</p>
+        <p><strong>Môn Tiếng Việt:</strong> 15 câu. Trắc nghiệm + đúng/sai + sắp xếp + điền khuyết. Tổng 100 điểm. Thời gian: 40 phút.</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- Hidden file input -->
+<input type="file" id="fileJSON" accept=".json" style="display:none" onchange="handleImportJSON(event)">
+
+<script>
+// ================================================================
+//  DATA STORE
+// ================================================================
+let DB = {
+  questions: [],
+  rooms: [],
+  students: [],  // { roomId, name, school, sbd, score, submitted, answers }
+};
+let editIdx = -1;
+
+// ================================================================
+//  TAB NAVIGATION
+// ================================================================
+function goTab(tab) {
+  document.querySelectorAll('.nav-tab').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  const tabs = ['dashboard','create','rooms','students','results','guide'];
+  const idx = tabs.indexOf(tab);
+  if (idx >= 0) {
+    document.querySelectorAll('.nav-tab')[idx].classList.add('active');
+    document.getElementById('sec-'+tab).classList.add('active');
+  }
+  if (tab === 'dashboard') refreshDashboard();
+  if (tab === 'rooms') renderRooms();
+  if (tab === 'students') populateRoomSelects();
+  if (tab === 'results') { populateRoomSelects(); renderResults(); }
+}
+
+// ================================================================
+//  FORM HELPERS
+// ================================================================
+function onTypeChange() {
+  const t = document.getElementById('fType').value;
+  const isChum = t === 'Câu hỏi chùm (câu dẫn)';
+  const isTL = t === 'Câu tự luận';
+  document.getElementById('fAnswersSec').style.display = (isChum||isTL) ? 'none' : 'block';
+  document.getElementById('fChildRow').style.display = 'flex';
+  if (t === 'Đúng/Sai') {
+    document.getElementById('fAnswers').value = 'A. Đúng\nB. Sai';
+  }
+}
+
+function clearForm() {
+  ['fContent','fAnswers','fCorrect','fExplain'].forEach(id => document.getElementById(id).value = '');
+  document.getElementById('fChild').value = '';
+  document.getElementById('fPoint').value = '1';
+  editIdx = -1;
+}
+
+// ================================================================
+//  QUESTIONS CRUD
+// ================================================================
+function addQuestion() {
+  const q = {
+    subject: v('fSubj'),
+    type: v('fType'),
+    diff: v('fDiff'),
+    level: v('fLevel'),
+    child: v('fChild'),
+    point: parseFloat(v('fPoint')) || 1,
+    content: v('fContent').trim(),
+    answers: v('fAnswers').trim(),
+    correct: v('fCorrect').trim(),
+    explain: v('fExplain').trim()
+  };
+  if (!q.content) return toast('⚠️ Nhập nội dung câu hỏi!','var(--danger)');
+  if (!['Câu hỏi chùm (câu dẫn)','Câu tự luận'].includes(q.type) && !q.correct) {
+    return toast('⚠️ Nhập đáp án đúng!','var(--danger)');
+  }
+  if (editIdx >= 0) {
+    DB.questions[editIdx] = q;
+    editIdx = -1;
+    toast('✅ Đã cập nhật câu hỏi');
+  } else {
+    DB.questions.push(q);
+    toast('✅ Thêm câu hỏi #'+DB.questions.length);
+  }
+  clearForm();
+  renderQuestions();
+  save();
+}
+
+function editQ(i) {
+  const q = DB.questions[i];
+  document.getElementById('fSubj').value = q.subject;
+  document.getElementById('fType').value = q.type;
+  onTypeChange();
+  document.getElementById('fDiff').value = q.diff;
+  document.getElementById('fLevel').value = q.level;
+  document.getElementById('fChild').value = q.child||'';
+  document.getElementById('fPoint').value = q.point||1;
+  document.getElementById('fContent').value = q.content;
+  document.getElementById('fAnswers').value = q.answers;
+  document.getElementById('fCorrect').value = q.correct;
+  document.getElementById('fExplain').value = q.explain||'';
+  editIdx = i;
+  goTab('create');
+  scrollTo({top:0,behavior:'smooth'});
+  toast('📝 Chỉnh sửa câu #'+(i+1));
+}
+
+function dupQ(i) {
+  DB.questions.push({...DB.questions[i]});
+  renderQuestions(); save();
+  toast('📋 Đã nhân bản');
+}
+
+function delQ(i) {
+  if (!confirm('Xoá câu #'+(i+1)+'?')) return;
+  DB.questions.splice(i,1);
+  renderQuestions(); save();
+  toast('🗑 Đã xoá');
+}
+
+function clearAllQ() {
+  if (!DB.questions.length) return;
+  if (!confirm('Xoá tất cả '+DB.questions.length+' câu hỏi?')) return;
+  DB.questions = [];
+  renderQuestions(); save();
+  toast('🗑 Đã xoá tất cả');
+}
+
+function renderQuestions() {
+  const filter = v('fFilter');
+  const list = DB.questions.map((q,i) => ({...q,_i:i})).filter(q => !filter || q.subject===filter);
+  document.getElementById('qCount').textContent = DB.questions.length;
+  const el = document.getElementById('qList');
+  if (!list.length) {
+    el.innerHTML = '<div class="empty"><div class="empty-icon">📝</div><div class="empty-text">Chưa có câu hỏi. Bắt đầu soạn đề ngay!</div></div>';
+    return;
+  }
+  el.innerHTML = list.map((q,n) => {
+    const ansPrev = q.answers ? q.answers.split('\n').slice(0,4).join(' │ ') : '';
+    return `<div class="q-item">
+      <div class="q-actions">
+        <button class="q-act-btn" title="Sửa" onclick="editQ(${q._i})">✏️</button>
+        <button class="q-act-btn" title="Nhân bản" onclick="dupQ(${q._i})">📋</button>
+        <button class="q-act-btn del" title="Xoá" onclick="delQ(${q._i})">✕</button>
+      </div>
+      <div class="q-top">
+        <div class="q-num">${n+1}</div>
+        <div class="q-tags">
+          <span class="q-tag q-tag-subj">${q.subject}</span>
+          <span class="q-tag q-tag-type">${q.type}</span>
+          <span class="q-tag q-tag-diff">${q.diff}</span>
+          <span class="q-tag q-tag-level">${q.level}</span>
+          ${q.child==='Có'?'<span class="q-tag q-tag-child">📎 Câu con</span>':''}
+          <span class="q-tag q-tag-type">${q.point||1} đ</span>
+        </div>
+      </div>
+      <div class="q-body">${esc(q.content)}</div>
+      ${ansPrev?`<div class="q-answers-preview">${esc(ansPrev)}${q.correct?' → <span class="correct-ans">Đ/A: '+esc(q.correct)+'</span>':''}</div>`:''}
+    </div>`;
+  }).join('');
+}
+
+// ================================================================
+//  ROOMS
+// ================================================================
+function genRoomCode() {
+  const c = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+  let code = '';
+  for (let i=0;i<4;i++) code += c[Math.floor(Math.random()*c.length)];
+  return 'OLY-'+code;
+}
+
+function createRoom() {
+  const name = v('rName').trim();
+  const subj = v('rSubject');
+  if (!name) return toast('⚠️ Nhập tên phòng thi!','var(--danger)');
+  
+  // Get questions for this subject
+  const qs = DB.questions.filter(q => q.subject === subj);
+  if (!qs.length) return toast('⚠️ Chưa có câu hỏi '+subj+'! Hãy soạn đề trước.','var(--danger)');
+
+  const room = {
+    id: Date.now().toString(36),
+    code: genRoomCode(),
+    name: name,
+    subject: subj,
+    time: parseInt(v('rTime'))||40,
+    maxScore: parseInt(v('rMaxScore'))||100,
+    shuffle: v('rShuffle')==='1',
+    shuffleAns: v('rShuffleAns')==='1',
+    showResult: v('rShowResult')==='1',
+    status: 'draft', // draft, open, closed
+    questions: JSON.parse(JSON.stringify(qs)),
+    created: new Date().toISOString()
+  };
+  DB.rooms.push(room);
+  save();
+  renderRooms();
+  document.getElementById('rName').value = '';
+  toast('✅ Đã tạo phòng thi: '+room.code);
+  
+  // Show room code modal
+  showRoomCodeModal(room);
+}
+
+function showRoomCodeModal(room) {
+  openModal(`
+    <div class="modal-head">
+      <h3>🎉 Tạo phòng thi thành công!</h3>
+      <button class="modal-close" onclick="closeModal()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="room-code-display">
+        <div class="label">Mã phòng thi</div>
+        <div class="code">${room.code}</div>
+        <div class="sub">${room.name} • ${room.subject} • ${room.time} phút</div>
+      </div>
+      <div class="info-box green" style="margin-top:16px;">
+        <strong>${room.questions.length} câu hỏi</strong> đã được gắn vào phòng thi này.<br>
+        Chia sẻ mã <strong>${room.code}</strong> cho học sinh để vào làm bài.
+      </div>
+      <div style="margin-top:12px;font-size:0.85rem;color:var(--text-light);">
+        <strong>Bước tiếp theo:</strong> Nhập danh sách thí sinh (tab "Thí sinh") → Mở phòng thi → HS làm bài.
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-outline" onclick="copyText('${room.code}')">📋 Copy mã</button>
+      <button class="btn btn-gold" onclick="closeModal();goTab('students')">🎓 Nhập thí sinh →</button>
+    </div>
+  `);
+}
+
+function renderRooms() {
+  const el = document.getElementById('roomList');
+  document.getElementById('roomCount').textContent = DB.rooms.length;
+  if (!DB.rooms.length) {
+    el.innerHTML = '<div class="empty"><div class="empty-icon">🚪</div><div class="empty-text">Chưa có phòng thi nào</div></div>';
+    return;
+  }
+  el.innerHTML = DB.rooms.map((r,i) => {
+    const stuCount = DB.students.filter(s => s.roomId===r.id).length;
+    const subCount = DB.students.filter(s => s.roomId===r.id && s.submitted).length;
+    const statusColors = {draft:'var(--warning)',open:'var(--success)',closed:'var(--text-light)'};
+    const statusLabels = {draft:'Nháp',open:'Đang mở',closed:'Đã đóng'};
+    return `<div class="q-item" style="border-left:4px solid ${statusColors[r.status]}">
+      <div class="q-actions">
+        <button class="q-act-btn del" onclick="deleteRoom(${i})" title="Xoá">✕</button>
+      </div>
+      <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+        <div class="q-num" style="background:var(--gold);color:var(--navy);font-size:0.65rem;min-width:60px;border-radius:6px;padding:4px;">${r.code}</div>
+        <div>
+          <strong style="font-size:0.95rem;">${esc(r.name)}</strong>
+          <div style="font-size:0.78rem;color:var(--text-light);margin-top:2px;">
+            ${r.subject} • ${r.questions.length} câu • ${r.time} phút • ${r.maxScore} điểm
+          </div>
+        </div>
+        <div style="margin-left:auto;display:flex;gap:6px;align-items:center;flex-wrap:wrap;">
+          <span style="padding:3px 10px;border-radius:12px;font-size:0.72rem;font-weight:600;background:${statusColors[r.status]}20;color:${statusColors[r.status]}">${statusLabels[r.status]}</span>
+          <span style="font-size:0.78rem;color:var(--text-light);">👤 ${stuCount} TS │ ✅ ${subCount} nộp</span>
+          ${r.status==='draft'?`<button class="btn btn-success btn-sm" onclick="openRoom(${i})">▶ Mở phòng</button>`:''}
+          ${r.status==='open'?`<button class="btn btn-danger btn-sm" onclick="closeRoom(${i})">⏹ Đóng phòng</button>`:''}
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function openRoom(i) {
+  DB.rooms[i].status = 'open';
+  save(); renderRooms(); refreshDashboard();
+  toast('▶ Phòng thi đã MỞ! HS có thể vào làm bài.');
+}
+function closeRoom(i) {
+  DB.rooms[i].status = 'closed';
+  save(); renderRooms(); refreshDashboard();
+  toast('⏹ Phòng thi đã ĐÓNG.');
+}
+function deleteRoom(i) {
+  if (!confirm('Xoá phòng thi '+DB.rooms[i].code+'?')) return;
+  const rid = DB.rooms[i].id;
+  DB.students = DB.students.filter(s => s.roomId !== rid);
+  DB.rooms.splice(i,1);
+  save(); renderRooms(); refreshDashboard();
+  toast('🗑 Đã xoá phòng thi');
+}
+
+// ================================================================
+//  STUDENTS
+// ================================================================
+function populateRoomSelects() {
+  const html = '<option value="">-- Chọn phòng --</option>' +
+    DB.rooms.map(r => `<option value="${r.id}">${r.code} – ${esc(r.name)} (${r.subject})</option>`).join('');
+  const el1 = document.getElementById('sRoom');
+  const el2 = document.getElementById('resRoom');
+  if (el1) el1.innerHTML = html;
+  if (el2) el2.innerHTML = html;
+}
+
+function addStudent() {
+  const roomId = v('sRoom');
+  const name = v('sName').trim();
+  if (!roomId) return toast('⚠️ Chọn phòng thi!','var(--danger)');
+  if (!name) return toast('⚠️ Nhập họ tên!','var(--danger)');
+  
+  let sbd = v('sSBD').trim();
+  if (!sbd) {
+    const existing = DB.students.filter(s => s.roomId===roomId);
+    sbd = String(existing.length + 1).padStart(3,'0');
+  }
+  
+  // Check duplicate SBD in same room
+  if (DB.students.find(s => s.roomId===roomId && s.sbd===sbd)) {
+    return toast('⚠️ SBD '+sbd+' đã tồn tại trong phòng này!','var(--danger)');
+  }
+
+  DB.students.push({
+    roomId,
+    name,
+    school: v('sSchool').trim(),
+    sbd,
+    submitted: false,
+    score: null,
+    answers: [],
+    submitTime: null
+  });
+  save();
+  document.getElementById('sName').value = '';
+  document.getElementById('sSchool').value = '';
+  document.getElementById('sSBD').value = '';
+  renderStudents();
+  toast('✅ Thêm thí sinh: '+name+' (SBD: '+sbd+')');
+}
+
+function renderStudents() {
+  const roomId = v('sRoom');
+  const el = document.getElementById('studentList');
+  if (!roomId) {
+    el.innerHTML = '<div class="empty"><div class="empty-icon">🎓</div><div class="empty-text">Chọn phòng thi để xem thí sinh</div></div>';
+    return;
+  }
+  const room = DB.rooms.find(r => r.id===roomId);
+  const stus = DB.students.filter(s => s.roomId===roomId);
+  if (!stus.length) {
+    el.innerHTML = '<div class="empty"><div class="empty-icon">🎓</div><div class="empty-text">Chưa có thí sinh. Hãy thêm thí sinh!</div></div>';
+    return;
+  }
+  el.innerHTML = `<div style="overflow-x:auto;"><table class="data-table">
+    <tr><th>SBD</th><th>Họ và tên</th><th>Trường</th><th>Trạng thái</th><th>Điểm</th><th></th></tr>
+    ${stus.map((s,i) => {
+      const idx = DB.students.indexOf(s);
+      return `<tr>
+        <td><strong>${s.sbd}</strong></td>
+        <td>${esc(s.name)}</td>
+        <td>${esc(s.school)}</td>
+        <td>${s.submitted?'<span style="color:var(--success);font-weight:600;">✅ Đã nộp</span>':'<span style="color:var(--text-light);">⏳ Chưa thi</span>'}</td>
+        <td>${s.score!==null?'<strong>'+s.score+'</strong>':'–'}</td>
+        <td><button class="q-act-btn del" onclick="delStudent(${idx})" title="Xoá">✕</button></td>
+      </tr>`;
+    }).join('')}
+  </table></div>`;
+}
+
+function delStudent(i) {
+  if (!confirm('Xoá thí sinh '+DB.students[i].name+'?')) return;
+  DB.students.splice(i,1);
+  save(); renderStudents();
+  toast('🗑 Đã xoá thí sinh');
+}
+
+function showBatchStudentModal() {
+  openModal(`
+    <div class="modal-head">
+      <h3>📋 Nhập thí sinh hàng loạt</h3>
+      <button class="modal-close" onclick="closeModal()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="info-box">Mỗi dòng 1 thí sinh, định dạng: <strong>Họ tên | Trường</strong><br>VD:<br>Nguyễn Văn A | TH Diễn Liên<br>Trần Thị B | TH Diễn Hải</div>
+      <div class="form-group">
+        <textarea class="form-textarea" id="batchInput" style="min-height:150px;" placeholder="Nguyễn Văn A | TH Diễn Liên&#10;Trần Thị B | TH Diễn Hải"></textarea>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn btn-outline" onclick="closeModal()">Huỷ</button>
+      <button class="btn btn-blue" onclick="batchAddStudents()">➕ Thêm tất cả</button>
+    </div>
+  `);
+}
+
+function batchAddStudents() {
+  const roomId = v('sRoom');
+  if (!roomId) { toast('⚠️ Chọn phòng thi trước!','var(--danger)'); return; }
+  const lines = document.getElementById('batchInput').value.trim().split('\n').filter(l => l.trim());
+  if (!lines.length) return;
+  let count = 0;
+  const existing = DB.students.filter(s => s.roomId===roomId).length;
+  lines.forEach((line, i) => {
+    const parts = line.split('|').map(s => s.trim());
+    const name = parts[0];
+    const school = parts[1] || '';
+    if (!name) return;
+    const sbd = String(existing + i + 1).padStart(3,'0');
+    DB.students.push({ roomId, name, school, sbd, submitted:false, score:null, answers:[], submitTime:null });
+    count++;
+  });
+  save(); closeModal(); renderStudents();
+  toast('✅ Đã thêm '+count+' thí sinh!');
+}
+
+function printStudentCards() {
+  const roomId = v('sRoom');
+  if (!roomId) return toast('⚠️ Chọn phòng thi!','var(--danger)');
+  const room = DB.rooms.find(r => r.id===roomId);
+  const stus = DB.students.filter(s => s.roomId===roomId);
+  if (!stus.length) return toast('⚠️ Chưa có thí sinh!','var(--danger)');
+
+  let html = `<html><head><meta charset="utf-8"><title>Phiếu tài khoản dự thi</title>
+  <style>
+    body{font-family:'Be Vietnam Pro',Arial,sans-serif;padding:20px;}
+    .card{border:2px solid #0C1B33;border-radius:12px;padding:20px;margin:10px;width:280px;display:inline-block;vertical-align:top;page-break-inside:avoid;}
+    .card h3{text-align:center;color:#0C1B33;margin:0 0 10px;font-size:14px;}
+    .card .code{text-align:center;font-size:28px;font-weight:900;color:#D4A012;letter-spacing:3px;margin:10px 0;padding:10px;background:#FFF9E6;border-radius:8px;}
+    .card .info{font-size:12px;line-height:1.8;}
+    .card .info strong{color:#0C1B33;}
+    .card .footer{text-align:center;font-size:10px;color:#999;margin-top:10px;border-top:1px dashed #ddd;padding-top:8px;}
+    @media print{.no-print{display:none;}}
+  </style></head><body>
+  <div class="no-print" style="margin-bottom:20px;">
+    <button onclick="window.print()" style="padding:10px 20px;font-size:14px;cursor:pointer;">🖨 In phiếu</button>
+  </div>
+  <h2 style="text-align:center;">PHIẾU TÀI KHOẢN DỰ THI OLYMPIC ${room.subject.toUpperCase()}</h2>
+  <p style="text-align:center;color:#666;">Phòng: ${room.name} │ Mã phòng: ${room.code} │ Thời gian: ${room.time} phút</p>`;
+  
+  stus.forEach(s => {
+    html += `<div class="card">
+      <h3>🏆 OLYMPIC ${room.subject.toUpperCase()} 2026</h3>
+      <div class="code">${room.code}</div>
+      <div class="info">
+        <strong>Họ tên:</strong> ${esc(s.name)}<br>
+        <strong>Trường:</strong> ${esc(s.school)}<br>
+        <strong>SBD:</strong> ${s.sbd}<br>
+        <strong>Mã phòng:</strong> ${room.code}<br>
+        <strong>Thời gian:</strong> ${room.time} phút
+      </div>
+      <div class="footer">Truy cập trang thi → Nhập Mã phòng + SBD → Làm bài</div>
+    </div>`;
+  });
+  html += '</body></html>';
+  const w = window.open('','_blank');
+  w.document.write(html);
+  w.document.close();
+}
+
+// ================================================================
+//  RESULTS
+// ================================================================
+function renderResults() {
+  const roomId = v('resRoom');
+  const el = document.getElementById('resultsList');
+  if (!roomId) {
+    el.innerHTML = '<div class="empty"><div class="empty-icon">📈</div><div class="empty-text">Chọn phòng thi để xem kết quả</div></div>';
+    return;
+  }
+  const room = DB.rooms.find(r => r.id===roomId);
+  const stus = DB.students.filter(s => s.roomId===roomId).sort((a,b) => (b.score||0)-(a.score||0));
+  if (!stus.length) {
+    el.innerHTML = '<div class="empty"><div class="empty-icon">📈</div><div class="empty-text">Chưa có thí sinh trong phòng này</div></div>';
+    return;
+  }
+  const submitted = stus.filter(s => s.submitted);
+  const avgScore = submitted.length ? (submitted.reduce((s,x)=>s+(x.score||0),0)/submitted.length).toFixed(1) : '–';
+  const maxScore = submitted.length ? Math.max(...submitted.map(s=>s.score||0)) : '–';
+
+  el.innerHTML = `
+    <div class="stats-row" style="margin-bottom:16px;">
+      <div class="stat-box green"><div class="stat-val">${submitted.length}/${stus.length}</div><div class="stat-lbl">Đã nộp bài</div></div>
+      <div class="stat-box gold"><div class="stat-val">${avgScore}</div><div class="stat-lbl">Điểm TB</div></div>
+      <div class="stat-box blue"><div class="stat-val">${maxScore}</div><div class="stat-lbl">Điểm cao nhất</div></div>
+    </div>
+    <div style="overflow-x:auto;"><table class="data-table">
+      <tr><th>Hạng</th><th>SBD</th><th>Họ và tên</th><th>Trường</th><th>Điểm</th><th>Trạng thái</th><th>Thời gian nộp</th></tr>
+      ${stus.map((s,i) => `<tr>
+        <td>${s.submitted?(i+1):'–'}</td>
+        <td><strong>${s.sbd}</strong></td>
+        <td>${esc(s.name)}</td>
+        <td>${esc(s.school)}</td>
+        <td style="font-weight:700;color:${s.score!==null?(s.score>=50?'var(--success)':'var(--danger)'):'var(--text-light)'};">${s.score!==null?s.score:'–'}</td>
+        <td>${s.submitted?'✅ Đã nộp':'⏳ Chưa thi'}</td>
+        <td style="font-size:0.78rem;color:var(--text-light);">${s.submitTime||'–'}</td>
+      </tr>`).join('')}
+    </table></div>
+  `;
+}
+
+function exportResults() {
+  const roomId = v('resRoom');
+  if (!roomId) return toast('⚠️ Chọn phòng thi!','var(--danger)');
+  const room = DB.rooms.find(r => r.id===roomId);
+  const stus = DB.students.filter(s => s.roomId===roomId).sort((a,b) => (b.score||0)-(a.score||0));
+  
+  let csv = 'Hạng,SBD,Họ và tên,Trường,Điểm,Trạng thái\n';
+  stus.forEach((s,i) => {
+    csv += `${s.submitted?i+1:''},${s.sbd},"${s.name}","${s.school}",${s.score!==null?s.score:''},${s.submitted?'Đã nộp':'Chưa thi'}\n`;
+  });
+  downloadFile('\ufeff'+csv, `KetQua_${room.code}_${room.subject}.csv`, 'text/csv');
+  toast('📤 Đã xuất kết quả!');
+}
+
+// ================================================================
+//  DASHBOARD
+// ================================================================
+function refreshDashboard() {
+  document.getElementById('dTotal').textContent = DB.questions.length;
+  document.getElementById('dRooms').textContent = DB.rooms.length;
+  document.getElementById('dStudents').textContent = DB.students.length;
+  document.getElementById('dSubmitted').textContent = DB.students.filter(s=>s.submitted).length;
+
+  // Update steps
+  const steps = document.querySelectorAll('#stepsBar .step');
+  const hasQ = DB.questions.length > 0;
+  const hasRoom = DB.rooms.length > 0;
+  const hasStu = DB.students.length > 0;
+  const hasOpen = DB.rooms.some(r => r.status==='open');
+  const hasSub = DB.students.some(s => s.submitted);
+  
+  [hasQ, hasRoom, hasStu, hasOpen, hasSub, hasSub].forEach((done, i) => {
+    steps[i].className = 'step' + (done ? ' done' : '');
+  });
+  // Find current
+  const currentIdx = [hasQ,hasRoom,hasStu,hasOpen,hasSub,hasSub].indexOf(false);
+  if (currentIdx >= 0) steps[currentIdx].className = 'step current';
+
+  // Rooms on dashboard
+  const dashEl = document.getElementById('dashRoomsList');
+  if (!DB.rooms.length) {
+    dashEl.innerHTML = '<div class="empty"><div class="empty-icon">🚪</div><div class="empty-text">Chưa có phòng thi. Hãy tạo phòng ở tab "Phòng thi".</div></div>';
+  } else {
+    dashEl.innerHTML = DB.rooms.map(r => {
+      const stuC = DB.students.filter(s=>s.roomId===r.id).length;
+      const subC = DB.students.filter(s=>s.roomId===r.id&&s.submitted).length;
+      const statusLabels = {draft:'🟡 Nháp',open:'🟢 Đang mở',closed:'⚫ Đã đóng'};
+      return `<div style="display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--border);flex-wrap:wrap;">
+        <span style="background:var(--cream);color:var(--gold-dark);font-weight:800;padding:4px 12px;border-radius:6px;font-size:0.85rem;">${r.code}</span>
+        <span style="font-weight:600;">${esc(r.name)}</span>
+        <span style="font-size:0.8rem;color:var(--text-light);">${r.subject} • ${r.questions.length} câu</span>
+        <span style="margin-left:auto;font-size:0.8rem;">${statusLabels[r.status]} │ 👤 ${stuC} │ ✅ ${subC}</span>
+      </div>`;
+    }).join('');
+  }
+}
+
+// ================================================================
+//  SAMPLE EXAMS
+// ================================================================
+function loadSampleExam(type) {
+  if (DB.questions.length && !confirm('Đề mẫu sẽ THÊM vào danh sách hiện tại. Tiếp tục?')) return;
+  let qs;
+  if (type==='toan') qs = sampleToan();
+  else if (type==='tv') qs = sampleTV();
+  else if (type==='ttt_dien_chau') qs = sampleTTT_DienChau();
+  else qs = [];
+  DB.questions = DB.questions.concat(qs);
+  save(); renderQuestions();
+  toast('✅ Đã tải '+qs.length+' câu hỏi mẫu '+( type==='toan'?'Toán':'Tiếng Việt'));
+}
+
+function mq(subj,type,diff,lv,content,ans,correct,explain,point) {
+  return {subject:subj,type:type,diff:diff,level:lv,child:'',point:point||1,content:content,answers:ans||'',correct:correct||'',explain:explain||''};
+}
+
+function sampleToan() {
+  return [
+    mq('Toán','Một lựa chọn','Dễ','Nhận biết','Kết quả của phép tính 3 456 + 2 789 là:','A. 6 245\nB. 6 345\nC. 6 145\nD. 6 255','A','3456+2789=6245',7),
+    mq('Toán','Một lựa chọn','Dễ','Nhận biết','Số nào sau đây chia hết cho cả 2 và 5?','A. 125\nB. 340\nC. 453\nD. 267','B','',7),
+    mq('Toán','Một lựa chọn','Dễ','Thông hiểu','Một hình chữ nhật có chiều dài 12 cm, chiều rộng 8 cm. Diện tích hình chữ nhật đó là:','A. 40 cm²\nB. 96 cm²\nC. 20 cm²\nD. 48 cm²','B','12×8=96',7),
+    mq('Toán','Đúng/Sai','Dễ','Nhận biết','1 km = 1 000 m','A. Đúng\nB. Sai','A','',6),
+    mq('Toán','Đúng/Sai','Trung bình','Thông hiểu','Số 2 024 chia hết cho 4.','A. Đúng\nB. Sai','A','2024÷4=506',6),
+    mq('Toán','Một lựa chọn','Trung bình','Thông hiểu','Một cửa hàng bán được 1 250 kg gạo trong 5 ngày. Trung bình mỗi ngày bán được bao nhiêu kg gạo?','A. 250 kg\nB. 215 kg\nC. 300 kg\nD. 225 kg','A','1250÷5=250',7),
+    mq('Toán','Một lựa chọn','Trung bình','Thông hiểu','Phân số nào sau đây lớn hơn 1/2?','A. 2/5\nB. 3/7\nC. 4/7\nD. 1/3','C','4/7≈0.571>0.5',7),
+    mq('Toán','Điền khuyết','Trung bình','Vận dụng','Một hình tam giác có đáy 10 cm, chiều cao 6 cm. Diện tích hình tam giác đó là {a} cm².','','A.30','10×6÷2=30',7),
+    mq('Toán','Một lựa chọn','Khó','Vận dụng','Một thửa ruộng hình thang có đáy lớn 120 m, đáy bé 80 m, chiều cao 50 m. Diện tích thửa ruộng là:','A. 5 000 m²\nB. 4 000 m²\nC. 6 000 m²\nD. 3 000 m²','A','(120+80)×50÷2=5000',7),
+    mq('Toán','Một lựa chọn','Khó','Vận dụng','Tìm x biết: x × 5 + 120 = 245','A. x = 20\nB. x = 25\nC. x = 30\nD. x = 35','B','x=(245-120)÷5=25',7),
+    mq('Toán','Điền khuyết','Khó','Vận dụng cao','Một bể nước hình hộp chữ nhật có chiều dài 2 m, chiều rộng 1,5 m, chiều cao 1 m. Thể tích bể nước là {a} m³.','','A.3','2×1.5×1=3',7),
+    mq('Toán','Một lựa chọn','Trung bình','Thông hiểu','75% của 240 là bao nhiêu?','A. 160\nB. 170\nC. 180\nD. 190','C','240×75÷100=180',6),
+    mq('Toán','Một lựa chọn','Trung bình','Vận dụng','Một ô tô đi từ A đến B với vận tốc 60 km/h hết 3 giờ. Quãng đường AB dài:','A. 150 km\nB. 160 km\nC. 180 km\nD. 200 km','C','60×3=180',6),
+    mq('Toán','Một lựa chọn','Trung bình','Thông hiểu','What is the result of 125 × 8?','A. 900\nB. 1 000\nC. 1 100\nD. 1 200','B','English question',6),
+    mq('Toán','Điền khuyết','Khó','Vận dụng','A rectangle has a length of 15 cm and a width of 9 cm. Its perimeter is {a} cm.','','A.48','English. P=(15+9)×2=48',7),
+  ];
+}
+
+function sampleTV() {
+  return [
+    mq('Tiếng Việt','Một lựa chọn','Dễ','Nhận biết','Từ nào dưới đây là từ láy?','A. Xinh đẹp\nB. Lung linh\nC. Bạn bè\nD. Nhà cửa','B','',7),
+    mq('Tiếng Việt','Một lựa chọn','Dễ','Nhận biết','Từ "học sinh" thuộc từ loại nào?','A. Động từ\nB. Tính từ\nC. Danh từ\nD. Đại từ','C','',7),
+    mq('Tiếng Việt','Một lựa chọn','Dễ','Thông hiểu','Câu nào sau đây là câu ghép?','A. Mặt trời mọc rất đẹp.\nB. Trời mưa, đường trơn.\nC. Em đi học mỗi ngày.\nD. Hoa nở trong vườn.','B','',7),
+    mq('Tiếng Việt','Đúng/Sai','Dễ','Nhận biết','Trong câu "Con mèo đen nằm trên bậc cửa", chủ ngữ là "Con mèo đen".','A. Đúng\nB. Sai','A','',6),
+    mq('Tiếng Việt','Đúng/Sai','Trung bình','Thông hiểu','Biện pháp tu từ trong câu "Trẻ em như búp trên cành" là so sánh.','A. Đúng\nB. Sai','A','',6),
+    mq('Tiếng Việt','Một lựa chọn','Trung bình','Thông hiểu','Trong câu "Dòng sông quê em hiền hoà chảy giữa đôi bờ xanh mướt", từ "hiền hoà" bổ nghĩa cho từ nào?','A. Dòng sông\nB. Quê em\nC. Chảy\nD. Đôi bờ','C','',7),
+    mq('Tiếng Việt','Điền khuyết','Trung bình','Vận dụng','Điền từ thích hợp: "Công cha như núi {a}, nghĩa mẹ như nước trong nguồn chảy ra."','','A.Thái Sơn','Ca dao',7),
+    mq('Tiếng Việt','Một lựa chọn','Trung bình','Thông hiểu','Từ "ăn" trong "ăn cơm" và "ăn ảnh" có quan hệ gì?','A. Đồng nghĩa\nB. Trái nghĩa\nC. Đồng âm\nD. Nhiều nghĩa','D','',7),
+    mq('Tiếng Việt','Một lựa chọn','Khó','Vận dụng','Bộ phận trạng ngữ trong câu "Sáng sớm, bà em ra vườn tưới rau" là:','A. Bà em\nB. Sáng sớm\nC. Ra vườn\nD. Tưới rau','B','',7),
+    mq('Tiếng Việt','Một lựa chọn','Khó','Vận dụng','Dấu phẩy trong câu "Mùa xuân, cây cối đâm chồi nảy lộc" có tác dụng gì?','A. Ngăn cách các vế câu\nB. Ngăn cách trạng ngữ với CN-VN\nC. Ngăn cách các từ cùng làm CN\nD. Ngăn cách các từ cùng làm VN','B','',7),
+    mq('Tiếng Việt','Nhiều lựa chọn','Khó','Vận dụng','Những câu nào dưới đây sử dụng biện pháp nhân hoá?','A. Ông mặt trời ban phát ánh nắng.\nB. Bầu trời xanh trong.\nC. Dòng sông lặng lẽ trôi.\nD. Chị gió mang hương thơm.','A,D','',7),
+    mq('Tiếng Việt','Điền khuyết','Trung bình','Nhận biết','Điền dấu câu thích hợp: "Bạn đi đâu đấy {a}"','','A.?','',6),
+    mq('Tiếng Việt','Một lựa chọn','Trung bình','Thông hiểu','Thành ngữ "Nước mắt cá sấu" có nghĩa là gì?','A. Nước mắt rất nhiều\nB. Giả vờ thương xót\nC. Rất buồn bã\nD. Khóc rất to','B','',7),
+    mq('Tiếng Việt','Một lựa chọn','Khó','Vận dụng cao','Câu "Những cánh đồng lúa chín vàng trải dài đến tận chân trời" thuộc kiểu câu gì theo mục đích nói?','A. Câu hỏi\nB. Câu kể\nC. Câu cảm\nD. Câu cầu khiến','B','',6),
+    mq('Tiếng Việt','Một lựa chọn','Khó','Vận dụng cao','Trong đoạn văn tả cảnh, câu mở đoạn thường có nhiệm vụ gì?','A. Kết luận nội dung\nB. Giới thiệu cảnh sẽ tả\nC. Nêu cảm xúc\nD. Kể sự việc','B','',6),
+  ];
+}
+
+// ================================================================
+//  IMPORT / EXPORT
+// ================================================================
+function showImportModal() {
+  document.getElementById('fileJSON').click();
+}
+function handleImportJSON(e) {
+  const file = e.target.files[0];
+  if (!file) return;
+  const r = new FileReader();
+  r.onload = ev => {
+    try {
+      const d = JSON.parse(ev.target.result);
+      if (d.questions) {
+        DB.questions = DB.questions.concat(d.questions);
+        save(); renderQuestions();
+        toast('📥 Nhập '+d.questions.length+' câu hỏi!');
+      } else if (Array.isArray(d)) {
+        DB.questions = DB.questions.concat(d);
+        save(); renderQuestions();
+        toast('📥 Nhập '+d.length+' câu hỏi!');
+      }
+    } catch(err) { toast('❌ File không hợp lệ!','var(--danger)'); }
+  };
+  r.readAsText(file);
+  e.target.value = '';
+}
+
+function exportJSON() {
+  const data = JSON.stringify({ title:'Olympic TV-Toán 2026', exported:new Date().toISOString(), questions:DB.questions },null,2);
+  downloadFile(data,'olympic-questions.json','application/json');
+  toast('💾 Đã xuất JSON');
+}
+
+// ================================================================
+//  ĐỀ MẪU: OLYMPIC TOÁN TUỔI THƠ – HUYỆN DIỄN CHÂU 2013-2014
+// ================================================================
+function sampleTTT_DienChau() {
+  return [
+    mq('Toán','Điền khuyết','Trung bình','Vận dụng',
+      'Điền số vào ô trống: (2013 + ▢ × 3/2014) : 3 = 672. Số cần điền là {a}.',
+      '','A.3','(2013 + ▢ × 3/2014) : 3 = 672 → 2013 + ▢ × 3/2014 = 2016 → ▢ × 3/2014 = 3 → ▢ = 2014',7),
+
+    mq('Toán','Điền khuyết','Khó','Vận dụng cao',
+      'Tìm một phân số, biết trung bình cộng của tử số và mẫu số bằng 55, và nếu ta thêm vào tử số 28 đơn vị và giữ nguyên mẫu số thì ta được phân số mới có giá trị bằng 1. Phân số đó là {a}.',
+      '','A.41/69','Tử + Mẫu = 110. Tử + 28 = Mẫu → Mẫu - Tử = 28 → Tử = 41, Mẫu = 69',7),
+
+    mq('Toán','Điền khuyết','Trung bình','Vận dụng',
+      'Một mảnh đất có hình vẽ trên bản đồ tỉ lệ 1:1000 là hình chữ nhật với chiều dài 8 cm, chiều rộng 5 cm. Diện tích mảnh đất đó là {a} mét vuông.',
+      '','A.4000','Thực tế: dài 80 m, rộng 50 m → S = 4000 m²',7),
+
+    mq('Toán','Điền khuyết','Khó','Vận dụng cao',
+      'Tổng của ba số bằng 10. Tổng của số thứ nhất và số thứ hai bằng 6,5. Tổng của số thứ hai và số thứ ba bằng 6,8. Hãy tìm mỗi số đó. Số thứ nhất = {a}; Số thứ hai = {b}; Số thứ ba = {c}.',
+      '','A.3,2\nB.3,3\nC.3,5','Số thứ ba = 10 - 6,5 = 3,5; Số thứ nhất = 10 - 6,8 = 3,2; Số thứ hai = 6,5 - 3,2 = 3,3',7),
+
+    mq('Toán','Điền khuyết','Trung bình','Vận dụng',
+      'Tìm số dư của phép chia 20,13 cho 3,4 nếu chỉ lấy đến hai chữ số ở phần thập phân của thương. Số dư là {a}.',
+      '','A.0,018','20,13 : 3,4 = 5,92 (dư 0,018)',6),
+
+    mq('Toán','Điền khuyết','Khó','Vận dụng cao',
+      'Một mảnh đất hình chữ nhật có kích thước 12 m × 12 m. Sau khi làm nhà và đào ao (nhà hình chữ nhật nằm góc trên bên trái, ao hình vuông nằm góc dưới bên phải), diện tích phần đất còn lại là {a} mét vuông.',
+      '','A.96','S toàn bộ = 144, S nhà + S ao cần tính theo hình',7),
+
+    mq('Toán','Điền khuyết','Khó','Vận dụng cao',
+      'Trong vườn hoa có một đàn ong. Biết rằng 1/2 đàn ong đậu trên cây hoa nhài, 1/3 đàn ong đỏ đậu trên cây hoa lan và 3 lần hiệu của hai số ong trên đang hút mật của cây hoa hồng. Còn lại 1 con đang bay qua bay lại. Hỏi đàn ong có bao nhiêu con? Đáp số: {a} con.',
+      '','A.6','1/2 + 1/3 + 3×(1/2-1/3) + 1 = tổng → giải ra 6 con',7),
+
+    mq('Toán','Điền khuyết','Khó','Vận dụng cao',
+      'Tìm x: 2/3 × x + 3 × 1/3 = 8 × 2/3. Kết quả x = {a}.',
+      '','A.8','2/3 × x + 1 = 52/6 → 2/3 × x = ... → x = 8',6),
+
+    mq('Toán','Điền khuyết','Khó','Vận dụng cao',
+      'Kì thi Olympic Toán Tuổi thơ huyện A năm học 2012-2013, Ban tổ chức quy định có 70% số thí sinh được trao giải thưởng Nhất, Nhì, Ba theo tỉ lệ là 1 : 2 : 3; số còn lại được trao giải khuyến khích. Kì thi đó có 56 học sinh đạt giải Nhì. Hỏi có tất cả bao nhiêu học sinh dự thi? Đáp số: {a} học sinh.',
+      '','A.240','70% × tổng chia theo 1:2:3. Nhì = 2/6 × 70% × tổng = 56 → tổng = 240',7),
+
+    mq('Toán','Điền khuyết','Khó','Vận dụng cao',
+      'Diện tích hình thang ABED lớn hơn diện tích hình tam giác BEC bao nhiêu đề-xi-mét vuông? Biết: AB = 1,9 dm; AH = 1,5 dm; DE = 2,1 dm và EC = 14 cm. Đáp số: {a} dm².',
+      '','A.1,95','S hình thang ABED - S tam giác BEC, tính theo công thức',7),
+
+    mq('Toán','Điền khuyết','Rất khó','Vận dụng cao',
+      'Viết các số tự nhiên liên tiếp từ 1 đến 2014 được một số. Hỏi số này có bao nhiêu chữ số? Đáp số: {a} chữ số.',
+      '','A.6941','1-9: 9 số × 1 = 9; 10-99: 90 × 2 = 180; 100-999: 900 × 3 = 2700; 1000-2014: 1015 × 4 = 4060. Tổng = 6949',6),
+
+    mq('Toán','Điền khuyết','Khó','Vận dụng cao',
+      'Học kỳ I, số học sinh giỏi của lớp 5A bằng 2/5 số học sinh còn lại. Sang học kỳ II, số học sinh giỏi tăng thêm 4 bạn (sĩ số cả lớp không đổi) nên số học sinh giỏi bằng 2/3 số học sinh còn lại. Hỏi học kỳ I, lớp 5A có bao nhiêu học sinh giỏi? Đáp số: {a} học sinh.',
+      '','A.8','HKI: giỏi = 2/7 tổng; HKII: giỏi + 4 = 2/5 tổng → 2/5 - 2/7 = 4 → tổng = 28, giỏi = 8',6),
+
+    mq('Toán','Điền khuyết','Khó','Vận dụng cao',
+      'Hãy thay các chữ số a, b ở số 1a804b để được số có 6 chữ số vừa chia hết cho 2, cho 3, cho 5 và cho 9. Số đó là {a}.',
+      '','A.198045','Chia hết cho 2 và 5 → b = 0. Tổng chữ số = 1+a+8+0+4+0 = 13+a chia hết cho 9 → a = 5. Số: 158040... cần kiểm tra lại',6),
+
+    mq('Toán','Điền khuyết','Khó','Vận dụng',
+      'Một lớp học có giáo viên phân hoạt động theo nhóm. Nếu phân mỗi nhóm 5 bạn thì thiếu 2 bạn, còn phân mỗi nhóm 4 bạn thì 3 bạn không có chỗ ngồi. Hỏi lớp học đó có ít nhất bao nhiêu bạn học sinh? Đáp số: {a} học sinh.',
+      '','A.23','Số HS = 5k - 2 = 4m + 3 → tìm số nhỏ nhất thoả mãn = 23',6),
+
+    mq('Toán','Điền khuyết','Khó','Vận dụng',
+      'Để làm món "Dưa kho thịt", ta cần có củi dừa (com dừa), thịt ba chỉ, đường, nước mắm cùng với gia vị. Lượng củi dừa bằng 2/3 lượng thịt ba chỉ và 5% lượng nước mắm và gia vị. Hỏi lượng củi dừa chiếm bao nhiêu phần trăm trong món "Dưa kho thịt"? Đáp số: {a} %.',
+      '','A.40','Tính tỉ lệ phần trăm theo tổng các thành phần',6),
+  ];
+}
+
+// ================================================================
+//  UTILITIES
+// ================================================================
+function v(id) { return document.getElementById(id).value; }
+function esc(s) { return s ? s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;') : ''; }
+
+function toast(msg, bg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.style.background = bg || 'var(--success)';
+  t.style.display = 'block';
+  clearTimeout(t._tid);
+  t._tid = setTimeout(() => t.style.display='none', 3000);
+}
+
+function downloadFile(content, name, type) {
+  const b = new Blob([content],{type});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(b);
+  a.download = name;
+  a.click();
+  URL.revokeObjectURL(a.href);
+}
+
+function copyText(t) {
+  navigator.clipboard.writeText(t).then(() => toast('📋 Đã copy: '+t));
+}
+
+function openModal(html) {
+  document.getElementById('modalBox').innerHTML = html;
+  document.getElementById('modalBg').classList.add('show');
+}
+function closeModal() {
+  document.getElementById('modalBg').classList.remove('show');
+}
+
+// ================================================================
+//  GAS BACKEND CONFIG
+// ================================================================
+const GAS_URL = 'https://script.google.com/macros/s/AKfycbwqu3i-RmyvKeH664yd_x1N_ZojGwmsC3kz61QjzLAlRdVKSMfWEVkdsp23Mv2_Re5DYQ/exec';
+
+function useGAS() { return GAS_URL && GAS_URL.length > 10; }
+
+async function gasCall(action, data, params) {
+  if (!useGAS()) return null;
+  try {
+    let url = GAS_URL + '?action=' + action;
+    if (params) {
+      Object.keys(params).forEach(k => url += '&' + k + '=' + encodeURIComponent(params[k]));
+    }
+    const opts = data
+      ? { method: 'POST', body: JSON.stringify(data), headers: {'Content-Type':'text/plain'} }
+      : { method: 'GET' };
+    const res = await fetch(url, opts);
+    return await res.json();
+  } catch(err) {
+    console.error('GAS Error:', err);
+    toast('⚠️ Lỗi kết nối server: ' + err.message, 'var(--danger)');
+    return null;
+  }
+}
+
+// ================================================================
+//  PERSISTENCE (GAS + localStorage fallback)
+// ================================================================
+function saveLocal() {
+  try { localStorage.setItem('oly_db', JSON.stringify(DB)); } catch(e){}
+}
+
+function loadLocal() {
+  try {
+    const d = localStorage.getItem('oly_db');
+    if (d) DB = JSON.parse(d);
+  } catch(e){}
+}
+
+function save() {
+  saveLocal(); // Luôn lưu local
+}
+
+async function loadFromGAS() {
+  if (!useGAS()) return;
+  toast('🔄 Đang tải dữ liệu từ server...', 'var(--blue)');
+  try {
+    // Load rooms
+    const roomsRes = await gasCall('getRooms');
+    if (roomsRes && roomsRes.success) {
+      DB.rooms = roomsRes.rooms;
+    }
+    // Load all students
+    const stuRes = await gasCall('getStudents', null, {});
+    if (stuRes && stuRes.success) {
+      DB.students = stuRes.students;
+    }
+    // Load questions
+    const qRes = await gasCall('getQuestions');
+    if (qRes && qRes.success && qRes.questions.length > 0) {
+      DB.questions = qRes.questions;
+    }
+    saveLocal();
+    renderQuestions();
+    refreshDashboard();
+    toast('✅ Đã tải dữ liệu từ Google Sheets!');
+  } catch(err) {
+    console.error(err);
+    toast('⚠️ Không thể tải từ server, dùng dữ liệu local', 'var(--warning)');
+  }
+}
+
+// Override createRoom to use GAS
+const _origCreateRoom = createRoom;
+createRoom = async function() {
+  const name = v('rName').trim();
+  const subj = v('rSubject');
+  if (!name) return toast('⚠️ Nhập tên phòng thi!','var(--danger)');
+  
+  const qs = DB.questions.filter(q => q.subject === subj);
+  if (!qs.length) return toast('⚠️ Chưa có câu hỏi '+subj+'! Hãy soạn đề trước.','var(--danger)');
+
+  const roomData = {
+    name: name,
+    subject: subj,
+    time: parseInt(v('rTime'))||40,
+    maxScore: parseInt(v('rMaxScore'))||100,
+    shuffle: v('rShuffle')==='1',
+    shuffleAns: v('rShuffleAns')==='1',
+    showResult: v('rShowResult')==='1',
+    questions: qs
+  };
+
+  if (useGAS()) {
+    toast('🔄 Đang tạo phòng thi...', 'var(--blue)');
+    const res = await gasCall('createRoom', roomData);
+    if (res && res.success) {
+      // Reload rooms from GAS
+      const roomsRes = await gasCall('getRooms');
+      if (roomsRes && roomsRes.success) DB.rooms = roomsRes.rooms;
+      saveLocal();
+      renderRooms();
+      document.getElementById('rName').value = '';
+      const room = res.room;
+      room.questions = qs;
+      room.time = roomData.time;
+      room.maxScore = roomData.maxScore;
+      showRoomCodeModal(room);
+      return;
+    } else {
+      toast('❌ Lỗi: '+(res?res.error:'Không kết nối được'), 'var(--danger)');
+      return;
+    }
+  }
+
+  // Fallback local
+  const room = {
+    id: Date.now().toString(36),
+    code: genRoomCode(),
+    name, subject: subj,
+    time: roomData.time, maxScore: roomData.maxScore,
+    shuffle: roomData.shuffle, shuffleAns: roomData.shuffleAns,
+    showResult: roomData.showResult,
+    status: 'draft',
+    questions: JSON.parse(JSON.stringify(qs)),
+    created: new Date().toISOString()
+  };
+  DB.rooms.push(room);
+  save(); renderRooms();
+  document.getElementById('rName').value = '';
+  showRoomCodeModal(room);
+};
+
+// Override openRoom/closeRoom for GAS
+const _origOpenRoom = openRoom;
+openRoom = async function(i) {
+  if (useGAS()) {
+    toast('🔄 Đang mở phòng thi...', 'var(--blue)');
+    const res = await gasCall('updateRoomStatus', {code: DB.rooms[i].code, status: 'open'});
+    if (res && res.success) {
+      DB.rooms[i].status = 'open';
+      saveLocal(); renderRooms(); refreshDashboard();
+      toast('▶ Phòng thi đã MỞ!');
+    }
+  } else {
+    DB.rooms[i].status = 'open';
+    save(); renderRooms(); refreshDashboard();
+    toast('▶ Phòng thi đã MỞ!');
+  }
+};
+
+const _origCloseRoom = closeRoom;
+closeRoom = async function(i) {
+  if (useGAS()) {
+    const res = await gasCall('updateRoomStatus', {code: DB.rooms[i].code, status: 'closed'});
+    if (res && res.success) {
+      DB.rooms[i].status = 'closed';
+      saveLocal(); renderRooms(); refreshDashboard();
+      toast('⏹ Phòng thi đã ĐÓNG.');
+    }
+  } else {
+    DB.rooms[i].status = 'closed';
+    save(); renderRooms(); refreshDashboard();
+    toast('⏹ Phòng thi đã ĐÓNG.');
+  }
+};
+
+// Override addStudent for GAS
+const _origAddStudent = addStudent;
+addStudent = async function() {
+  const roomId = v('sRoom');
+  const name = v('sName').trim();
+  if (!roomId) return toast('⚠️ Chọn phòng thi!','var(--danger)');
+  if (!name) return toast('⚠️ Nhập họ tên!','var(--danger)');
+  
+  const room = DB.rooms.find(r => r.id === roomId);
+  let sbd = v('sSBD').trim();
+  if (!sbd) {
+    const existing = DB.students.filter(s => s.roomId===roomId || s.roomCode===room?.code);
+    sbd = String(existing.length + 1).padStart(3,'0');
+  }
+
+  if (useGAS() && room) {
+    toast('🔄 Đang thêm thí sinh...', 'var(--blue)');
+    const res = await gasCall('addStudent', {
+      roomId, roomCode: room.code, name, school: v('sSchool').trim(), sbd
+    });
+    if (res && res.success) {
+      // Reload students
+      const stuRes = await gasCall('getStudents', null, {roomCode: room.code});
+      if (stuRes && stuRes.success) {
+        DB.students = DB.students.filter(s => s.roomCode !== room.code).concat(stuRes.students);
+      }
+      saveLocal();
+      document.getElementById('sName').value = '';
+      document.getElementById('sSchool').value = '';
+      document.getElementById('sSBD').value = '';
+      renderStudents();
+      toast('✅ Thêm thí sinh: '+name+' (SBD: '+sbd+')');
+    } else {
+      toast('❌ '+(res?res.error:'Lỗi kết nối'), 'var(--danger)');
+    }
+    return;
+  }
+
+  // Fallback local
+  if (DB.students.find(s => s.roomId===roomId && s.sbd===sbd)) {
+    return toast('⚠️ SBD '+sbd+' đã tồn tại!','var(--danger)');
+  }
+  DB.students.push({ roomId, roomCode: room?.code||'', name, school: v('sSchool').trim(), sbd, submitted:false, score:null, answers:[], submitTime:null });
+  save();
+  document.getElementById('sName').value = '';
+  document.getElementById('sSchool').value = '';
+  document.getElementById('sSBD').value = '';
+  renderStudents();
+  toast('✅ Thêm thí sinh: '+name+' (SBD: '+sbd+')');
+};
+
+// Override renderResults to fetch fresh from GAS
+const _origRenderResults = renderResults;
+renderResults = async function() {
+  const roomId = v('resRoom');
+  const el = document.getElementById('resultsList');
+  if (!roomId) {
+    el.innerHTML = '<div class="empty"><div class="empty-icon">📈</div><div class="empty-text">Chọn phòng thi để xem kết quả</div></div>';
+    return;
+  }
+  const room = DB.rooms.find(r => r.id===roomId);
+
+  if (useGAS() && room) {
+    el.innerHTML = '<div class="empty"><div class="empty-icon">🔄</div><div class="empty-text">Đang tải kết quả từ server...</div></div>';
+    const res = await gasCall('getResults', null, {roomCode: room.code});
+    if (res && res.success) {
+      // Update local DB
+      DB.students = DB.students.filter(s => s.roomCode !== room.code).concat(res.students);
+      saveLocal();
+      refreshDashboard();
+    }
+  }
+
+  // Render from local DB
+  const stus = DB.students.filter(s => s.roomId===roomId || s.roomCode===room?.code).sort((a,b) => (b.score||0)-(a.score||0));
+  if (!stus.length) {
+    el.innerHTML = '<div class="empty"><div class="empty-icon">📈</div><div class="empty-text">Chưa có thí sinh trong phòng này</div></div>';
+    return;
+  }
+  const submitted = stus.filter(s => s.submitted);
+  const avgScore = submitted.length ? (submitted.reduce((s,x)=>s+(x.score||0),0)/submitted.length).toFixed(1) : '–';
+  const maxScore = submitted.length ? Math.max(...submitted.map(s=>s.score||0)) : '–';
+
+  el.innerHTML = `
+    <div class="stats-row" style="margin-bottom:16px;">
+      <div class="stat-box green"><div class="stat-val">${submitted.length}/${stus.length}</div><div class="stat-lbl">Đã nộp bài</div></div>
+      <div class="stat-box gold"><div class="stat-val">${avgScore}</div><div class="stat-lbl">Điểm TB</div></div>
+      <div class="stat-box blue"><div class="stat-val">${maxScore}</div><div class="stat-lbl">Điểm cao nhất</div></div>
+    </div>
+    <div style="text-align:right;margin-bottom:8px;">
+      <button class="btn btn-outline btn-sm" onclick="renderResults()">🔄 Làm mới</button>
+    </div>
+    <div style="overflow-x:auto;"><table class="data-table">
+      <tr><th>Hạng</th><th>SBD</th><th>Họ và tên</th><th>Trường</th><th>Điểm</th><th>Trạng thái</th><th>Thời gian nộp</th></tr>
+      ${stus.map((s,i) => `<tr>
+        <td>${s.submitted?(i+1):'–'}</td>
+        <td><strong>${s.sbd}</strong></td>
+        <td>${esc(s.name)}</td>
+        <td>${esc(s.school)}</td>
+        <td style="font-weight:700;color:${s.score!==null?(s.score>=50?'var(--success)':'var(--danger)'):'var(--text-light)'};">${s.score!==null?s.score:'–'}</td>
+        <td>${s.submitted?'✅ Đã nộp':'⏳ Chưa thi'}</td>
+        <td style="font-size:0.78rem;color:var(--text-light);">${s.submitTime||'–'}</td>
+      </tr>`).join('')}
+    </table></div>
+  `;
+};
+
+// Sync questions to GAS when saving
+async function syncQuestionsToGAS() {
+  if (!useGAS() || !DB.questions.length) return;
+  toast('🔄 Đồng bộ câu hỏi lên server...', 'var(--blue)');
+  const res = await gasCall('saveQuestions', {questions: DB.questions});
+  if (res && res.success) {
+    toast('✅ Đã đồng bộ '+res.count+' câu hỏi lên Google Sheets!');
+  }
+}
+
+// ================================================================
+//  INIT
+// ================================================================
+loadLocal();
+renderQuestions();
+refreshDashboard();
+
+// Auto-load from GAS if configured
+if (useGAS()) {
+  loadFromGAS();
+}
+
+// Show connection status
+setTimeout(() => {
+  if (useGAS()) {
+    toast('🌐 Đã kết nối Google Sheets backend');
+  } else {
+    toast('💾 Chế độ offline (localStorage). Cấu hình GAS_URL để dùng Google Sheets.', 'var(--warning)');
+  }
+}, 500);
+</script>
+
+<!-- FOOTER -->
+<div style="text-align:center;padding:20px;font-size:0.72rem;color:var(--text-light);">
+  Thiết kế: Chung Trần • Olympic Tiếng Việt – Toán Tuổi Thơ 2026 • Xã Quảng Châu, Nghệ An
+</div>
+
+</body>
+</html>
