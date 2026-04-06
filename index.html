@@ -608,12 +608,13 @@ body {
 }
 
 .school-reg-card h2 {
-  font-size: 1.6rem;
-  color: var(--navy);
+  font-size: 1.8rem;
+  color: #1565C0;
   margin-bottom: 0.5rem;
   font-family: 'Be Vietnam Pro', sans-serif;
   font-weight: 700;
-  letter-spacing: -0.3px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
 .sr-sub {
@@ -958,17 +959,20 @@ body {
         <input class="form-input" id="regProvince" placeholder="VD: Nghệ An">
       </div>
     </div>
-
-    <input type="hidden" id="regContact" value="">
-    <input type="hidden" id="regPhone" value="">
-    <input type="hidden" id="regEmail" value="">
-
-    <div class="info-box gold" style="text-align:left;">
-      <strong>💡 Lưu ý:</strong> Mỗi trường tạo 1 bộ dữ liệu riêng biệt, không ảnh hưởng trường khác.
+    <div class="form-grid" style="text-align:left;">
+      <div class="form-group">
+        <label class="form-label">Người phụ trách <span class="req">*</span></label>
+        <input class="form-input" id="regContact" placeholder="VD: Nguyễn Văn A">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Số điện thoại</label>
+        <input class="form-input" id="regPhone" placeholder="VD: 0912 345 ...">
+      </div>
     </div>
 
-    <button class="btn btn-gold" style="width:100%;padding:14px;font-size:1rem;" onclick="registerSchool()">🚀 Bắt đầu sử dụng</button>
-    <p style="text-align:center;font-size:0.75rem;color:var(--text-light);margin-top:16px;">Thiết kế: Chung Trần • Zalo: 0913 031 073</p>
+    <input type="hidden" id="regEmail" value="">
+
+    <button class="btn" style="width:100%;padding:14px;font-size:1rem;background:linear-gradient(135deg,#1565C0 0%,#1976D2 100%);color:white;border-radius:10px;margin-top:0.5rem;" onclick="registerSchool()">Bắt đầu sử dụng</button>
   </div>
 </div>
 
@@ -1849,6 +1853,7 @@ function registerSchool() {
   if (!name) return toast('⚠️ Nhập tên trường!', 'var(--danger)');
   if (!ward) return toast('⚠️ Nhập xã/phường!', 'var(--danger)');
   if (!province) return toast('⚠️ Nhập tỉnh/thành phố!', 'var(--danger)');
+  if (!contact) return toast('⚠️ Nhập tên người phụ trách!', 'var(--danger)');
 
   schoolInfo = {
     name, ward, province, contact, phone, email,
