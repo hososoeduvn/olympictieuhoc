@@ -951,7 +951,7 @@ body {
     <div class="form-grid" style="text-align:left;">
       <div class="form-group">
         <label class="form-label">Xã / Phường <span class="req">*</span></label>
-        <input class="form-input" id="regWard" placeholder="VD: Diễn Liên">
+        <input class="form-input" id="regWard" placeholder="VD: Quảng Châu">
       </div>
       <div class="form-group">
         <label class="form-label">Tỉnh / Thành phố <span class="req">*</span></label>
@@ -1929,9 +1929,18 @@ function loadFromGAS() {
     .then(data => {
       if (data.success) {
         questions = data.questions || [];
-        rooms = data.rooms || [];
+        // ★ Map GAS column 'code' → frontend 'roomCode' + 'status' → 'published'
+        rooms = (data.rooms || []).map(r => ({
+          ...r,
+          roomCode: r.code || r.roomCode || '',
+          published: r.status === 'published'
+        }));
         students = data.students || [];
         results = data.results || [];
+        // Sync trạng thái công bố từ GAS → localStorage
+        if (rooms.some(r => r.published || r.status === 'published')) {
+          localStorage.setItem('oly_exam_published', 'true');
+        }
         saveLocal(); // Lưu cache local
         renderQuestions();
         renderRooms();
