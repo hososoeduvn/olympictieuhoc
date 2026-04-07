@@ -1354,7 +1354,7 @@ body {
         </div>
         <div class="form-group">
           <label class="form-label">SBD <span style="font-size:0.75rem;color:var(--text-light);">(tự tạo nếu bỏ trống)</span></label>
-          <input class="form-input" id="sSBD" placeholder="Tự động">
+          <input class="form-input" id="sSBD" placeholder="VD: HS001">
         </div>
         <input type="hidden" id="sSchool">
       </div>
@@ -1461,7 +1461,7 @@ body {
               <span style="background:var(--blue);color:white;padding:4px 10px;border-radius:6px;font-size:0.8rem;font-weight:600;">📋 Nhập tay</span>
             </div>
             <div style="font-size:0.85rem;color:#555;line-height:1.6;">
-              Điền <strong>họ tên</strong>, <strong>ngày sinh</strong>, <strong>lớp</strong> cho từng em. <strong>SBD tự động</strong> sinh ra (01, 02, 03...) — cố định xuyên suốt tất cả các lần thi.
+              Điền <strong>họ tên</strong>, <strong>ngày sinh</strong>, <strong>lớp</strong> cho từng em. <strong>SBD tự động</strong> sinh ra (HS001, HS002, HS003...) — cố định xuyên suốt tất cả các lần thi.
             </div>
           </div>
           <div style="background:white;border-radius:10px;padding:1.25rem;border:2px solid #FFF3CD;box-shadow:0 2px 6px rgba(0,0,0,0.04);">
@@ -1632,7 +1632,7 @@ body {
       <div style="background:#EDE7F6;border-radius:10px;padding:1.25rem;margin:1rem 0;">
         <div style="font-weight:700;color:#4A148C;margin-bottom:0.5rem;">📱 Phía học sinh:</div>
         <div style="font-size:0.85rem;color:#555;line-height:1.8;">
-          HS mở link bài thi → Nhập <strong>mã phòng thi</strong> (VD: OLYMPIC-T2847) + <strong>SBD</strong> (VD: 01) → Bấm Đăng Nhập.<br>
+          HS mở link bài thi → Nhập <strong>mã phòng thi</strong> (VD: OLYMPIC-T2847) + <strong>SBD</strong> (VD: HS001) → Bấm Đăng Nhập.<br>
           Nếu phòng <strong>chưa mở</strong>: hiện thông báo <em>"⏳ Phòng thi chưa mở. Vui lòng chờ giáo viên..."</em><br>
           Nếu phòng <strong>đã mở</strong>: HS xác nhận thông tin → Bắt đầu làm bài (đồng hồ đếm ngược).
         </div>
@@ -2677,7 +2677,7 @@ function saveStudent() {
   // Auto-generate SBD nếu bỏ trống — số thứ tự trong trường
   if (!sbd) {
     const existingCount = students.length;
-    sbd = String(existingCount + 1).padStart(2, '0');
+    sbd = 'HS' + String(existingCount + 1).padStart(3, '0');
   }
 
   // Kiểm tra SBD trùng
@@ -2781,12 +2781,12 @@ function exportStudentTemplate() {
   html += '</tr>';
 
   // 3 dòng mẫu
-  html += '<tr><td class="stt">1</td><td>Nguyễn Văn An</td><td style="text-align:center;">15/06/2015</td><td style="text-align:center;">5A</td><td class="sbd">01</td></tr>';
-  html += '<tr><td class="stt">2</td><td>Trần Thị Bình</td><td style="text-align:center;">22/09/2015</td><td style="text-align:center;">5A</td><td class="sbd">02</td></tr>';
-  html += '<tr><td class="stt">3</td><td>Lê Hoàng Châu</td><td style="text-align:center;">03/12/2015</td><td style="text-align:center;">5B</td><td class="sbd">03</td></tr>';
+  html += '<tr><td class="stt">1</td><td>Nguyễn Văn An</td><td style="text-align:center;">15/06/2015</td><td style="text-align:center;">5A</td><td class="sbd">HS001</td></tr>';
+  html += '<tr><td class="stt">2</td><td>Trần Thị Bình</td><td style="text-align:center;">22/09/2015</td><td style="text-align:center;">5A</td><td class="sbd">HS002</td></tr>';
+  html += '<tr><td class="stt">3</td><td>Lê Hoàng Châu</td><td style="text-align:center;">03/12/2015</td><td style="text-align:center;">5B</td><td class="sbd">HS003</td></tr>';
 
   for (let i = 4; i <= 50; i++) {
-    html += '<tr><td class="stt">' + i + '</td><td></td><td></td><td></td><td class="sbd">' + String(i).padStart(2, '0') + '</td></tr>';
+    html += '<tr><td class="stt">' + i + '</td><td></td><td></td><td></td><td class="sbd">HS' + String(i).padStart(3, '0') + '</td></tr>';
   }
 
   html += '<tr><td colspan="5" style="border:none;height:5px;"></td></tr>';
@@ -2834,7 +2834,7 @@ function uploadStudentFile() {
         let sbd = cols[3] || '';
         // Auto SBD if empty
         if (!sbd) {
-          sbd = String(students.filter(s => true).length + 1).padStart(2, '0');
+          sbd = 'HS' + String(students.filter(s => true).length + 1).padStart(3, '0');
         }
         students.push({
           id: 's_' + Date.now().toString(36) + Math.random().toString(36).substr(2, 9),
