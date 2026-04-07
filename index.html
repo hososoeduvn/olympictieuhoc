@@ -258,6 +258,62 @@ body {
   .form-grid {
     grid-template-columns: 1fr;
   }
+  /* Dashboard: 4 stat cards → 2 columns */
+  .section [style*="repeat(4"] {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 0.5rem !important;
+  }
+  /* Dashboard: 3 step cards → stack vertical */
+  .section [style*="repeat(3"] {
+    grid-template-columns: 1fr !important;
+  }
+  /* Guide: 3-col grids → 1 column */
+  .card [style*="1fr 1fr 1fr"] {
+    grid-template-columns: 1fr !important;
+  }
+  /* Guide: 2-col grids → 1 column on small screens */
+  .card [style*="1fr 1fr;"] {
+    grid-template-columns: 1fr !important;
+  }
+  /* Header responsive */
+  .header-right {
+    gap: 0.3rem;
+  }
+  .header-right .btn {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.75rem;
+  }
+  /* Section padding */
+  .section {
+    padding: 1rem;
+  }
+  .card {
+    padding: 1rem;
+  }
+  /* Registration card */
+  .school-reg-card {
+    padding: 1.5rem;
+  }
+  .school-reg-card h2 {
+    font-size: 1.4rem;
+  }
+  /* Tab bar scrollable */
+  .tab-bar {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .tab-bar .tab {
+    white-space: nowrap;
+    font-size: 0.8rem;
+    padding: 0.6rem 0.8rem;
+  }
+  /* Buttons wrap */
+  .btn-group {
+    flex-wrap: wrap;
+  }
+  .btn-group .btn {
+    font-size: 0.8rem;
+  }
 }
 
 /* ===== BUTTONS ===== */
@@ -1096,7 +1152,7 @@ body {
         <span style="font-size:0.7rem;background:var(--gold);color:white;padding:2px 10px;border-radius:12px;font-weight:600;">Nhanh nhất</span>
       </span>
     </div>
-    <div style="font-size:0.9rem;color:#555;margin-bottom:1rem;">Hệ thống rút ngẫu nhiên 15 câu từ ngân hàng 241 câu hỏi theo ma trận chuẩn. Mỗi lần bấm ra đề khác nhau!</div>
+    <div style="font-size:0.9rem;color:#555;margin-bottom:1rem;">Hệ thống rút ngẫu nhiên 15 câu từ ngân hàng <strong id="totalBankCount">260+</strong> câu hỏi và bài tập theo ma trận chuẩn. Mỗi lần bấm ra đề khác nhau!</div>
     <div style="display:flex;gap:1rem;flex-wrap:wrap;">
       <button class="btn btn-gold" onclick="generateToanSample()" style="font-size:1rem;padding:12px 24px;">🎲 Tạo đề Toán (15 câu)</button>
       <button class="btn btn-primary" onclick="generateTVSample()" style="font-size:1rem;padding:12px 24px;">🎲 Tạo đề Tiếng Việt (15 câu)</button>
@@ -1404,7 +1460,7 @@ body {
           <div style="position:absolute;top:-10px;left:16px;background:var(--gold);color:white;padding:2px 12px;border-radius:20px;font-size:0.75rem;font-weight:600;">Nhanh nhất</div>
           <div style="font-size:2rem;text-align:center;margin:0.5rem 0;">🎲</div>
           <div style="font-weight:700;color:var(--navy);text-align:center;margin-bottom:0.75rem;">Tạo đề tự động</div>
-          <div style="font-size:0.85rem;color:#555;">Bấm <strong>"🎲 Mẫu Toán"</strong> hoặc <strong>"🎲 Mẫu TV"</strong> → Hệ thống rút ngẫu nhiên 15 câu từ ngân hàng 241 câu hỏi. Mỗi lần bấm ra đề khác nhau!</div>
+          <div style="font-size:0.85rem;color:#555;">Bấm <strong>"🎲 Mẫu Toán"</strong> hoặc <strong>"🎲 Mẫu TV"</strong> → Hệ thống rút ngẫu nhiên 15 câu từ ngân hàng <strong>260+</strong> câu hỏi và bài tập. Mỗi lần bấm ra đề khác nhau!</div>
           <!-- Minh họa nút -->
           <div style="margin-top:1rem;display:flex;gap:0.5rem;justify-content:center;">
             <span style="background:var(--gold);color:white;padding:6px 14px;border-radius:6px;font-size:0.8rem;font-weight:600;">🎲 Mẫu Toán</span>
@@ -1499,7 +1555,7 @@ body {
               <span style="background:var(--blue);color:white;padding:4px 10px;border-radius:6px;font-size:0.8rem;font-weight:600;">🏛️ Phòng thi</span>
             </div>
             <div style="font-size:0.85rem;color:#555;line-height:1.6;">
-              Điền tên phòng, chọn chủ đề (Toán/TV), thời gian, rồi bấm <strong>"Tạo phòng thi"</strong>. Có thể tạo nhiều phòng (Phòng A Toán, Phòng B TV...). Bật xáo trộn câu hỏi để chống gian lận.
+              Khi tạo đề Toán hoặc TV ở Bước 1, hệ thống <strong>tự tạo phòng thi</strong> tương ứng. Bạn cũng có thể tạo thêm phòng thủ công nếu cần. Bật xáo trộn câu hỏi để chống gian lận.
             </div>
           </div>
           <!-- Thí sinh -->
@@ -1508,7 +1564,7 @@ body {
               <span style="background:var(--gold);color:white;padding:4px 10px;border-radius:6px;font-size:0.8rem;font-weight:600;">👥 Thí sinh</span>
             </div>
             <div style="font-size:0.85rem;color:#555;line-height:1.6;">
-              Chuyển sang tab <strong>"Thí sinh"</strong> → Chọn phòng thi → Nhập họ tên, trường, SBD. Hoặc bấm <strong>"Xuất mẫu Excel"</strong>, điền danh sách rồi <strong>"Tải lên"</strong>.
+              Chuyển sang tab <strong>"Thí sinh"</strong> → Chọn phòng → Nhập họ tên, lớp, SBD. Hoặc bấm <strong>"Xuất mẫu Excel"</strong> (có SBD tự sinh sẵn), điền danh sách rồi <strong>"Tải lên"</strong>.
             </div>
           </div>
         </div>
@@ -2419,6 +2475,11 @@ function copyImageToQuestion() {
 
 // Xử lý tải ảnh
 document.addEventListener('DOMContentLoaded', function() {
+  // Cập nhật số câu hỏi từ ngân hàng thực tế
+  const totalBank = (typeof BANK_TOAN !== 'undefined' ? BANK_TOAN.length : 0) + (typeof BANK_TV !== 'undefined' ? BANK_TV.length : 0);
+  const el = document.getElementById('totalBankCount');
+  if (el) el.textContent = totalBank + '+';
+
   const imgUpload = document.getElementById('imgUpload');
   if (imgUpload) {
     imgUpload.addEventListener('change', function(e) {
