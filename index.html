@@ -1393,6 +1393,7 @@ body {
     </div>
 
     <div class="btn-group">
+      <button class="btn btn-primary btn-small" onclick="refreshResults()">🔄 Tải kết quả mới</button>
       <button class="btn btn-gold btn-small" onclick="exportResultsExcel()">📊 Xuất Excel</button>
       <button class="btn btn-secondary btn-small" onclick="printResultsCard()">🖨️ In phiếu thi</button>
     </div>
@@ -2829,13 +2830,27 @@ async function addStudent() {
 }
 
 // ===== RESULTS =====
+async function refreshResults() {
+  if (!useGAS()) return toast('⚠️ Chưa kết nối GAS', 'var(--warning)');
+  toast('⏳ Đang tải kết quả...', 'var(--blue)');
+  try {
+    await loadFromGAS();
+    populateRoomSelects();
+    renderResults();
+    toast('✅ Đã tải ' + results.length + ' kết quả', 'var(--success)');
+  } catch(e) {
+    toast('⚠️ Không tải được kết quả', 'var(--danger)');
+  }
+}
+
 function renderResults() {
   const list = document.getElementById('resultsList');
   const roomId = v('resRoom');
   let filtered = roomId ? results.filter(r => r.roomId === roomId) : results;
 
   if (!filtered.length) {
-    list.innerHTML = '<div style="padding: 2rem; text-align: center; color: var(--text-light);">Chưa có kết quả.</div>';
+    list.innerHTML = '<div style="padding: 2rem; text-align: center; color: var(--text-light);">' +
+      (results.length ? 'Phòng này chưa có kết quả.' : 'Chưa có kết quả. Bấm <strong>"🔄 Tải kết quả mới"</strong> để cập nhật từ hệ thống.') + '</div>';
     return;
   }
 
@@ -3027,7 +3042,17 @@ function goTab(tab) {
   if (tab === 'dashboard') refreshDashboard();
   if (tab === 'create') updatePublishBar();
   if (tab === 'rooms') { renderRooms(); populateRoomSelects(); renderStudentList(); }
-  if (tab === 'results') { populateRoomSelects(); renderResults(); }
+  if (tab === 'results') {
+    populateRoomSelects();
+    renderResults();
+    // Auto-refresh từ GAS nếu chưa có kết quả
+    if (useGAS() && !results.length) {
+      loadFromGAS().then(() => {
+        populateRoomSelects();
+        renderResults();
+      });
+    }
+  }
 }
 
 // Sub-tab chuyển đổi Phòng thi / Thí sinh
