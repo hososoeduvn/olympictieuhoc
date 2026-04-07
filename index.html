@@ -1386,7 +1386,7 @@ body {
     </div>
 
     <div class="form-group">
-      <label class="form-label">Phòng thi</label>
+      <label class="form-label">Lọc theo mã phòng thi</label>
       <select class="form-select" id="resRoom" onchange="renderResults()"></select>
     </div>
 
@@ -2650,8 +2650,12 @@ function populateRoomSelects() {
   sRoom.innerHTML = '<option value="">- Chọn -</option>' +
     rooms.map(r => `<option value="${r.id}">${r.name}</option>`).join('');
 
-  resRoom.innerHTML = '<option value="">- Chọn -</option>' +
-    rooms.map(r => `<option value="${r.id}">${r.name}</option>`).join('');
+  resRoom.innerHTML = '<option value="">- Tất cả -</option>' +
+    rooms.filter(r => r.roomCode).map(r => {
+      const code = r.roomCode || '';
+      const subj = r.subject === 'TV' ? 'Tiếng Việt' : r.subject;
+      return `<option value="${r.id}">${code} (${subj})</option>`;
+    }).join('');
 }
 
 function saveStudent() {
@@ -2902,7 +2906,10 @@ function renderResults() {
 
   const sorted = [...filtered].sort((a, b) => b.score - a.score);
 
-  list.innerHTML = sorted.map((res, i) => `
+  list.innerHTML = sorted.map((res, i) => {
+    const room = rooms.find(r => r.id === res.roomId);
+    const roomCode = room ? (room.roomCode || room.name) : '';
+    return `
     <div class="question-item">
       <div class="q-number">${i + 1}</div>
       <div class="q-info">
@@ -2911,24 +2918,28 @@ function renderResults() {
           <span>⭐ ${res.score}/${res.maxScore} điểm</span>
           <span>📊 ${Math.round(res.score / res.maxScore * 100)}%</span>
           <span>⏱️ ${res.timeSpent || 'N/A'} phút</span>
+          <span>🔑 ${roomCode}</span>
           <span>📅 ${new Date(res.submitted).toLocaleDateString('vi-VN')}</span>
         </div>
       </div>
       <div class="q-actions">
         <button class="btn btn-primary btn-small" onclick="viewResultDetail('${res.id}')">👁️</button>
       </div>
-    </div>
-  `).join('');
+    </div>`;
+  }).join('');
 }
 
 function viewResultDetail(id) {
   const res = results.find(r => r.id === id);
   if (!res) return;
   const pct = Math.round(res.score / res.maxScore * 100);
+  const room = rooms.find(r => r.id === res.roomId);
+  const roomCode = room ? (room.roomCode || room.name) : 'N/A';
   const html = '<div style="text-align:left;line-height:2;">'
     + '<div style="font-size:1.1rem;font-weight:700;color:var(--navy);margin-bottom:0.75rem;">' + res.studentName + '</div>'
     + '<div>🏫 Trường: <strong>' + (res.school || 'N/A') + '</strong></div>'
     + '<div>🔢 SBD: <strong>' + (res.sbd || 'N/A') + '</strong></div>'
+    + '<div>🔑 Mã phòng: <strong style="color:var(--success);">' + roomCode + '</strong></div>'
     + '<div>⭐ Điểm: <strong style="color:var(--success);font-size:1.1rem;">' + res.score + '/' + res.maxScore + '</strong> (' + pct + '%)</div>'
     + '<div>✅ Đúng: <strong>' + (res.correctAnswers || 0) + '</strong> | ❌ Sai: <strong>' + (res.incorrectAnswers || 0) + '</strong> | ⬜ Bỏ qua: <strong>' + (res.unansweredCount || 0) + '</strong></div>'
     + '<div>⏱️ Thời gian: <strong>' + (res.timeSpent || 'N/A') + ' phút</strong></div>'
