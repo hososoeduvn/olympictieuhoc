@@ -975,9 +975,9 @@ body {
 <div class="header">
   <div class="header-logo">
     <div class="header-logo-icon">🏆</div>
-    <div>
-      <div>Olympic Tiếng Việt - Toán Tuổi Thơ</div>
-      <div id="headerSchoolName" style="font-size: 0.8rem; color: rgba(255,255,255,0.9);">Cấp tiểu học năm 2026</div>
+    <div style="text-align:center;">
+      <div style="font-size:1.1rem;font-weight:700;letter-spacing:0.5px;">Olympic Tiếng Việt - Toán Tuổi Thơ</div>
+      <div id="headerSchoolName" style="font-size:0.85rem;color:rgba(255,255,255,0.95);margin-top:2px;font-weight:500;">Cấp tiểu học năm 2026</div>
     </div>
   </div>
   <div class="nav-tabs">
@@ -1834,7 +1834,7 @@ function checkSchoolRegistration() {
     const saved = localStorage.getItem('oly_school');
     if (saved) {
       schoolInfo = JSON.parse(saved);
-      document.getElementById('headerSchoolName').textContent = '🏫 ' + schoolInfo.name;
+      document.getElementById('headerSchoolName').innerHTML = '🏫 ' + schoolInfo.name + ' · <span style="opacity:0.8;">Cấp tiểu học 2026</span>';
       return true;
     }
   } catch(e) {}
@@ -1889,7 +1889,7 @@ function registerSchool() {
 
   localStorage.setItem('oly_school', JSON.stringify(schoolInfo));
   document.getElementById('schoolRegOverlay').classList.remove('active');
-  document.getElementById('headerSchoolName').textContent = '🏫 ' + schoolInfo.name;
+  document.getElementById('headerSchoolName').innerHTML = '🏫 ' + schoolInfo.name + ' · <span style="opacity:0.8;">Cấp tiểu học 2026</span>';
 
   loadLocal();
   renderQuestions();
@@ -2272,6 +2272,10 @@ function randomTVExam() {
 
 // Hàm nạp câu hỏi vào danh sách (giữ nguyên từ cũ)
 function loadSamples(data, subj, label) {
+  // ★ XÓA đề cũ cùng môn trước khi tạo mới (giữ nguyên môn khác)
+  const oldCount = questions.filter(q => q.subj === subj).length;
+  questions = questions.filter(q => q.subj !== subj);
+
   data.forEach(s => {
     questions.push({
       id: 'q_' + Date.now().toString(36) + Math.random().toString(36).substr(2, 9),
@@ -2309,9 +2313,9 @@ function loadSamples(data, subj, label) {
     rooms.push(newRoom);
     renderRooms();
     populateRoomSelects();
-    toast('✅ Đã tạo đề ' + data.length + ' câu ' + label + ' + tự tạo phòng "' + roomName + '"');
+    toast('✅ Đã tạo đề ' + data.length + ' câu ' + label + ' + tự tạo phòng "' + roomName + '"' + (oldCount ? ' (thay ' + oldCount + ' câu cũ)' : ''));
   } else {
-    toast('✅ Đã tạo đề ' + data.length + ' câu ' + label);
+    toast('✅ Đã tạo đề mới ' + data.length + ' câu ' + label + (oldCount ? ' (thay ' + oldCount + ' câu cũ)' : ''));
   }
 
   saveLocal();
@@ -2432,48 +2436,100 @@ async function generateTVSample() {
 // Xem trước đề thi
 function previewExam() {
   if (!questions.length) return toast('⚠️ Chưa có câu hỏi để xem trước', 'var(--danger)');
+
+  // Group by subject
+  const subjects = {};
+  questions.forEach(q => {
+    const s = q.subj === 'TV' ? 'Tiếng Việt' : q.subj;
+    if (!subjects[s]) subjects[s] = [];
+    subjects[s].push(q);
+  });
+  const subjNames = Object.keys(subjects);
+
   let html = '<html><head><meta charset="utf-8"><title>Xem trước đề thi</title>';
-  html += '<style>body{font-family:Arial,sans-serif;max-width:800px;margin:20px auto;padding:20px;line-height:1.8;}';
-  html += 'h1{text-align:center;color:#0C1B33;}h2{color:#2980B9;border-bottom:2px solid #E5E7EB;padding-bottom:5px;}';
-  html += '.q{margin-bottom:20px;padding:15px;background:#f9f9f9;border-radius:8px;border-left:4px solid #D4A012;}';
-  html += '.q-num{font-weight:bold;color:#D4A012;font-size:1.1em;}.q-meta{font-size:0.85em;color:#6B7280;margin:5px 0;}';
+  html += '<style>body{font-family:"Be Vietnam Pro",Arial,sans-serif;max-width:850px;margin:0 auto;padding:20px;line-height:1.8;background:#f5f7fa;}';
+  html += 'h1{text-align:center;color:#0C1B33;margin-bottom:5px;}';
+  html += '.subtitle{text-align:center;color:#6B7280;margin-bottom:20px;}';
+  html += '.tabs{display:flex;gap:8px;justify-content:center;margin-bottom:20px;position:sticky;top:0;background:#f5f7fa;padding:10px 0;z-index:10;}';
+  html += '.tab-btn{padding:10px 24px;border:2px solid #D4A012;border-radius:8px;font-size:1rem;font-weight:600;cursor:pointer;background:white;color:#0C1B33;transition:all 0.2s;}';
+  html += '.tab-btn.active{background:linear-gradient(135deg,#D4A012,#F5C518);color:white;border-color:#D4A012;}';
+  html += '.tab-btn:hover{transform:translateY(-1px);box-shadow:0 2px 8px rgba(0,0,0,0.1);}';
+  html += '.subj-section{display:none;}.subj-section.active{display:block;}';
+  html += '.q{margin-bottom:16px;padding:15px;background:white;border-radius:8px;border-left:4px solid #D4A012;box-shadow:0 1px 4px rgba(0,0,0,0.06);}';
+  html += '.q-num{font-weight:bold;color:#D4A012;font-size:1.1em;}.q-meta{font-size:0.8em;color:#6B7280;margin:4px 0;}';
   html += '.q-ans{margin-left:20px;margin-top:5px;}.q-correct{color:#27AE60;font-weight:bold;margin-top:5px;}';
   html += '.frac{display:inline-flex;flex-direction:column;align-items:center;vertical-align:middle;margin:0 3px;font-size:0.85em;line-height:1.2;}';
   html += '.frac .num{border-bottom:1.5px solid #333;padding:0 4px 2px;min-width:1.2em;text-align:center;}';
   html += '.frac .den{padding:2px 4px 0;min-width:1.2em;text-align:center;}';
   html += '.mixed{display:inline-flex;align-items:center;vertical-align:middle;margin:0 3px;}.mixed .whole{font-size:1em;margin-right:2px;}';
-  html += '@media print{.no-print{display:none;}}</style></head><body>';
-  html += '<h1>🏆 Olympic Tiếng Việt – Toán Tuổi Thơ 2026</h1>';
-  html += '<h2>📋 Đề thi gồm ' + questions.length + ' câu hỏi</h2>';
-  html += '<p style="text-align:center;font-size:0.9em;color:#6B7280;">Trường: ' + (schoolInfo.name || '___') + ' | Xã: ' + (schoolInfo.ward || '___') + ' | Tỉnh: ' + (schoolInfo.province || '___') + '</p>';
+  html += '.section-title{font-size:1.1em;font-weight:700;color:#2980B9;margin:20px 0 10px;padding:8px 12px;background:#EBF5FB;border-radius:6px;}';
+  html += '@media print{.no-print{display:none !important;}.tabs{position:static;}.subj-section{display:block !important;page-break-before:always;}}</style></head><body>';
 
-  questions.forEach((q, i) => {
-    html += '<div class="q">';
-    html += '<div class="q-num">Câu ' + (i+1) + ' (' + q.point + ' điểm)</div>';
-    html += '<div class="q-meta">[' + q.subj + ' | ' + getTypeName(q.type) + ' | ' + q.diff + ' | ' + (q.level || '—') + ']</div>';
-    html += '<div>' + q.content + '</div>';
-    if (q.answers) {
-      let opts;
-      if (Array.isArray(q.answers)) {
-        opts = q.answers;
-      } else {
-        opts = String(q.answers).split('\n').filter(a => a.trim());
-      }
-      html += '<div class="q-ans">';
-      opts.forEach((opt, j) => {
-        html += '<div>' + String.fromCharCode(65+j) + '. ' + opt + '</div>';
+  html += '<h1>🏆 Olympic Tiếng Việt – Toán Tuổi Thơ 2026</h1>';
+  html += '<div class="subtitle">Trường: ' + (schoolInfo.name || '___') + ' | Xã: ' + (schoolInfo.ward || '___') + '</div>';
+
+  // Tabs
+  if (subjNames.length > 1) {
+    html += '<div class="tabs no-print">';
+    subjNames.forEach((s, i) => {
+      const count = subjects[s].length;
+      html += '<button class="tab-btn' + (i===0?' active':'') + '" onclick="showSubj(\'' + s + '\')">' + s + ' (' + count + ' câu)</button>';
+    });
+    html += '</div>';
+  }
+
+  // Content per subject
+  subjNames.forEach((s, si) => {
+    const qs = subjects[s];
+    html += '<div class="subj-section' + (si===0?' active':'') + '" id="subj_' + s.replace(/\s/g,'_') + '">';
+    html += '<div class="section-title">📝 Đề thi ' + s + ' — ' + qs.length + ' câu | Tổng: ' + qs.reduce((a,q)=>a+q.point,0) + ' điểm</div>';
+
+    const m1 = qs.filter(q => q.level === 'M1');
+    const m2 = qs.filter(q => q.level === 'M2');
+    const m3 = qs.filter(q => q.level === 'M3');
+
+    let num = 0;
+    [
+      { label: 'PHẦN I. MỨC 1 — Nhận biết (5 câu × 6đ = 30đ)', items: m1 },
+      { label: 'PHẦN II. MỨC 2 — Thông hiểu (5 câu × 6đ = 30đ)', items: m2 },
+      { label: 'PHẦN III. MỨC 3 — Vận dụng (5 câu × 8đ = 40đ)', items: m3 }
+    ].forEach(section => {
+      if (!section.items.length) return;
+      html += '<div class="section-title" style="font-size:0.95em;color:#8E44AD;">' + section.label + '</div>';
+      section.items.forEach(q => {
+        num++;
+        html += '<div class="q">';
+        html += '<div class="q-num">Câu ' + num + ' (' + q.point + ' điểm)</div>';
+        html += '<div class="q-meta">[' + q.subj + ' | ' + getTypeName(q.type) + ' | ' + q.diff + ' | ' + (q.level || '—') + ']</div>';
+        html += '<div>' + q.content + '</div>';
+        if (q.answers) {
+          let opts = Array.isArray(q.answers) ? q.answers : String(q.answers).split(/\\n|\n/).filter(a => a.trim());
+          html += '<div class="q-ans">';
+          opts.forEach((opt, j) => { html += '<div>' + String.fromCharCode(65+j) + '. ' + opt + '</div>'; });
+          html += '</div>';
+        }
+        html += '<div class="q-correct">Đáp án: ' + (q.correct || '(GV chấm tay)') + '</div>';
+        if (q.explain) html += '<div style="font-size:0.85em;color:#6B7280;margin-top:3px;">💡 ' + q.explain + '</div>';
+        html += '</div>';
       });
-      html += '</div>';
-    }
-    html += '<div class="q-correct">Đáp án: ' + (q.correct || '(GV chấm tay)') + '</div>';
-    if (q.explain) html += '<div style="font-size:0.85em;color:#6B7280;margin-top:3px;">💡 ' + q.explain + '</div>';
+    });
     html += '</div>';
   });
 
-  html += '<div class="no-print" style="text-align:center;margin-top:30px;">';
+  html += '<div class="no-print" style="text-align:center;margin:30px 0;">';
   html += '<button onclick="window.print()" style="padding:10px 30px;font-size:1em;background:#2980B9;color:white;border:none;border-radius:8px;cursor:pointer;">🖨️ In đề thi</button>';
-  html += '</div></body></html>';
-  const win = window.open('', '', 'width=900,height=700');
+  html += '</div>';
+
+  // Tab switching script
+  html += '<scr' + 'ipt>function showSubj(name){';
+  html += 'document.querySelectorAll(".subj-section").forEach(s=>s.classList.remove("active"));';
+  html += 'document.querySelectorAll(".tab-btn").forEach(b=>b.classList.remove("active"));';
+  html += 'document.getElementById("subj_"+name.replace(/\\s/g,"_")).classList.add("active");';
+  html += 'event.target.classList.add("active");';
+  html += '}</' + 'script>';
+
+  html += '</body></html>';
+  const win = window.open('', '', 'width=920,height=750');
   win.document.write(html);
   win.document.close();
 }
@@ -3152,14 +3208,9 @@ function refreshDashboard() {
   if (sc1) sc1.innerHTML = students.length ? '<span style="color:var(--success);">✅ ' + students.length + ' thí sinh</span>' : '<span style="color:var(--danger);">⚠ Chưa có thí sinh</span>';
   if (sc2) sc2.innerHTML = questions.length ? '<span style="color:var(--success);">✅ ' + questions.length + ' câu hỏi</span>' : '<span style="color:var(--danger);">⚠ Chưa có đề</span>';
   const roomCodesStr = rooms.filter(r => r.roomCode).map(r => r.roomCode).join(', ');
-  const isRoomOpenDash = rooms.some(r => r.roomOpen === true || r.roomOpen === 'true');
   if (sc3) {
-    if (isPublished && isRoomOpenDash) {
+    if (isPublished && roomCodesStr) {
       sc3.innerHTML = '<span style="color:var(--success);">🟢 ĐANG THI — ' + roomCodesStr + '</span>';
-    } else if (isPublished && roomCodesStr) {
-      sc3.innerHTML = '<span style="color:var(--warning);">🔒 Đã công bố — chờ mở phòng</span>';
-    } else if (isPublished) {
-      sc3.innerHTML = '<span style="color:var(--success);">✅ Đã công bố</span>';
     } else {
       sc3.innerHTML = '<span style="color:var(--danger);">⚠ Chưa công bố</span>';
     }
@@ -3174,6 +3225,12 @@ function updateExamStatusUI() {
   const hasStudents = students.length > 0;
   const examReady = hasQuestions && hasRooms;
   const isPublished = localStorage.getItem('oly_exam_published') === 'true';
+
+  // Kiểm tra có môn mới chưa công bố không
+  const subjects = new Set(questions.map(q => q.subj));
+  const publishedSubjects = new Set(rooms.filter(r => r.roomCode).map(r => r.subject));
+  const unpublishedSubjects = [...subjects].filter(s => !publishedSubjects.has(s));
+  const hasNewSubject = unpublishedSubjects.length > 0;
 
   const statusText = document.getElementById('statusText');
   const statusBadge = document.getElementById('statusBadge');
@@ -3191,16 +3248,23 @@ function updateExamStatusUI() {
     statusIcon.style.background = '#ccc';
   } else if (isPublished) {
     const roomCodesStr = rooms.filter(r => r.roomCode).map(r => r.roomCode).join(', ');
-    statusText.textContent = 'Đang thi — thí sinh có thể đăng nhập làm bài';
+    statusText.textContent = 'Đang thi — ' + roomCodesStr;
     statusBadge.className = 'status-badge published';
     statusBadge.textContent = 'ĐANG THI';
     statusIcon.style.background = 'var(--success)';
     btnUnpub.style.display = 'inline-flex';
+    // Nếu có môn mới chưa công bố → hiện nút công bố thêm
+    if (hasNewSubject) {
+      const subjName = unpublishedSubjects.map(s => s === 'TV' ? 'Tiếng Việt' : s).join(', ');
+      btnPub.textContent = '📤 Công bố thêm ' + subjName;
+      btnPub.style.display = 'inline-flex';
+    }
   } else {
     statusText.textContent = 'Sẵn sàng — bấm "Công bố đề" để lấy mã phòng thi';
     statusBadge.className = 'status-badge draft';
     statusBadge.textContent = 'NHÁP';
     statusIcon.style.background = 'var(--warning)';
+    btnPub.textContent = '📤 Công bố đề';
     btnPub.style.display = 'inline-flex';
   }
 
