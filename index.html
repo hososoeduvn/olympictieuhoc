@@ -1687,6 +1687,7 @@ body {
 <!-- ===== TOAST NOTIFICATION ===== -->
 <div id="toast"></div>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 <script>
 // ===== GLOBALS =====
 // ▼▼▼ QUẢN TRỊ: URL Google Apps Script ▼▼▼
@@ -2750,92 +2751,109 @@ function renderStudentList() {
 }
 
 function exportStudentTemplate() {
-  const school = schoolInfo.name || '';
+  const school = schoolInfo.name || 'Trường ...';
 
-  let html = '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40">';
-  html += '<head><meta charset="utf-8"><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet>';
-  html += '<x:Name>Thí sinh</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions>';
-  html += '</x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]-->';
-  html += '<style>';
-  html += 'td,th{mso-number-format:"\\@";font-family:"Times New Roman";font-size:13pt;border:1px solid #999;padding:6px 12px;}';
-  html += '.title{background:#1565C0;color:white;font-weight:bold;text-align:center;font-size:14pt;font-family:Arial;border:none;}';
-  html += '.sub{background:#E3F2FD;color:#1565C0;text-align:center;font-size:11pt;border:none;font-style:italic;}';
-  html += '.col-header{background:#0C1B33;color:white;font-weight:bold;text-align:center;font-size:12pt;font-family:Arial;}';
-  html += '.stt{text-align:center;width:40px;}';
-  html += '.sbd{text-align:center;font-weight:bold;color:#1565C0;}';
-  html += '.note{background:#FFF8E1;color:#666;font-size:10pt;border:none;font-style:italic;}';
-  html += 'tr:nth-child(even) td{background:#F8F9FA;}';
-  html += '</style></head><body>';
-
-  html += '<table>';
-  html += '<tr><td class="title" colspan="5">DANH SÁCH THÍ SINH DỰ THI OLYMPIC 2026</td></tr>';
-  html += '<tr><td class="sub" colspan="5">' + (school || '...') + '</td></tr>';
-  html += '<tr><td colspan="5" style="border:none;height:5px;"></td></tr>';
-
-  html += '<tr>';
-  html += '<td class="col-header" style="width:40px;">STT</td>';
-  html += '<td class="col-header" style="width:200px;">Họ và tên</td>';
-  html += '<td class="col-header" style="width:90px;">Ngày sinh</td>';
-  html += '<td class="col-header" style="width:60px;">Lớp</td>';
-  html += '<td class="col-header" style="width:70px;">SBD</td>';
-  html += '</tr>';
-
-  // 3 dòng mẫu
-  html += '<tr><td class="stt">1</td><td>Nguyễn Văn An</td><td style="text-align:center;">15/06/2015</td><td style="text-align:center;">5A</td><td class="sbd">HS001</td></tr>';
-  html += '<tr><td class="stt">2</td><td>Trần Thị Bình</td><td style="text-align:center;">22/09/2015</td><td style="text-align:center;">5A</td><td class="sbd">HS002</td></tr>';
-  html += '<tr><td class="stt">3</td><td>Lê Hoàng Châu</td><td style="text-align:center;">03/12/2015</td><td style="text-align:center;">5B</td><td class="sbd">HS003</td></tr>';
-
+  // Tạo data cho sheet
+  const data = [
+    ['DANH SÁCH THÍ SINH DỰ THI OLYMPIC 2026'],
+    [school],
+    [],
+    ['STT', 'Họ và tên', 'Ngày sinh', 'Lớp', 'SBD'],
+    [1, 'Nguyễn Văn An', '15/06/2015', '5A', 'HS001'],
+    [2, 'Trần Thị Bình', '22/09/2015', '5A', 'HS002'],
+    [3, 'Lê Hoàng Châu', '03/12/2015', '5B', 'HS003'],
+  ];
   for (let i = 4; i <= 50; i++) {
-    html += '<tr><td class="stt">' + i + '</td><td></td><td></td><td></td><td class="sbd">HS' + String(i).padStart(3, '0') + '</td></tr>';
+    data.push([i, '', '', '', 'HS' + String(i).padStart(3, '0')]);
   }
 
-  html += '<tr><td colspan="5" style="border:none;height:5px;"></td></tr>';
-  html += '<tr><td class="note" colspan="5">Hướng dẫn: Điền Họ tên + Ngày sinh + Lớp → Lưu file dạng CSV (UTF-8) → Tải lên hệ thống. SBD đã được tạo sẵn.</td></tr>';
-  html += '<tr><td class="note" colspan="5">Thứ tự cột khi tải lên: Họ tên, Ngày sinh, Lớp, SBD. Cột "Họ và tên" là bắt buộc.</td></tr>';
-  html += '</table></body></html>';
+  const wb = XLSX.utils.book_new();
+  const ws = XLSX.utils.aoa_to_sheet(data);
 
-  const blob = new Blob(['\uFEFF' + html], { type: 'application/vnd.ms-excel;charset=utf-8;' });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = 'MauDanhSach_ThiSinh_' + (school.replace(/\s+/g, '_').substring(0, 20) || 'Olympic') + '.xls';
-  a.click();
-  URL.revokeObjectURL(url);
-  toast('✅ Đã tải mẫu Excel. Điền thông tin → Lưu CSV → Tải lên.');
+  // Cài đặt độ rộng cột
+  ws['!cols'] = [
+    { wch: 5 },   // STT
+    { wch: 25 },  // Họ và tên
+    { wch: 14 },  // Ngày sinh
+    { wch: 8 },   // Lớp
+    { wch: 10 },  // SBD
+  ];
+
+  // Merge cells cho tiêu đề
+  ws['!merges'] = [
+    { s: { r: 0, c: 0 }, e: { r: 0, c: 4 } },  // Dòng 1: tiêu đề
+    { s: { r: 1, c: 0 }, e: { r: 1, c: 4 } },  // Dòng 2: tên trường
+  ];
+
+  // Style cho các cell (SheetJS community chỉ hỗ trợ basic)
+  // Đặt tất cả cell dạng text để giữ số 0 đầu
+  const range = XLSX.utils.decode_range(ws['!ref']);
+  for (let r = range.s.r; r <= range.e.r; r++) {
+    for (let c = range.s.c; c <= range.e.c; c++) {
+      const addr = XLSX.utils.encode_cell({ r, c });
+      if (!ws[addr]) ws[addr] = { t: 's', v: '' };
+      ws[addr].z = '@'; // Text format
+    }
+  }
+
+  XLSX.utils.book_append_sheet(wb, ws, 'Thí sinh');
+  XLSX.writeFile(wb, 'MauDanhSach_' + school.replace(/\s+/g, '_').substring(0, 20) + '.xlsx');
+  toast('✅ Đã tải file Excel. Mở bằng Excel → Điền thông tin → Lưu → Tải lên.');
 }
 
 function uploadStudentFile() {
   const input = document.createElement('input');
   input.type = 'file';
-  input.accept = '.csv,.txt';
+  input.accept = '.xlsx,.xls,.csv';
   input.onchange = (e) => {
     const file = e.target.files[0];
     if (!file) return;
+
     const reader = new FileReader();
     reader.onload = (ev) => {
-      const text = ev.target.result;
-      const lines = text.split('\n').filter(l => l.trim());
+      let rows = [];
+
+      try {
+        // Đọc file bằng SheetJS (hỗ trợ xlsx, xls, csv)
+        const data = new Uint8Array(ev.target.result);
+        const wb = XLSX.read(data, { type: 'array', codepage: 65001 });
+        const ws = wb.Sheets[wb.SheetNames[0]];
+        rows = XLSX.utils.sheet_to_json(ws, { header: 1, defval: '' });
+      } catch (err) {
+        console.error('XLSX parse error:', err);
+        toast('⚠️ Không đọc được file. Vui lòng dùng file .xlsx hoặc .csv', 'var(--danger)');
+        return;
+      }
+
       let count = 0;
-      // Bỏ dòng tiêu đề nếu có (chứa "họ tên" hoặc "stt" hoặc "lớp")
-      const firstLine = (lines[0] || '').toLowerCase();
-      const startIdx = (firstLine.includes('họ tên') || firstLine.includes('stt') || firstLine.includes('lớp')) ? 1 : 0;
-      for (let i = startIdx; i < lines.length; i++) {
-        // Tách theo dấu phẩy hoặc tab
-        const parts = lines[i].split(/[,\t]/).map(p => p.trim());
-        // Bỏ cột STT nếu cột đầu là số
-        let cols = parts;
+      for (let i = 0; i < rows.length; i++) {
+        let cols = rows[i].map(c => String(c).trim());
+
+        // Bỏ dòng tiêu đề / dòng trang trí / dòng trống
+        const joined = cols.join(' ').toLowerCase();
+        if (joined.includes('họ và tên') || joined.includes('danh sách') ||
+            joined.includes('olympic') || joined.includes('hướng dẫn') ||
+            joined.includes('thứ tự cột') || joined.includes('trường') ||
+            cols.every(c => !c) || cols.length < 2) continue;
+
+        // Bỏ cột STT nếu cột đầu là số thuần
         if (cols.length >= 2 && /^\d+$/.test(cols[0])) {
-          cols = cols.slice(1); // Bỏ STT
+          cols = cols.slice(1);
         }
+
         const name = cols[0] || '';
-        if (!name) continue;
+        if (!name || name.length < 2) continue;
+
         const dob = cols[1] || '';
         const lop = cols[2] || '';
         let sbd = cols[3] || '';
-        // Auto SBD if empty
         if (!sbd) {
-          sbd = 'HS' + String(students.filter(s => true).length + 1).padStart(3, '0');
+          sbd = 'HS' + String(students.length + count + 1).padStart(3, '0');
         }
+
+        // Kiểm tra trùng SBD
+        if (students.find(s => s.sbd === sbd)) continue;
+
         students.push({
           id: 's_' + Date.now().toString(36) + Math.random().toString(36).substr(2, 9),
           roomId: 'all', name, dob, lop,
@@ -2846,12 +2864,13 @@ function uploadStudentFile() {
         });
         count++;
       }
+
       saveLocal();
       renderStudentList();
-      toast('✅ Đã nhập ' + count + ' thí sinh từ file');
-      if (useGAS()) syncToGAS();
+      toast(count > 0 ? '✅ Đã nhập ' + count + ' thí sinh từ file Excel' : '⚠️ Không tìm thấy thí sinh hợp lệ', count > 0 ? 'var(--success)' : 'var(--danger)');
+      if (useGAS() && count > 0) syncToGAS();
     };
-    reader.readAsText(file, 'UTF-8');
+    reader.readAsArrayBuffer(file);
   };
   input.click();
 }
@@ -2940,94 +2959,50 @@ function exportResultsExcel() {
   const roomName = room ? room.name : 'Tất cả';
   const sorted = [...filtered].sort((a, b) => b.score - a.score);
 
-  // Tạo bảng HTML giả lập Excel đẹp
-  let html = '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40">';
-  html += '<head><meta charset="utf-8"><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet>';
-  html += '<x:Name>Kết quả</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions>';
-  html += '</x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]-->';
-  html += '<style>td,th{mso-number-format:"\\@";font-family:Arial;font-size:11pt;border:1px solid #999;padding:6px 10px;}';
-  html += '.header{background:#0C1B33;color:white;font-weight:bold;text-align:center;font-size:12pt;}';
-  html += '.title{background:#D4A012;color:#0C1B33;font-weight:bold;text-align:center;font-size:14pt;border:none;}';
-  html += '.subtitle{background:#FFF8E7;color:#333;text-align:center;font-size:10pt;border:none;font-style:italic;}';
-  html += '.col-header{background:#1E3A5F;color:white;font-weight:bold;text-align:center;font-size:11pt;}';
-  html += '.rank-gold{background:#FFF8E7;font-weight:bold;color:#B8860B;}';
-  html += '.rank-silver{background:#F5F5F5;font-weight:bold;color:#666;}';
-  html += '.rank-bronze{background:#FFF0E0;font-weight:bold;color:#CD7F32;}';
-  html += '.num{text-align:center;}.score{text-align:center;font-weight:bold;color:#0C1B33;}';
-  html += '.pct-high{text-align:center;color:#27AE60;font-weight:bold;}';
-  html += '.pct-mid{text-align:center;color:#F39C12;font-weight:bold;}';
-  html += '.pct-low{text-align:center;color:#E74C3C;font-weight:bold;}';
-  html += '.footer{background:#F8F9FA;font-size:9pt;color:#666;text-align:center;border:none;font-style:italic;}';
-  html += '.stat{background:#E8F5E9;font-weight:bold;text-align:center;}</style></head><body>';
+  // Tạo data
+  const data = [
+    ['🏆 OLYMPIC TIẾNG VIỆT – TOÁN TUỔI THƠ 2026'],
+    ['BẢNG KẾT QUẢ THI – ' + roomName.toUpperCase()],
+    ['Trường: ' + (schoolInfo.name || '___') + ' | Xã: ' + (schoolInfo.ward || '___') + ' | Tỉnh: ' + (schoolInfo.province || '___')],
+    [],
+    ['STT', 'Hạng', 'Họ và tên', 'Trường', 'SBD', 'Điểm', 'Tổng điểm', 'Tỉ lệ %', 'Thời gian (phút)']
+  ];
 
-  // Tiêu đề
-  html += '<table>';
-  html += '<tr><td class="title" colspan="9">🏆 OLYMPIC TIẾNG VIỆT – TOÁN TUỔI THƠ 2026</td></tr>';
-  html += '<tr><td class="subtitle" colspan="9">BẢNG KẾT QUẢ THI – ' + roomName.toUpperCase() + '</td></tr>';
-  html += '<tr><td class="subtitle" colspan="9">Trường: ' + (schoolInfo.name || '___') + ' | Xã: ' + (schoolInfo.ward || '___') + ' | Tỉnh: ' + (schoolInfo.province || '___') + '</td></tr>';
-  html += '<tr><td colspan="9" style="border:none;height:5px;"></td></tr>';
-
-  // Header cột
-  html += '<tr>';
-  html += '<td class="col-header" style="width:40px;">STT</td>';
-  html += '<td class="col-header" style="width:50px;">Hạng</td>';
-  html += '<td class="col-header" style="width:200px;">Họ và tên</td>';
-  html += '<td class="col-header" style="width:150px;">Trường</td>';
-  html += '<td class="col-header" style="width:70px;">SBD</td>';
-  html += '<td class="col-header" style="width:70px;">Điểm</td>';
-  html += '<td class="col-header" style="width:80px;">Tổng điểm</td>';
-  html += '<td class="col-header" style="width:80px;">Tỉ lệ %</td>';
-  html += '<td class="col-header" style="width:80px;">Thời gian</td>';
-  html += '</tr>';
-
-  // Dữ liệu
   let totalScore = 0;
   sorted.forEach((res, i) => {
     const pct = Math.round(res.score / res.maxScore * 100);
     totalScore += res.score;
-    let rankClass = '';
     let rankText = i + 1;
-    if (i === 0) { rankClass = 'rank-gold'; rankText = '🥇 1'; }
-    else if (i === 1) { rankClass = 'rank-silver'; rankText = '🥈 2'; }
-    else if (i === 2) { rankClass = 'rank-bronze'; rankText = '🥉 3'; }
-
-    let pctClass = pct >= 70 ? 'pct-high' : (pct >= 50 ? 'pct-mid' : 'pct-low');
-
-    html += '<tr>';
-    html += '<td class="num">' + (i+1) + '</td>';
-    html += '<td class="' + rankClass + '" style="text-align:center;">' + rankText + '</td>';
-    html += '<td>' + res.studentName + '</td>';
-    html += '<td>' + (res.school || '') + '</td>';
-    html += '<td class="num">' + (res.sbd || '') + '</td>';
-    html += '<td class="score">' + res.score + '</td>';
-    html += '<td class="num">' + res.maxScore + '</td>';
-    html += '<td class="' + pctClass + '">' + pct + '%</td>';
-    html += '<td class="num">' + (res.timeSpent || 0) + ' phút</td>';
-    html += '</tr>';
+    if (i === 0) rankText = '🥇 1';
+    else if (i === 1) rankText = '🥈 2';
+    else if (i === 2) rankText = '🥉 3';
+    data.push([i + 1, rankText, res.studentName, res.school || '', res.sbd || '', res.score, res.maxScore, pct + '%', (res.timeSpent || 0)]);
   });
 
   // Thống kê
   const avg = sorted.length ? (totalScore / sorted.length).toFixed(1) : 0;
   const maxS = sorted.length ? sorted[0].score : 0;
   const minS = sorted.length ? sorted[sorted.length - 1].score : 0;
-  html += '<tr><td colspan="9" style="border:none;height:3px;"></td></tr>';
-  html += '<tr><td class="stat" colspan="2">Tổng thí sinh</td><td class="stat">' + sorted.length + '</td>';
-  html += '<td class="stat">Điểm TB</td><td class="stat">' + avg + '</td>';
-  html += '<td class="stat">Cao nhất</td><td class="stat">' + maxS + '</td>';
-  html += '<td class="stat">Thấp nhất</td><td class="stat">' + minS + '</td></tr>';
+  data.push([]);
+  data.push(['Tổng thí sinh', sorted.length, '', 'Điểm TB', avg, 'Cao nhất', maxS, 'Thấp nhất', minS]);
+  data.push([]);
+  data.push(['Xuất bởi hệ thống Olympic 2026 • ' + new Date().toLocaleString('vi-VN') + ' • Thiết kế: Chung Trần']);
 
-  // Footer
-  html += '<tr><td colspan="9" style="border:none;height:5px;"></td></tr>';
-  html += '<tr><td class="footer" colspan="9">Xuất bởi hệ thống Olympic 2026 • ' + new Date().toLocaleString('vi-VN') + ' • Thiết kế: Chung Trần</td></tr>';
-  html += '</table></body></html>';
+  const wb = XLSX.utils.book_new();
+  const ws = XLSX.utils.aoa_to_sheet(data);
 
-  const blob = new Blob([html], { type: 'application/vnd.ms-excel;charset=utf-8' });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = 'KetQua_' + roomName.replace(/\s+/g,'_') + '_' + new Date().toISOString().slice(0,10) + '.xls';
-  a.click();
-  URL.revokeObjectURL(url);
+  ws['!cols'] = [
+    { wch: 5 }, { wch: 8 }, { wch: 25 }, { wch: 20 },
+    { wch: 10 }, { wch: 8 }, { wch: 10 }, { wch: 10 }, { wch: 14 }
+  ];
+  ws['!merges'] = [
+    { s: { r: 0, c: 0 }, e: { r: 0, c: 8 } },
+    { s: { r: 1, c: 0 }, e: { r: 1, c: 8 } },
+    { s: { r: 2, c: 0 }, e: { r: 2, c: 8 } },
+  ];
+
+  XLSX.utils.book_append_sheet(wb, ws, 'Kết quả');
+  XLSX.writeFile(wb, 'KetQua_' + roomName.replace(/\s+/g, '_') + '_' + new Date().toISOString().slice(0, 10) + '.xlsx');
   toast('✅ Xuất Excel thành công');
 }
 
