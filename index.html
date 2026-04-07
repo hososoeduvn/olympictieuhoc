@@ -3268,6 +3268,15 @@ async function publishExam() {
     return toast('⚠️ Chưa có mã trường. Vui lòng đăng ký lại trường ở Trang chủ.', 'var(--danger)');
   }
 
+  // Chỉ publish phòng thi có câu hỏi tương ứng
+  const subjects = new Set(questions.map(q => q.subj));
+  const activeRooms = rooms.filter(r => subjects.has(r.subject));
+  if (!activeRooms.length) return toast('⚠️ Không có phòng thi nào khớp với đề đã soạn!', 'var(--danger)');
+
+  // Xóa phòng không có đề
+  rooms = activeRooms;
+  saveLocal();
+
   localStorage.setItem('oly_exam_published', 'true');
 
   if (useGAS()) {
