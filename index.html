@@ -3467,22 +3467,34 @@ async function toggleRoom(open) {
   });
   if (!ok) return;
 
-  // Cập nhật local
+  // GAS TRƯỚC — đợi xác nhận rồi mới cập nhật UI
+  if (useGAS()) {
+    const sid = getGasSchoolId();
+    if (!sid) return toast('⚠️ Thiếu mã trường. Đăng ký lại.', 'var(--danger)');
+
+    toast('⏳ Đang ' + action.toLowerCase() + ' phòng thi...', 'var(--blue)');
+    try {
+      const res = await fetch(GAS_URL, {
+        method: 'POST',
+        body: JSON.stringify({ action: open ? 'openRoom' : 'closeRoom', schoolId: sid })
+      });
+      const data = await res.json();
+      if (!data.success) {
+        return toast('⚠️ Lỗi: ' + (data.error || 'Không rõ'), 'var(--danger)');
+      }
+      console.log('toggleRoom GAS OK:', data);
+    } catch(e) {
+      console.error('Toggle room error:', e);
+      return toast('⚠️ Lỗi kết nối GAS. Thử lại.', 'var(--danger)');
+    }
+  }
+
+  // GAS thành công → cập nhật local
   rooms.forEach(r => { r.roomOpen = open; });
   saveLocal();
   updateExamStatusUI();
   refreshDashboard();
-  toast('✅ Đã ' + action.toLowerCase() + ' phòng thi');
-
-  // Sync GAS
-  if (useGAS()) {
-    try {
-      await fetch(GAS_URL, {
-        method: 'POST',
-        body: JSON.stringify({ action: open ? 'openRoom' : 'closeRoom', schoolId: getGasSchoolId() })
-      });
-    } catch(e) { console.warn('Toggle room GAS error:', e); }
-  }
+  toast('✅ Đã ' + action.toLowerCase() + ' phòng thi thành công!');
 }
 
 async function unpublishExam() {
