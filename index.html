@@ -3264,12 +3264,15 @@ async function publishExam() {
   if (!rooms.length) return toast('⚠️ Chưa có phòng thi nào!', 'var(--danger)');
   if (!questions.length) return toast('⚠️ Chưa có câu hỏi nào!', 'var(--danger)');
 
+  if (useGAS() && !getGasSchoolId()) {
+    return toast('⚠️ Chưa có mã trường. Vui lòng đăng ký lại trường ở Trang chủ.', 'var(--danger)');
+  }
+
   localStorage.setItem('oly_exam_published', 'true');
 
   if (useGAS()) {
     toast('⏳ Đang xuất bản & tạo mã phòng thi...', 'var(--blue)');
 
-    // GỌI 1 REQUEST DUY NHẤT: sync + publish cùng lúc (tránh lỗi 2 request)
     try {
       const qForGAS = questions.map(q => ({
         ...q,
@@ -3290,25 +3293,33 @@ async function publishExam() {
       const data = await res.json();
       if (data.success && data.codes) {
         rooms.forEach(r => {
-          if (data.codes[r.id]) r.roomCode = data.codes[r.id];
+          if (data.codes[r.id]) {
+            r.roomCode = data.codes[r.id];
+            r.roomOpen = false;
+          }
         });
         saveLocal();
         buildLocalDB();
-        renderRooms();
         showRoomCodes(data.codes);
-        toast('✅ Đã xuất bản! Mã phòng thi đã tạo.', 'var(--success)');
+        updateExamStatusUI();
+        refreshDashboard();
+        toast('✅ Đã xuất bản! Bấm "🟢 Mở phòng thi" khi sẵn sàng.');
       } else {
-        toast('⚠️ Lỗi tạo mã: ' + (data.error || 'Không rõ'), 'var(--danger)');
+        localStorage.setItem('oly_exam_published', 'false');
+        toast('⚠️ Lỗi: ' + (data.error || 'Không rõ'), 'var(--danger)');
       }
     } catch(e) {
       console.error('Publish error:', e);
+      localStorage.setItem('oly_exam_published', 'false');
       toast('⚠️ Lỗi kết nối GAS. Thử lại.', 'var(--danger)');
     }
   } else {
-    // Offline fallback: tạo mã giả local
+    // Offline fallback: tạo mã local với prefix T/TV
     rooms.forEach(r => {
       if (!r.roomCode) {
-        r.roomCode = 'OLYMPIC-' + Math.floor(1000 + Math.random() * 9000);
+        const prefix = (r.subject === 'TV' || r.subject === 'Tiếng Việt') ? 'OLYMPIC-TV' : 'OLYMPIC-T';
+        r.roomCode = prefix + Math.floor(1000 + Math.random() * 9000);
+        r.roomOpen = false;
       }
     });
     saveLocal();
@@ -3486,52 +3497,32 @@ function updateMatrixStats() {
 
   let html = '';
 
-  // Tổng quan chung
   const toanQs = questions.filter(q => q.subj === 'Toán');
   const tvQs = questions.filter(q => q.subj === 'TV');
 
   html += '<div style="margin-bottom:2rem;">';
   html += '<h4 style="margin-bottom:1rem;color:var(--navy);">📊 Ma trận đề thi theo mức độ nhận thức</h4>';
 
-  // Bảng ma trận NB/TH/VD/VDC
+  // Bảng ma trận M1/M2/M3
   html += '<div style="overflow-x:auto;">';
   html += '<table class="table" style="font-size:0.9rem;margin-top:0;">';
-  html += '<thead><tr><th>Chủ đề</th><th>Nhận biết</th><th>Thông hiểu</th><th>Vận dụng</th><th>Vận dụng cao</th><th>Tổng</th><th>Tổng điểm</th></tr></thead>';
+  html += '<thead><tr><th>Chủ đề</th><th>Mức 1 (Dễ)<br><span style="font-size:0.7em;">6đ/câu</span></th><th>Mức 2 (TB)<br><span style="font-size:0.7em;">6đ/câu</span></th><th>Mức 3 (Khó)<br><span style="font-size:0.7em;">8đ/câu</span></th><th>Tổng</th><th>Tổng điểm</th></tr></thead>';
   html += '<tbody>';
 
   [{ label: 'Toán', qs: toanQs }, { label: 'Tiếng Việt', qs: tvQs }].forEach(item => {
-    const nb = item.qs.filter(q => q.level === 'NB');
-    const th = item.qs.filter(q => q.level === 'TH');
-    const vd = item.qs.filter(q => q.level === 'VD');
-    const vdc = item.qs.filter(q => q.level === 'VDC');
+    const m1 = item.qs.filter(q => q.level === 'M1');
+    const m2 = item.qs.filter(q => q.level === 'M2');
+    const m3 = item.qs.filter(q => q.level === 'M3');
     const total = item.qs.length;
     const totalPts = item.qs.reduce((s, q) => s + (q.point || 0), 0);
     html += '<tr>';
     html += '<td><strong>' + item.label + '</strong></td>';
-    html += '<td style="text-align:center;"><span style="font-size:1.2em;font-weight:700;color:var(--blue);">' + nb.length + '</span><br><span style="font-size:0.75em;color:var(--text-light);">' + nb.reduce((s,q)=>s+(q.point||0),0) + 'đ</span></td>';
-    html += '<td style="text-align:center;"><span style="font-size:1.2em;font-weight:700;color:var(--success);">' + th.length + '</span><br><span style="font-size:0.75em;color:var(--text-light);">' + th.reduce((s,q)=>s+(q.point||0),0) + 'đ</span></td>';
-    html += '<td style="text-align:center;"><span style="font-size:1.2em;font-weight:700;color:var(--warning);">' + vd.length + '</span><br><span style="font-size:0.75em;color:var(--text-light);">' + vd.reduce((s,q)=>s+(q.point||0),0) + 'đ</span></td>';
-    html += '<td style="text-align:center;"><span style="font-size:1.2em;font-weight:700;color:var(--danger);">' + vdc.length + '</span><br><span style="font-size:0.75em;color:var(--text-light);">' + vdc.reduce((s,q)=>s+(q.point||0),0) + 'đ</span></td>';
+    html += '<td style="text-align:center;"><span style="font-size:1.2em;font-weight:700;color:var(--blue);">' + m1.length + '</span><br><span style="font-size:0.75em;color:var(--text-light);">' + m1.reduce((s,q)=>s+(q.point||0),0) + 'đ</span></td>';
+    html += '<td style="text-align:center;"><span style="font-size:1.2em;font-weight:700;color:var(--success);">' + m2.length + '</span><br><span style="font-size:0.75em;color:var(--text-light);">' + m2.reduce((s,q)=>s+(q.point||0),0) + 'đ</span></td>';
+    html += '<td style="text-align:center;"><span style="font-size:1.2em;font-weight:700;color:var(--warning);">' + m3.length + '</span><br><span style="font-size:0.75em;color:var(--text-light);">' + m3.reduce((s,q)=>s+(q.point||0),0) + 'đ</span></td>';
     html += '<td style="text-align:center;font-weight:700;">' + total + '</td>';
     html += '<td style="text-align:center;font-weight:700;color:var(--gold-dark);">' + totalPts + 'đ</td>';
     html += '</tr>';
-  });
-  html += '</tbody></table></div>';
-
-  // Bảng theo độ khó
-  html += '<h4 style="margin:1.5rem 0 1rem;color:var(--navy);">📋 Phân bố theo độ khó</h4>';
-  html += '<div style="overflow-x:auto;">';
-  html += '<table class="table" style="font-size:0.9rem;margin-top:0;">';
-  html += '<thead><tr><th>Chủ đề</th><th>Dễ</th><th>TB</th><th>Khó</th><th>Rất khó</th><th>Tổng</th></tr></thead>';
-  html += '<tbody>';
-
-  [{ label: 'Toán', qs: toanQs }, { label: 'Tiếng Việt', qs: tvQs }].forEach(item => {
-    html += '<tr><td><strong>' + item.label + '</strong></td>';
-    ['Dễ', 'TB', 'Khó', 'RK'].forEach(d => {
-      const cnt = item.qs.filter(q => q.diff === d).length;
-      html += '<td style="text-align:center;font-weight:600;">' + cnt + '</td>';
-    });
-    html += '<td style="text-align:center;font-weight:700;">' + item.qs.length + '</td></tr>';
   });
   html += '</tbody></table></div>';
 
@@ -3540,16 +3531,16 @@ function updateMatrixStats() {
     html += '<h4 style="margin:1.5rem 0 1rem;color:var(--navy);">🏛️ Thống kê theo phòng thi</h4>';
     rooms.forEach(room => {
       const roomQs = questions.filter(q => q.subj === room.subject);
-      const stuCount = students.filter(s => s.roomId === room.id).length;
+      const stuCount = students.filter(s => true).length;
       const resCount = results.filter(r => r.roomId === room.id).length;
-      html += '<div style="display:flex;gap:1rem;align-items:center;padding:0.75rem;background:#F8F9FA;border-radius:8px;margin-bottom:0.5rem;border-left:4px solid var(--gold);">';
+      html += '<div style="display:flex;gap:1rem;align-items:center;padding:0.75rem;background:#F8F9FA;border-radius:8px;margin-bottom:0.5rem;border-left:4px solid var(--gold);flex-wrap:wrap;">';
       html += '<strong>' + room.name + '</strong>';
       html += '<span style="font-size:0.85rem;color:var(--text-light);">📚 ' + room.subject + '</span>';
       html += '<span style="font-size:0.85rem;color:var(--text-light);">📝 ' + roomQs.length + ' câu</span>';
       html += '<span style="font-size:0.85rem;color:var(--text-light);">👥 ' + stuCount + ' TS</span>';
       html += '<span style="font-size:0.85rem;color:var(--text-light);">✅ ' + resCount + ' bài nộp</span>';
       html += '<span style="font-size:0.85rem;color:var(--text-light);">⏱️ ' + room.time + ' phút</span>';
-      html += '<span style="font-size:0.85rem;">' + (room.published ? '🟢 Công bố' : '🟡 Nháp') + '</span>';
+      html += '<span style="font-size:0.85rem;">' + (room.roomCode ? '🟢 ' + room.roomCode : '🟡 Nháp') + '</span>';
       html += '</div>';
     });
   }
