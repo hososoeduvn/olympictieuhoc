@@ -1811,6 +1811,18 @@ function registerSchool() {
   if (!province) return toast('⚠️ Nhập tỉnh/thành phố!', 'var(--danger)');
   if (!contact) return toast('⚠️ Nhập tên người phụ trách!', 'var(--danger)');
 
+  // ★ XÓA SẠCH dữ liệu trường cũ khi đăng ký trường mới
+  questions = [];
+  rooms = [];
+  students = [];
+  results = [];
+  localStorage.removeItem('oly_questions');
+  localStorage.removeItem('oly_rooms');
+  localStorage.removeItem('oly_students');
+  localStorage.removeItem('oly_results');
+  localStorage.removeItem('oly_exam_published');
+  localStorage.removeItem('oly_db');
+
   schoolInfo = {
     name, ward, province, contact, phone, email,
     id: name.replace(/\s+/g,'_').substring(0,20) + '_' + Date.now().toString(36),
